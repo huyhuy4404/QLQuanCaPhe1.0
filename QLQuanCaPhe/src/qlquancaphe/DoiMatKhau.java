@@ -44,7 +44,7 @@ public class DoiMatKhau extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Đổi mật khẩu");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Mật khẩu cũ");
@@ -68,7 +68,7 @@ public class DoiMatKhau extends javax.swing.JDialog {
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 311, 406, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/caphe3.jpg"))); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 470));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 480));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
