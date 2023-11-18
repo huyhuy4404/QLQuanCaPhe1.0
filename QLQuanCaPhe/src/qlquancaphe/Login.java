@@ -4,12 +4,15 @@
  */
 package qlquancaphe;
 
+import qlquancaphe.DAO.NhanVienDAO;
+import qlquancaphe.entity.NhanVien;
+
 /**
  *
  * @author huydz
  */
 public class Login extends javax.swing.JDialog {
-
+    NhanVienDAO nvDAO = new NhanVienDAO();
     /**
      * Creates new form Login
      */
@@ -31,11 +34,11 @@ public class Login extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtMaNV = new javax.swing.JTextField();
+        lblQuenMatKhau = new javax.swing.JLabel();
+        btnLogin = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
+        txtMatKhau = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
@@ -57,31 +60,36 @@ public class Login extends javax.swing.JDialog {
         jLabel3.setText("Mật khẩu");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 406, -1));
 
-        jTextField1.setEnabled(false);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtMaNV.setEnabled(false);
+        txtMaNV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtMaNVActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 406, 38));
+        getContentPane().add(txtMaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 406, 38));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(51, 153, 255));
-        jLabel4.setText("Quên mật khẩu ?");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, -1, -1));
+        lblQuenMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblQuenMatKhau.setForeground(new java.awt.Color(51, 153, 255));
+        lblQuenMatKhau.setText("Quên mật khẩu ?");
+        getContentPane().add(lblQuenMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, -1, -1));
 
-        jButton1.setText("Login");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 350, -1, -1));
-
-        jButton2.setText("Exit");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 350, -1, -1));
-
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                btnLoginActionPerformed(evt);
             }
         });
-        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 406, 38));
+        getContentPane().add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 350, -1, -1));
+
+        btnExit.setText("Exit");
+        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 350, -1, -1));
+
+        txtMatKhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMatKhauActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 406, 38));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/caphe3.jpg"))); // NOI18N
         jLabel5.setText("jLabel5");
@@ -91,14 +99,25 @@ public class Login extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtMaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaNVActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtMaNVActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void txtMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatKhauActionPerformed
     
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_txtMatKhauActionPerformed
 
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLoginActionPerformed
+
+    public Login() {
+        String maNV = txtMaNV.getText();
+        String matKhau = txtMatKhau.getPassword().toString();
+        NhanVien nv = nvDAO.selectById(maNV);
+    }
+
+    
     /**
      * @param args the command line arguments
      */
@@ -142,15 +161,15 @@ public class Login extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblQuenMatKhau;
+    private javax.swing.JTextField txtMaNV;
+    private javax.swing.JPasswordField txtMatKhau;
     // End of variables declaration//GEN-END:variables
 }
