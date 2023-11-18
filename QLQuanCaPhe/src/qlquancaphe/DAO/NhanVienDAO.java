@@ -39,12 +39,16 @@ public class NhanVienDAO extends QLQuanCaPhe<NhanVien, String> {
 
     @Override
     public List<NhanVien> selectAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return selectBySql(SELECT_ALL_SQL);
     }
 
     @Override
     public NhanVien selectById(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<NhanVien> list = selectBySql(SELECT_BY_ID_SQL, key);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list.get(0);
     }
 
     @Override
