@@ -58,7 +58,6 @@ public class Login extends javax.swing.JDialog {
         jLabel3.setText("Mật khẩu");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, 110, -1));
 
-        jTextField1.setEnabled(false);
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
