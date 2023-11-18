@@ -57,6 +57,11 @@ public class Menu extends javax.swing.JFrame {
         btnDonHang.setText("Đơn hàng");
         btnDonHang.setMaximumSize(new java.awt.Dimension(100, 200));
         btnDonHang.setPreferredSize(new java.awt.Dimension(145, 35));
+        btnDonHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDonHangActionPerformed(evt);
+            }
+        });
 
         btnDoanhThu.setText("Doanh thu");
         btnDoanhThu.setPreferredSize(new java.awt.Dimension(145, 35));
@@ -168,6 +173,10 @@ public class Menu extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnDonHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDonHangActionPerformed
+        this.openHoaDon();
+    }//GEN-LAST:event_btnDonHangActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -218,4 +227,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlMenu2;
     // End of variables declaration//GEN-END:variables
+
+    private void openHoaDon() {
+        new HoaDon(this, true).setVisible(true);
+    }
 }
