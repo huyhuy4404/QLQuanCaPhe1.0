@@ -76,6 +76,11 @@ public class NhanVien {
         this.dienThoai = dienThoai;
     }
 
+    @Override
+    public String toString() {
+        return this.matKhau;
+    }
+    
     
     
 }
