@@ -78,7 +78,7 @@ public class NhanVien {
 
     @Override
     public String toString() {
-        return this.matKhau;
+        return this.hoTen;
     }
     
     
