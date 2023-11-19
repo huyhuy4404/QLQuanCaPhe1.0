@@ -9,17 +9,20 @@ package qlquancaphe.entity;
  * @author huydz
  */
 public class NhanVien {
-    String maNV,hoTen,matkhau;
-    boolean vaiTro;
-    String ngaySinh,dienThoai;
+    public String maNV;
+    public String hoTen;
+    public String matKhau;
+    public boolean vaiTro;
+    public String ngaySinh;
+    public String dienThoai;
 
     public NhanVien() {
     }
 
-    public NhanVien(String maNV, String hoTen, String matkhau, boolean vaiTro, String ngaySinh, String dienThoai) {
+    public NhanVien(String maNV, String hoTen, String matKhau, boolean vaiTro, String ngaySinh, String dienThoai) {
         this.maNV = maNV;
         this.hoTen = hoTen;
-        this.matkhau = matkhau;
+        this.matKhau = matKhau;
         this.vaiTro = vaiTro;
         this.ngaySinh = ngaySinh;
         this.dienThoai = dienThoai;
@@ -41,12 +44,12 @@ public class NhanVien {
         this.hoTen = hoTen;
     }
 
-    public String getMatkhau() {
-        return matkhau;
+    public String getMatKhau() {
+        return matKhau;
     }
 
-    public void setMatkhau(String matkhau) {
-        this.matkhau = matkhau;
+    public void setMatKhau(String matKhau) {
+        this.matKhau = matKhau;
     }
 
     public boolean isVaiTro() {
@@ -72,5 +75,7 @@ public class NhanVien {
     public void setDienThoai(String dienThoai) {
         this.dienThoai = dienThoai;
     }
+
+    
     
 }

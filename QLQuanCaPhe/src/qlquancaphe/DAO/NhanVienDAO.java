@@ -24,12 +24,12 @@ public class NhanVienDAO extends QLQuanCaPhe<NhanVien, String> {
 
     @Override
     public void insert(NhanVien entity) {
-        JDBCHelper.update(INSERT_SQL, entity.getMaNV(), entity.getHoTen(), entity.getMatkhau(), entity.isVaiTro(), entity.getNgaySinh(), entity.getDienThoai());
+        JDBCHelper.update(INSERT_SQL, entity.getMaNV(), entity.getHoTen(), entity.getMatKhau(), entity.isVaiTro(), entity.getNgaySinh(), entity.getDienThoai());
     }
 
     @Override
     public void update(NhanVien entity) {
-        JDBCHelper.update(INSERT_SQL, entity.getHoTen(), entity.getMatkhau(), entity.isVaiTro(), entity.getNgaySinh(), entity.getDienThoai(), entity.getMaNV());
+        JDBCHelper.update(INSERT_SQL, entity.getHoTen(), entity.getMatKhau(), entity.isVaiTro(), entity.getNgaySinh(), entity.getDienThoai(), entity.getMaNV());
     }
 
     @Override
@@ -60,7 +60,7 @@ public class NhanVienDAO extends QLQuanCaPhe<NhanVien, String> {
                 NhanVien entity = new NhanVien();
                 entity.setMaNV(rs.getString("MaNV"));
                 entity.setHoTen(rs.getString("HoTen"));
-                entity.setMatkhau(rs.getString("MatKhau"));
+                entity.setMatKhau(rs.getString("MatKhau"));
                 entity.setVaiTro(rs.getBoolean("VaiTro"));
                 entity.setNgaySinh(rs.getString("NgaySinh"));
                 entity.setDienThoai(rs.getString("DienThoai"));
