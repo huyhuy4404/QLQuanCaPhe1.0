@@ -173,7 +173,7 @@ public class Login extends javax.swing.JDialog {
         if(nv==null){
             MsgBox.alert(this, "Sai tên đăng nhập");
         }else{
-            if(!nv.getMatkhau().equals(pass)){
+            if(!nv.getMatkhau().equalsIgnoreCase(pass)){
                 MsgBox.alert(this, "Sai mật khẩu");
             }else{
                 Auth.user=nv;
