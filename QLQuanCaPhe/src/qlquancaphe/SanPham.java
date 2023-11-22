@@ -92,7 +92,7 @@ public class SanPham extends javax.swing.JDialog {
         );
         pnlListLayout.setVerticalGroup(
             pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 486, Short.MAX_VALUE)
+            .addGap(0, 459, Short.MAX_VALUE)
             .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlListLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -300,7 +300,7 @@ public class SanPham extends javax.swing.JDialog {
                         .addComponent(btnXoa)
                         .addComponent(btnMoi))
                     .addComponent(btnThem))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabs.addTab("CẬP NHẬT", pnlEdit);
@@ -317,16 +317,17 @@ public class SanPham extends javax.swing.JDialog {
                 .addComponent(tabs)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(252, 252, 252)
-                .addComponent(lblTittle)
+                .addGap(254, 254, 254)
+                .addComponent(lblTittle, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(lblTittle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabs))
+                .addGap(21, 21, 21)
+                .addComponent(lblTittle, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
