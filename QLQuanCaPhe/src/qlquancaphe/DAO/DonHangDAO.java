@@ -4,8 +4,11 @@
  */
 package qlquancaphe.DAO;
 
+import java.util.ArrayList;
 import java.util.List;
 import qlquancaphe.entity.DonHang;
+import qlquancaphe.utils.JDBCHelper;
+import java.sql.ResultSet;
 
 /**
  *
@@ -13,40 +16,59 @@ import qlquancaphe.entity.DonHang;
  */
 public class DonHangDAO extends QLQuanCaPhe<DonHang, String> {
 
-    final String INSERT_SQL = "INSERT INTO DonHang(MaLSP,TenLoaiSP)VALUES(?,?)";
-    final String UPDATE_SQL = "UPDATE LoaiSP SET TenLoaiSP=? WHERE MaLSP=?";
-    final String DELETE_SQL = "DELETE FROM LoaiSP WHERE MaLSP=?";
-    final String SELECT_ALL_SQL = "SELECT * FROM LoaiSP";
-    final String SELECT_BY_ID_SQL = "SELECT * FROM LoaiSP WHERE MaLSP=?";
+    final String INSERT_SQL = "INSERT INTO DonHang(MaDH,NgayMua,TongTien,MaNV)VALUES(?,?,?,?)";
+    final String UPDATE_SQL = "UPDATE DonHang SET NgayMua=?,TongTien=?,MaNV=? WHERE MaDH=?";
+    final String DELETE_SQL = "DELETE FROM DonHang WHERE MaDH=?";
+    final String SELECT_ALL_SQL = "SELECT * FROM DonHang";
+    final String SELECT_BY_ID_SQL = "SELECT * FROM DonHang WHERE MaDH=?";
 
     @Override
     public void insert(DonHang entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        JDBCHelper.update(INSERT_SQL, entity.getMaDH(), entity.getNgayMua(), entity.getTongTien(), entity.getMaNV());
+
     }
 
     @Override
     public void update(DonHang entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        JDBCHelper.update(INSERT_SQL,  entity.getNgayMua(), entity.getTongTien(), entity.getMaNV(),entity.getMaDH());
     }
 
     @Override
     public void delete(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        JDBCHelper.update(DELETE_SQL, key);
     }
 
     @Override
     public List<DonHang> selectAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return selectBySql(SELECT_ALL_SQL);
     }
 
     @Override
     public DonHang selectById(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<DonHang> list = selectBySql(SELECT_BY_ID_SQL, key);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list.get(0);
     }
 
     @Override
     protected List<DonHang> selectBySql(String sql, Object... args) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<DonHang> list = new ArrayList<>();
+        try {
+            ResultSet rs = JDBCHelper.query(sql, args);
+            while (rs.next()) {
+                DonHang entity = new DonHang();
+                entity.setMaDH(rs.getInt("MaDH"));
+                entity.setNgayMua(rs.getString("NgayMua"));
+                entity.setTongTien(rs.getFloat("TongTien"));
+                entity.setMaNV(rs.getString("MaNV"));
+                list.add(entity);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+        return list;
     }
 
 }
