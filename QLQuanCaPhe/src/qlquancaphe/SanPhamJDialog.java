@@ -25,6 +25,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
     public SanPhamJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        fillTable();
         //init();
     }
 
