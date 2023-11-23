@@ -35,5 +35,9 @@ public class LoaiSanPham {
     public void setTenLSP(String tenLSP) {
         this.tenLSP = tenLSP;
     }
+    @Override
+    public String toString(){
+        return this.tenLSP;
+    }
     
 }

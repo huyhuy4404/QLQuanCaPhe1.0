@@ -4,18 +4,28 @@
  */
 package qlquancaphe;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import qlquancaphe.DAO.LoaiSanPhamDAO;
+import qlquancaphe.DAO.SanPhamDAO;
+import qlquancaphe.entity.LoaiSanPham;
+import qlquancaphe.utils.MsgBox;
+
 /**
  *
  * @author huydz
  */
 public class HoaDon extends javax.swing.JDialog {
-
+    List<LoaiSanPham> list = new ArrayList<>();
+    LoaiSanPhamDAO lspDAO = new LoaiSanPhamDAO();
     /**
      * Creates new form HoaDon
      */
     public HoaDon(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        fillComboboxLSP();
     }
 
     /**
@@ -37,7 +47,7 @@ public class HoaDon extends javax.swing.JDialog {
         btnTroVe = new javax.swing.JButton();
         btnThanhToan = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cboLoaiSP = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -123,7 +133,7 @@ public class HoaDon extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboLoaiSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -145,14 +155,14 @@ public class HoaDon extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(cboLoaiSP, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cboLoaiSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2))
         );
@@ -183,6 +193,20 @@ public class HoaDon extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
+    private void fillComboboxLSP() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboLoaiSP.getModel();
+        model.removeAllElements();
+        try {
+            List<LoaiSanPham> ds = lspDAO.selectAll();
+        for (LoaiSanPham cd : ds) {
+            model.addElement(cd);
+        }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+        }
+        
+
+    }
     /**
      * @param args the command line arguments
      */
@@ -230,7 +254,7 @@ public class HoaDon extends javax.swing.JDialog {
     private javax.swing.JButton btnInHoaDon;
     private javax.swing.JButton btnThanhToan;
     private javax.swing.JButton btnTroVe;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cboLoaiSP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
