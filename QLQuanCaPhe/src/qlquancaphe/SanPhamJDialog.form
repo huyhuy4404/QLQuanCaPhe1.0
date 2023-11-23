@@ -46,9 +46,10 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-              <Component id="lblTittle" pref="55" max="32767" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="lblTittle" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="tabs" min="-2" pref="467" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -70,25 +71,19 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="747" max="32767" attributes="0"/>
-                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="jScrollPane2" min="-2" pref="730" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="730" max="-2" attributes="0"/>
+                      <EmptySpace pref="11" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="459" max="32767" attributes="0"/>
-                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="jScrollPane2" min="-2" pref="459" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="448" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -197,10 +192,10 @@
                               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="lblTenCD" max="32767" attributes="0"/>
-                                  <Component id="lblMaCD" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblThoiLuong" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblHocPhi1" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
+                                  <Component id="lblTenSP" max="32767" attributes="0"/>
+                                  <Component id="lblMaSP" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tblDongia" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblMaLSP" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -215,7 +210,7 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblMoTaCD" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblMoTa" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblHinhLogo" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -232,22 +227,22 @@
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblMaCD" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblMaSP" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtMaSp" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblTenCD" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblTenSP" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtTenSp" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="txtDongia" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                                  <Component id="lblThoiLuong" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tblDongia" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblHocPhi1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblMaLSP" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="cboMaloaiSP" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -259,10 +254,10 @@
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="lblMoTaCD" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblMoTa" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="131" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" pref="139" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="btnPrev" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -277,7 +272,7 @@
                           </Group>
                           <Component id="btnThem" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -323,7 +318,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="lblMaCD">
+            <Component class="javax.swing.JLabel" name="lblMaSP">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
@@ -333,7 +328,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txtMaSp">
             </Component>
-            <Component class="javax.swing.JLabel" name="lblTenCD">
+            <Component class="javax.swing.JLabel" name="lblTenSP">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
@@ -343,7 +338,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txtTenSp">
             </Component>
-            <Component class="javax.swing.JLabel" name="lblThoiLuong">
+            <Component class="javax.swing.JLabel" name="tblDongia">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
@@ -351,7 +346,7 @@
                 <Property name="text" type="java.lang.String" value="&#x110;&#x1a1;n gi&#xe1; "/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblMoTaCD">
+            <Component class="javax.swing.JLabel" name="lblMoTa">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
@@ -464,7 +459,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txtDongia">
             </Component>
-            <Component class="javax.swing.JLabel" name="lblHocPhi1">
+            <Component class="javax.swing.JLabel" name="lblMaLSP">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
