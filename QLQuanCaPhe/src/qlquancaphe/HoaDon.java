@@ -7,9 +7,11 @@ package qlquancaphe;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 import qlquancaphe.DAO.LoaiSanPhamDAO;
 import qlquancaphe.DAO.SanPhamDAO;
 import qlquancaphe.entity.LoaiSanPham;
+import qlquancaphe.entity.SanPham;
 import qlquancaphe.utils.MsgBox;
 
 /**
@@ -17,8 +19,11 @@ import qlquancaphe.utils.MsgBox;
  * @author huydz
  */
 public class HoaDon extends javax.swing.JDialog {
+
     List<LoaiSanPham> list = new ArrayList<>();
     LoaiSanPhamDAO lspDAO = new LoaiSanPhamDAO();
+    SanPhamDAO spDAO = new SanPhamDAO();
+
     /**
      * Creates new form HoaDon
      */
@@ -26,6 +31,7 @@ public class HoaDon extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         fillComboboxLSP();
+
     }
 
     /**
@@ -49,7 +55,7 @@ public class HoaDon extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         cboLoaiSP = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblSanPham = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -134,8 +140,18 @@ public class HoaDon extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         cboLoaiSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboLoaiSP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cboLoaiSPMouseClicked(evt);
+            }
+        });
+        cboLoaiSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboLoaiSPActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -146,9 +162,9 @@ public class HoaDon extends javax.swing.JDialog {
                 "Tên sản phẩm", "Đơn giá"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
+        jScrollPane2.setViewportView(tblSanPham);
+        if (tblSanPham.getColumnModel().getColumnCount() > 0) {
+            tblSanPham.getColumnModel().getColumn(1).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -193,20 +209,43 @@ public class HoaDon extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
+    private void cboLoaiSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboLoaiSPMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboLoaiSPMouseClicked
+
+    private void cboLoaiSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLoaiSPActionPerformed
+        // TODO add your handling code here:
+        loadTableSanPham();
+    }//GEN-LAST:event_cboLoaiSPActionPerformed
+
     private void fillComboboxLSP() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboLoaiSP.getModel();
         model.removeAllElements();
         try {
             List<LoaiSanPham> ds = lspDAO.selectAll();
-        for (LoaiSanPham cd : ds) {
-            model.addElement(cd);
-        }
+            for (LoaiSanPham cd : ds) {
+                model.addElement(cd);
+            }
         } catch (Exception e) {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
         }
-        
 
     }
+
+    private void loadTableSanPham() {
+        DefaultTableModel model = (DefaultTableModel) tblSanPham.getModel();
+        model.setRowCount(0);
+        try {
+            List<SanPham> list = spDAO.selectbyMaLSP(cboLoaiSP.getSelectedIndex() + 1);
+            for (SanPham sp : list) {
+                Object[] row = {sp.getTenSP(), sp.getDonGia()};
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -260,8 +299,8 @@ public class HoaDon extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblTongTien;
     private javax.swing.JTable tblHoaDon;
+    private javax.swing.JTable tblSanPham;
     // End of variables declaration//GEN-END:variables
 }

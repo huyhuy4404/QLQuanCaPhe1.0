@@ -18,6 +18,7 @@ public class SanPhamDAO extends QLQuanCaPhe<SanPham, String> {
     String DELETE_SQL = "DELETE FROM SanPham WHERE MaSP=?";
     String SELECT_ALL_SQL = "SELECT * FROM SanPham";
     String SELECT_BY_ID_SQL = "SELECT * FROM SanPham WHERE MaSP=?";
+    String SELECT_BY_LSP_SQL = "SELECT * FROM SanPham WHERE MaLSP = ?";
 
     @Override
     public void insert(SanPham entity) {
@@ -80,6 +81,9 @@ public class SanPhamDAO extends QLQuanCaPhe<SanPham, String> {
         } catch (Exception e) {
             throw new RuntimeException();
         }
+    }
+    public List<SanPham> selectbyMaLSP(int MaLSP) {
+        return selectBySql(SELECT_BY_LSP_SQL,MaLSP);
     }
 
 }
