@@ -23,6 +23,7 @@ public class HoaDon extends javax.swing.JDialog {
     List<LoaiSanPham> list = new ArrayList<>();
     LoaiSanPhamDAO lspDAO = new LoaiSanPhamDAO();
     SanPhamDAO spDAO = new SanPhamDAO();
+    int row = -1;
 
     /**
      * Creates new form HoaDon
@@ -31,6 +32,7 @@ public class HoaDon extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         fillComboboxLSP();
+        
 
     }
 
@@ -58,16 +60,17 @@ public class HoaDon extends javax.swing.JDialog {
         tblSanPham = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("ĐƠN HÀNG");
 
         tblHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "STT", "Tên món", "SL", "Giá", "Tổng giá"
+                "Tên món", "SL", "Giá", "Tổng giá"
             }
         ));
         jScrollPane1.setViewportView(tblHoaDon);
@@ -162,6 +165,11 @@ public class HoaDon extends javax.swing.JDialog {
                 "Tên sản phẩm", "Đơn giá"
             }
         ));
+        tblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSanPhamMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblSanPham);
         if (tblSanPham.getColumnModel().getColumnCount() > 0) {
             tblSanPham.getColumnModel().getColumn(1).setResizable(false);
@@ -199,6 +207,7 @@ public class HoaDon extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHuyMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyMonActionPerformed
@@ -218,6 +227,23 @@ public class HoaDon extends javax.swing.JDialog {
         loadTableSanPham();
     }//GEN-LAST:event_cboLoaiSPActionPerformed
 
+    private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
+        // TODO add your handling code here:
+        fillTableHoaDon();
+    }//GEN-LAST:event_tblSanPhamMouseClicked
+    void fillTableHoaDon() {
+        DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
+        model.setRowCount(0);
+        try {
+            List<SanPham> list = spDAO.selectbyTenSP((String) tblSanPham.getValueAt(row, 0));
+            for (SanPham sp : list) {
+                Object[] row = {sp.getTenSP(), sp.getTenSP(), sp.getDonGia(), sp.getMaLSP()};
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+        }
+    }
     private void fillComboboxLSP() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboLoaiSP.getModel();
         model.removeAllElements();
