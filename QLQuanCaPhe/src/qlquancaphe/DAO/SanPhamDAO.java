@@ -69,7 +69,7 @@ public class SanPhamDAO extends QLQuanCaPhe<SanPham, String> {
             ResultSet rs = JDBCHelper.query(sql, args);
             while (rs.next()) {
                 SanPham entity = new SanPham();
-                entity.setMaSP(rs.getInt("MaLSP"));
+                entity.setMaSP(rs.getInt("MaSP"));
                 entity.setTenSP(rs.getString("TenSP"));
                 entity.setDonGia(rs.getFloat("DonGia"));
                 entity.setMaLSP(rs.getInt("MaLSP"));
@@ -88,6 +88,9 @@ public class SanPhamDAO extends QLQuanCaPhe<SanPham, String> {
     }
     public List<SanPham> selectbyTenSP(String tenSP) {
         return selectBySql(SELECT_BY_LSP_SQL,tenSP);
+    }
+    public List<SanPham> selectbyMaSP(int MaSP) {
+        return selectBySql(SELECT_BY_ID_SQL,MaSP);
     }
 
 }
