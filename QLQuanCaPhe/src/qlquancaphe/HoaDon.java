@@ -156,13 +156,13 @@ public class HoaDon extends javax.swing.JDialog {
 
         tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Tên sản phẩm", "Đơn giá"
+                "Mã sản phẩm", "Tên sản phẩm", "Đơn giá"
             }
         ));
         tblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -172,7 +172,7 @@ public class HoaDon extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(tblSanPham);
         if (tblSanPham.getColumnModel().getColumnCount() > 0) {
-            tblSanPham.getColumnModel().getColumn(1).setResizable(false);
+            tblSanPham.getColumnModel().getColumn(2).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -264,7 +264,7 @@ public class HoaDon extends javax.swing.JDialog {
         try {
             List<SanPham> list = spDAO.selectbyMaLSP(cboLoaiSP.getSelectedIndex() + 1);
             for (SanPham sp : list) {
-                Object[] row = {sp.getTenSP(), sp.getDonGia()};
+                Object[] row = {sp.getMaSP(),sp.getTenSP(), sp.getDonGia()};
                 model.addRow(row);
             }
         } catch (Exception e) {
