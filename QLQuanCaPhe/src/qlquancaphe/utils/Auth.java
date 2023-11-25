@@ -29,4 +29,7 @@ public class Auth {
     public static boolean isManager() {
         return Auth.isLogin() && user.isVaiTro();
     }
+    public static String isMaNV() {
+        return user.getMaNV();
+    }
 }

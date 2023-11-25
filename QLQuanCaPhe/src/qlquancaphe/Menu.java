@@ -260,6 +260,7 @@ public class Menu extends javax.swing.JFrame {
         new HoaDon(this, true).setVisible(true);
     }
     private void init() {
+        new Login(this, true).setVisible(true);
         new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

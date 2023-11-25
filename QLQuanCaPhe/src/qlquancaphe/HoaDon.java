@@ -4,14 +4,22 @@
  */
 package qlquancaphe;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import qlquancaphe.DAO.ChiTietDonHangDAO;
+import qlquancaphe.DAO.DonHangDAO;
 import qlquancaphe.DAO.LoaiSanPhamDAO;
 import qlquancaphe.DAO.SanPhamDAO;
+import qlquancaphe.entity.ChiTietDonHang;
+import qlquancaphe.entity.DonHang;
 import qlquancaphe.entity.LoaiSanPham;
 import qlquancaphe.entity.SanPham;
+import qlquancaphe.utils.Auth;
 import qlquancaphe.utils.MsgBox;
 
 /**
@@ -23,6 +31,8 @@ public class HoaDon extends javax.swing.JDialog {
     List<LoaiSanPham> list = new ArrayList<>();
     LoaiSanPhamDAO lspDAO = new LoaiSanPhamDAO();
     SanPhamDAO spDAO = new SanPhamDAO();
+    DonHangDAO dhDAO = new DonHangDAO();
+    ChiTietDonHangDAO CTDHDAO = new ChiTietDonHangDAO();
     int row = 0;
 
     /**
@@ -34,7 +44,6 @@ public class HoaDon extends javax.swing.JDialog {
         fillComboboxLSP();
         DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
         model.setRowCount(0);
-        
 
     }
 
@@ -96,6 +105,11 @@ public class HoaDon extends javax.swing.JDialog {
         });
 
         btnTroVe.setText("Trở về");
+        btnTroVe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTroVeActionPerformed(evt);
+            }
+        });
 
         btnThanhToan.setText("Thanh toán");
         btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
@@ -223,10 +237,13 @@ public class HoaDon extends javax.swing.JDialog {
 
     private void btnHuyMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyMonActionPerformed
         // TODO add your handling code here:
+        deleteMon();
+        tinhTongTien();
     }//GEN-LAST:event_btnHuyMonActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         // TODO add your handling code here:
+        ThanhToan();
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void cboLoaiSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboLoaiSPMouseClicked
@@ -242,33 +259,92 @@ public class HoaDon extends javax.swing.JDialog {
         // TODO add your handling code here:
         fillTableHoaDon();
         tinhTongTien();
-        
+
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
     private void btnInHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInHoaDonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnInHoaDonActionPerformed
+
+    private void btnTroVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTroVeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTroVeActionPerformed
     void fillTableHoaDon() {
-        
-        String input=MsgBox.prompt(this, "Vui lòng nhập số lượng");
-        int sl = Integer.parseInt(input);
-        DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
-//        model.setRowCount(0);
-        try {
-            int maSP = tblSanPham.getSelectedRow();
-            List<SanPham> list = (List<SanPham>) spDAO.selectbyMaSP((int) tblSanPham.getValueAt(maSP, 0));
-            for (SanPham sp : list) {
-                Object[] row = {sp.getTenSP(),
-                                sl,
-                                sp.getDonGia(),
-                                sp.getDonGia()*sl};
-                model.insertRow(0,row);
+        String input = MsgBox.prompt(this, "Vui lòng nhập số lượng");
+        if (input != null && !input.isEmpty()) {
+            try {
+                int sl = Integer.parseInt(input);
+                DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
+                int maSP = tblSanPham.getSelectedRow();
+                List<SanPham> list = (List<SanPham>) spDAO.selectbyMaSP((int) tblSanPham.getValueAt(maSP, 0));
+                for (SanPham sp : list) {
+                    Object[] row = {sp.getTenSP(),
+                        sl,
+                        sp.getDonGia(),
+                        sp.getDonGia() * sl};
+                    model.insertRow(0, row);
+                }
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                MsgBox.alert(this, "Số lượng không hợp lệ");
+            } catch (Exception e) {
+                e.printStackTrace();
+                MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+        } else {
+            return;
         }
     }
+
+    void deleteMon() {
+        int hoaDon = tblHoaDon.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
+        model.removeRow(hoaDon);
+    }
+
+    void ThanhToan() {
+        try {
+            Date currentDate = new Date();
+
+            // Định dạng ngày tháng
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            // Hiển thị ngày tháng năm
+            String ngayHienTai = dateFormat.format(currentDate);
+            DonHang dh = new DonHang();
+            dh.setNgayMua(ngayHienTai);
+            float tongTien = Float.parseFloat(lblTongTien.getText());
+            dh.setTongTien(tongTien);
+            String maNV = Auth.isMaNV();
+            dh.setMaNV(maNV);
+            dhDAO.insert(dh);
+            List<DonHang> ds = dhDAO.selectAll();
+            DonHang lastDonHang = ds.get(ds.size() - 1);
+            int maDH = lastDonHang.getMaDH();
+
+            for (int i = 0; i < tblHoaDon.getRowCount(); i++) {
+                ChiTietDonHang CTDH = new ChiTietDonHang();
+                String ten = (String) tblHoaDon.getValueAt(i, 0);
+                int sl = (int) tblHoaDon.getValueAt(i, 1);
+                float tongGia = (float) tblHoaDon.getValueAt(i, 3);
+                List<SanPham> list = spDAO.selectbyTenSP(ten);
+                for (SanPham sp : list) {
+                    int masp = sp.getMaSP();
+                    CTDH.setMaSP(masp);
+                    CTDH.setMaDH(maDH);
+                    CTDH.setSl(sl);
+                    CTDH.setDonGia(sp.getDonGia());
+                    CTDH.setTongGia(tongGia);
+                    CTDHDAO.insert(CTDH);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            MsgBox.alert(this, "Thanh toán thất bại!");
+        }
+    }
+
     private void fillComboboxLSP() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboLoaiSP.getModel();
         model.removeAllElements();
@@ -289,23 +365,25 @@ public class HoaDon extends javax.swing.JDialog {
         try {
             List<SanPham> list = spDAO.selectbyMaLSP(cboLoaiSP.getSelectedIndex() + 1);
             for (SanPham sp : list) {
-                Object[] row = {sp.getMaSP(),sp.getTenSP(), sp.getDonGia()};
+                Object[] row = {sp.getMaSP(), sp.getTenSP(), sp.getDonGia()};
                 model.addRow(row);
             }
         } catch (Exception e) {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
         }
     }
-    void tinhTongTien(){
+
+    void tinhTongTien() {
         DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
-        int soHang =model.getRowCount();
-        int tongTien=0;
-        for(int i =0;i<soHang;i++){
-            float soTien= (float) tblHoaDon.getValueAt(i, 3);
-            tongTien+=soTien;
+        int soHang = model.getRowCount();
+        int tongTien = 0;
+        for (int i = 0; i < soHang; i++) {
+            float soTien = (float) tblHoaDon.getValueAt(i, 3);
+            tongTien += soTien;
             lblTongTien.setText(String.valueOf(tongTien));
         }
     }
+
     /**
      * @param args the command line arguments
      */

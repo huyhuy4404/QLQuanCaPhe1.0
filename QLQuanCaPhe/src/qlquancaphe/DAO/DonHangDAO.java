@@ -16,7 +16,7 @@ import java.sql.ResultSet;
  */
 public class DonHangDAO extends QLQuanCaPhe<DonHang, String> {
 
-    final String INSERT_SQL = "INSERT INTO DonHang(MaDH,NgayMua,TongTien,MaNV)VALUES(?,?,?,?)";
+    final String INSERT_SQL = "INSERT INTO DonHang(NgayMua,TongTien,MaNV)VALUES(?,?,?)";
     final String UPDATE_SQL = "UPDATE DonHang SET NgayMua=?,TongTien=?,MaNV=? WHERE MaDH=?";
     final String DELETE_SQL = "DELETE FROM DonHang WHERE MaDH=?";
     final String SELECT_ALL_SQL = "SELECT * FROM DonHang";
@@ -24,7 +24,7 @@ public class DonHangDAO extends QLQuanCaPhe<DonHang, String> {
 
     @Override
     public void insert(DonHang entity) {
-        JDBCHelper.update(INSERT_SQL, entity.getMaDH(), entity.getNgayMua(), entity.getTongTien(), entity.getMaNV());
+        JDBCHelper.update(INSERT_SQL,  entity.getNgayMua(), entity.getTongTien(), entity.getMaNV());
 
     }
 

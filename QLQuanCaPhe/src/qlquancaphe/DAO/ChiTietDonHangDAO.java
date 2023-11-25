@@ -16,7 +16,7 @@ import qlquancaphe.utils.JDBCHelper;
  */
 public class ChiTietDonHangDAO extends QLQuanCaPhe<ChiTietDonHang, String> {
 
-    final String INSERT_SQL = "INSERT INTO ChiTietDonHang(MaCT,MaSP,MaDH,SoLuong,DonGia,TongGia)VALUES(?,?,?,?,?,?)";
+    final String INSERT_SQL = "INSERT INTO ChiTietDonHang(MaSP,MaDH,SoLuong,DonGia,TongGia)VALUES(?,?,?,?,?)";
     final String UPDATE_SQL = "UPDATE ChiTietDonHang SET MaSP=?,MaDH=?,SoLuong=?,DonGia=?,TongGia=? WHERE MaCT=?";
     final String DELETE_SQL = "DELETE FROM ChiTietDonHang WHERE MaCT=?";
     final String SELECT_ALL_SQL = "SELECT * FROM ChiTietDonHang";
@@ -24,7 +24,7 @@ public class ChiTietDonHangDAO extends QLQuanCaPhe<ChiTietDonHang, String> {
 
     @Override
     public void insert(ChiTietDonHang entity) {
-        JDBCHelper.update(INSERT_SQL, entity.getMaCT(), entity.getMaSP(), entity.getMaDH(), entity.getSl(), entity.getDonGia(), entity.getTongGia());
+        JDBCHelper.update(INSERT_SQL,  entity.getMaSP(), entity.getMaDH(), entity.getSl(), entity.getDonGia(), entity.getTongGia());
     }
 
     @Override
