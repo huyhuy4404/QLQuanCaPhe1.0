@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import qlquancaphe.utils.Auth;
 
@@ -48,7 +49,7 @@ public class Menu extends javax.swing.JFrame {
         btnDangXuat = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MENU");
 
         pnlMenu.setBackground(new java.awt.Color(255, 153, 102));
@@ -140,6 +141,11 @@ public class Menu extends javax.swing.JFrame {
         btnDangXuat.setBackground(new java.awt.Color(255, 102, 102));
         btnDangXuat.setText("Đăng xuất");
         btnDangXuat.setPreferredSize(new java.awt.Dimension(101, 23));
+        btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangXuatActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlMenu2Layout = new javax.swing.GroupLayout(pnlMenu2);
         pnlMenu2.setLayout(pnlMenu2Layout);
@@ -215,6 +221,15 @@ public class Menu extends javax.swing.JFrame {
         this.openDoiMatKhau();
     }//GEN-LAST:event_btnDoiMatKhauActionPerformed
 
+    private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
+        int i = JOptionPane.showConfirmDialog(this, "Bạn có muốn đăng xuất ?",
+                "THÔNG BÁO !", JOptionPane.YES_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        if (i == 0) {
+            dangxuat();
+        }
+    }//GEN-LAST:event_btnDangXuatActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -269,6 +284,7 @@ public class Menu extends javax.swing.JFrame {
     private void openHoaDon() {
         new HoaDon(this, true).setVisible(true);
     }
+
     private void init() {
         new Login(this, true).setVisible(true);
         new Timer(1000, new ActionListener() {
@@ -280,13 +296,20 @@ public class Menu extends javax.swing.JFrame {
                 lblTime.setText(text);
             }
         }).start();
-        if(!Auth.isManager()){
+        if (!Auth.isManager()) {
             btnNhanVien.setEnabled(false);
             btnDoanhThu.setEnabled(false);
-        }else{
+        } else {
             btnNhanVien.setEnabled(true);
             btnDoanhThu.setEnabled(true);
         }
+    }
+
+    void dangxuat() {
+        Auth.clear();
+        Login login_Dialog = new Login(this, rootPaneCheckingEnabled);
+        login_Dialog.show();
+        this.dispose();
     }
 
     private void openDoiMatKhau() {

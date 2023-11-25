@@ -159,7 +159,9 @@ public class Login extends javax.swing.JDialog {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        dangNhap();
+        if(kiemTra()){
+            dangNhap();
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -181,6 +183,17 @@ public class Login extends javax.swing.JDialog {
             }
         }
         
+    }
+    public boolean kiemTra() {
+        if (txtTaiKhoan.getText().equals("")) {
+            MsgBox.alert(this, "Tên đăng nhập không được bỏ trống");
+            return false;
+        }
+        if (txtMatKhau.getText().equals("")) {
+            MsgBox.alert(this, "Mật khẩu không được bỏ trống");
+            return false;
+        }
+        return true;
     }
     void ketThuc(){
         if(MsgBox.confirm(this, "Bạn có muốn kết thúc không ?")){

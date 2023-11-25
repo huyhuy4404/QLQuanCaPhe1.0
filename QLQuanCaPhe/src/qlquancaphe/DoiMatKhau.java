@@ -4,6 +4,11 @@
  */
 package qlquancaphe;
 
+import java.awt.Color;
+import javax.swing.JOptionPane;
+import qlquancaphe.DAO.NhanVienDAO;
+import qlquancaphe.utils.Auth;
+
 /**
  *
  * @author huydz
@@ -16,6 +21,7 @@ public class DoiMatKhau extends javax.swing.JDialog {
     public DoiMatKhau(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -50,8 +56,18 @@ public class DoiMatKhau extends javax.swing.JDialog {
         jLabel3.setText("Mật khẩu mới");
 
         jButton1.setText("Đổi mật khẩu");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Trở về");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Xác nhận mật khẩu mới");
@@ -116,9 +132,51 @@ public class DoiMatKhau extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (validateForm()) {
+            this.doimatkhau();
+        } else {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập đầy đủ thông tin !");
+
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
+    public boolean validateForm() {
+        if (txtPassCu.getText().isEmpty() || txtPassMoi.getText().isEmpty() || txtXNPass.getText().isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
+    private void doimatkhau() {
+        String maNV = Auth.user.getMaNV();
+        String matkhau = new String(txtPassCu.getPassword());
+        String matkhaumoi = new String(txtPassMoi.getPassword());
+        String matkhau2 = new String(txtXNPass.getPassword());
+        if (!maNV.equalsIgnoreCase(Auth.user.getMaNV())) {
+        } else if (!matkhau.equals(Auth.user.getMatKhau())) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu hiện tại không đúng !");
+            txtPassCu.setBackground(Color.pink);
+        } else if (!matkhaumoi.equals(matkhau2)) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu không trùng khớp !");
+            txtXNPass.setBackground(Color.pink);
+        } else {
+            NhanVienDAO dao = new NhanVienDAO();
+            Auth.user.setMatKhau(matkhaumoi);
+            dao.update(Auth.user);
+            JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công !");
+            this.dispose();
+        }
+
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
