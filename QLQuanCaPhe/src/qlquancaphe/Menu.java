@@ -131,6 +131,11 @@ public class Menu extends javax.swing.JFrame {
 
         btnDoiMatKhau.setBackground(new java.awt.Color(0, 204, 255));
         btnDoiMatKhau.setText("Đổi mật khẩu");
+        btnDoiMatKhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDoiMatKhauActionPerformed(evt);
+            }
+        });
 
         btnDangXuat.setBackground(new java.awt.Color(255, 102, 102));
         btnDangXuat.setText("Đăng xuất");
@@ -205,6 +210,11 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnNhanVienActionPerformed
 
+    private void btnDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMatKhauActionPerformed
+        // TODO add your handling code here:
+        this.openDoiMatKhau();
+    }//GEN-LAST:event_btnDoiMatKhauActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -277,5 +287,9 @@ public class Menu extends javax.swing.JFrame {
             btnNhanVien.setEnabled(true);
             btnDoanhThu.setEnabled(true);
         }
+    }
+
+    private void openDoiMatKhau() {
+        new DoiMatKhau(this, true).setVisible(true);
     }
 }
