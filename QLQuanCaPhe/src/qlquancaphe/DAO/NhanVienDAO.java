@@ -16,20 +16,20 @@ import qlquancaphe.utils.JDBCHelper;
  */
 public class NhanVienDAO extends QLQuanCaPhe<NhanVien, String> {
 
-    final String INSERT_SQL = "INSERT INTO NhanVien(MaNV,HoTen,MatKhau,VaiTro,NgaySinh,DienThoai)VALUES(?,?,?,?,?,?)";
-    final String UPDATE_SQL = "UPDATE NhanVien SET HoTen=?,MatKhau=?,VaiTro=?,NgaySinh=?,DienThoai=? WHERE MaNV=?";
+    final String INSERT_SQL = "INSERT INTO NhanVien(MaNV,HoTen,MatKhau,VaiTro,NgaySinh,DienThoai,Email)VALUES(?,?,?,?,?,?,?)";
+    final String UPDATE_SQL = "UPDATE NhanVien SET HoTen=?,MatKhau=?,VaiTro=?,NgaySinh=?,DienThoai=?,Email=? WHERE MaNV=?";
     final String DELETE_SQL = "DELETE FROM NhanVien WHERE MaNV=?";
     final String SELECT_ALL_SQL = "SELECT * FROM NhanVien";
     final String SELECT_BY_ID_SQL = "SELECT * FROM NhanVien WHERE MaNV=?";
 
     @Override
     public void insert(NhanVien entity) {
-        JDBCHelper.update(INSERT_SQL, entity.getMaNV(), entity.getHoTen(), entity.getMatKhau(), entity.isVaiTro(), entity.getNgaySinh(), entity.getDienThoai());
+        JDBCHelper.update(INSERT_SQL, entity.getMaNV(), entity.getHoTen(), entity.getMatKhau(), entity.isVaiTro(), entity.getNgaySinh(), entity.getDienThoai(),entity.getEmail());
     }
 
     @Override
     public void update(NhanVien entity) {
-        JDBCHelper.update(INSERT_SQL, entity.getHoTen(), entity.getMatKhau(), entity.isVaiTro(), entity.getNgaySinh(), entity.getDienThoai(), entity.getMaNV());
+        JDBCHelper.update(INSERT_SQL, entity.getHoTen(), entity.getMatKhau(), entity.isVaiTro(), entity.getNgaySinh(), entity.getDienThoai(),entity.getEmail(), entity.getMaNV());
     }
 
     @Override
@@ -64,6 +64,7 @@ public class NhanVienDAO extends QLQuanCaPhe<NhanVien, String> {
                 entity.setVaiTro(rs.getBoolean("VaiTro"));
                 entity.setNgaySinh(rs.getString("NgaySinh"));
                 entity.setDienThoai(rs.getString("DienThoai"));
+                entity.setEmail(rs.getString("Email"));
                 list.add(entity);
             }
         } catch (Exception e) {

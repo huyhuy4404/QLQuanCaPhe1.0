@@ -15,17 +15,19 @@ public class NhanVien {
     public boolean vaiTro;
     public String ngaySinh;
     public String dienThoai;
+    public String email;
 
     public NhanVien() {
     }
 
-    public NhanVien(String maNV, String hoTen, String matKhau, boolean vaiTro, String ngaySinh, String dienThoai) {
+    public NhanVien(String maNV, String hoTen, String matKhau, boolean vaiTro, String ngaySinh, String dienThoai, String email) {
         this.maNV = maNV;
         this.hoTen = hoTen;
         this.matKhau = matKhau;
         this.vaiTro = vaiTro;
         this.ngaySinh = ngaySinh;
         this.dienThoai = dienThoai;
+        this.email = email;
     }
 
     public String getMaNV() {
@@ -76,6 +78,14 @@ public class NhanVien {
         this.dienThoai = dienThoai;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+   
     @Override
     public String toString() {
         return this.hoTen;
