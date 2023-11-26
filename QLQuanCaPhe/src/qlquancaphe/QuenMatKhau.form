@@ -99,6 +99,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="G&#x1eed;i"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuiActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

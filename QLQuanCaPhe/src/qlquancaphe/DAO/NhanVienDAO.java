@@ -22,6 +22,8 @@ public class NhanVienDAO extends QLQuanCaPhe<NhanVien, String> {
     final String SELECT_ALL_SQL = "SELECT * FROM NhanVien";
     final String SELECT_BY_ID_SQL = "SELECT * FROM NhanVien WHERE MaNV=?";
     final String UPDATE_MK = "UPDATE NhanVien SET MatKhau=? WHERE MaNV=?";
+    final String SELECT_BY_EMAIL_SQL = "SELECT * FROM NhanVien WHERE Email=?";
+
 
     @Override
     public void insert(NhanVien entity) {
@@ -50,6 +52,13 @@ public class NhanVienDAO extends QLQuanCaPhe<NhanVien, String> {
             return null;
         }
         return list.get(0);
+    }
+    public NhanVien select_byEmail(String key ){
+        List<NhanVien> list = selectBySql(SELECT_BY_EMAIL_SQL, key);
+        if(list.isEmpty()){
+            return null;
+        }
+        return  list.get(0);
     }
 
     @Override

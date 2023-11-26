@@ -4,6 +4,11 @@
  */
 package qlquancaphe;
 
+import qlquancaphe.DAO.NhanVienDAO;
+import qlquancaphe.entity.NhanVien;
+import javax.mail.*;
+
+
 /**
  *
  * @author Admin
@@ -13,8 +18,11 @@ public class QuenMatKhau extends javax.swing.JFrame {
     /**
      * Creates new form QuenMatKhau
      */
+    NhanVienDAO dao = new NhanVienDAO();
+    
     public QuenMatKhau() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -42,6 +50,11 @@ public class QuenMatKhau extends javax.swing.JFrame {
         jLabel3.setText("Email");
 
         btnGui.setText("Gửi");
+        btnGui.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,6 +99,11 @@ public class QuenMatKhau extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiActionPerformed
+        String DoiPass = txtEmail.getText();
+        
+    }//GEN-LAST:event_btnGuiActionPerformed
 
     /**
      * @param args the command line arguments
