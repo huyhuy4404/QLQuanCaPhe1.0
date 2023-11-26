@@ -4,10 +4,14 @@
  */
 package qlquancaphe;
 
+import java.util.Properties;
+import java.util.Random;
 import qlquancaphe.DAO.NhanVienDAO;
 import qlquancaphe.entity.NhanVien;
 import javax.mail.*;
-
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,7 +23,8 @@ public class QuenMatKhau extends javax.swing.JFrame {
      * Creates new form QuenMatKhau
      */
     NhanVienDAO dao = new NhanVienDAO();
-    
+    int randomCode;
+
     public QuenMatKhau() {
         initComponents();
         setLocationRelativeTo(null);
@@ -39,6 +44,9 @@ public class QuenMatKhau extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         btnGui = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txtCode = new javax.swing.JTextField();
+        btnCode = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,10 +57,19 @@ public class QuenMatKhau extends javax.swing.JFrame {
 
         jLabel3.setText("Email");
 
-        btnGui.setText("Gửi");
+        btnGui.setText("Send");
         btnGui.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuiActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Verify Code");
+
+        btnCode.setText("Verify Code");
+        btnCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCodeActionPerformed(evt);
             }
         });
 
@@ -63,22 +80,22 @@ public class QuenMatKhau extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(156, 156, 156))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(36, 36, 36)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(btnGui)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(156, 156, 156))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addGap(36, 36, 36)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnGui, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnCode)
+                        .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,20 +107,65 @@ public class QuenMatKhau extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnGui)
-                .addGap(0, 71, Short.MAX_VALUE))
+                .addGap(8, 8, 8)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCode)
+                .addGap(0, 23, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiActionPerformed
-        String DoiPass = txtEmail.getText();
+        try {
+            Random rand = new Random();
+        randomCode = rand.nextInt(999999);
+        String host = "smtp.gmail.com";
+        String user = "haunvpc06859@fpt.edu.vn";
+        String pass = "Vanhau@123";
+        String to = txtEmail.getText();
+        String suject = "Mã Code";
+        String message = "Mã Code của bạn là " + randomCode;
+        boolean sessDebug = false;
+        Properties pros = new Properties();
+        pros.put("mail.smtp.host", "smtp.gmail.com");
+        pros.put("mail.smtp.port", "587");
+        pros.put("mail.smtp.auth", "true");
+        pros.put("mail.smtp.starttls.enable", "true");
+        Session mailsession = Session.getDefaultInstance(pros, null);
+        mailsession.setDebug(sessDebug);
+        Message msg = new MimeMessage(mailsession);
+            msg.setFrom(new InternetAddress(user));
+            InternetAddress [] addresses = {new InternetAddress(to)};
+            msg.setSubject(suject);
+            msg.setText(message);
+            Transport transport = mailsession.getTransport("smtp");
+            transport.connect(host,user,pass);
+            transport.sendMessage(msg, msg.getAllRecipients());
+            transport.close();
+            JOptionPane.showMessageDialog(this, "Mã đã gửi thành công");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        }
         
+            
+            
     }//GEN-LAST:event_btnGuiActionPerformed
+
+    private void btnCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCodeActionPerformed
+//        if(Integer.valueOf(txtCode.getText())== randomCode){
+//            DoiMatKhau rs = new DoiMatKhau(txtEmail.getText());
+//            rs.setVisible(true);
+//            this.setVisible(false);
+        }
+    }//GEN-LAST:event_btnCodeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,10 +203,13 @@ public class QuenMatKhau extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCode;
     private javax.swing.JButton btnGui;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField txtCode;
     private javax.swing.JTextField txtEmail;
     // End of variables declaration//GEN-END:variables
 }

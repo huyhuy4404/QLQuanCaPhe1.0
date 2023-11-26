@@ -4,6 +4,7 @@
  */
 package qlquancaphe;
 
+import java.awt.Cursor;
 import qlquancaphe.DAO.NhanVienDAO;
 import qlquancaphe.entity.NhanVien;
 import qlquancaphe.utils.Auth;
@@ -68,6 +69,16 @@ public class Login extends javax.swing.JDialog {
         txtQuenMK.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txtQuenMK.setForeground(new java.awt.Color(51, 153, 255));
         txtQuenMK.setText("Quên mật khẩu ?");
+        txtQuenMK.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                txtQuenMKMouseMoved(evt);
+            }
+        });
+        txtQuenMK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtQuenMKMousePressed(evt);
+            }
+        });
 
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -100,9 +111,9 @@ public class Login extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -111,10 +122,8 @@ public class Login extends javax.swing.JDialog {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addContainerGap())
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtQuenMK)
-                                .addContainerGap()))
+                                .addComponent(txtQuenMK))
+                            .addContainerGap())
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(jLabel2)
                             .addGap(66, 66, 66)))
@@ -168,6 +177,16 @@ public class Login extends javax.swing.JDialog {
         // TODO add your handling code here:
         ketThuc();
     }//GEN-LAST:event_btnExitActionPerformed
+
+    private void txtQuenMKMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQuenMKMouseMoved
+        txtQuenMK.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_txtQuenMKMouseMoved
+
+    private void txtQuenMKMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQuenMKMousePressed
+        QuenMatKhau qmk = new QuenMatKhau();
+        this.setVisible(false);
+        qmk.setVisible(true);
+    }//GEN-LAST:event_txtQuenMKMousePressed
     void dangNhap(){
         String maNV = txtTaiKhoan.getText();
         String pass = new String(txtMatKhau.getPassword());
