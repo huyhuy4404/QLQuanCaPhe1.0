@@ -4,6 +4,9 @@
  */
 package qlquancaphe.entity;
 
+import java.util.Date;
+import qlquancaphe.utils.XDate;
+
 /**
  *
  * @author huydz
@@ -13,19 +16,18 @@ public class NhanVien {
     public String hoTen;
     public String matKhau;
     public boolean vaiTro;
-    public String ngaySinh;
+   private Date ngaySinh = XDate.addDays(new Date(),  -365*20);
     public String dienThoai;
     public String email;
 
     public NhanVien() {
     }
 
-    public NhanVien(String maNV, String hoTen, String matKhau, boolean vaiTro, String ngaySinh, String dienThoai, String email) {
+    public NhanVien(String maNV, String hoTen, String matKhau, boolean vaiTro, String dienThoai, String email) {
         this.maNV = maNV;
         this.hoTen = hoTen;
         this.matKhau = matKhau;
         this.vaiTro = vaiTro;
-        this.ngaySinh = ngaySinh;
         this.dienThoai = dienThoai;
         this.email = email;
     }
@@ -62,11 +64,11 @@ public class NhanVien {
         this.vaiTro = vaiTro;
     }
 
-    public String getNgaySinh() {
+    public Date getNgaySinh() {
         return ngaySinh;
     }
 
-    public void setNgaySinh(String ngaySinh) {
+    public void setNgaySinh(Date ngaySinh) {
         this.ngaySinh = ngaySinh;
     }
 
@@ -85,6 +87,8 @@ public class NhanVien {
     public void setEmail(String email) {
         this.email = email;
     }
+
+  
    
     @Override
     public String toString() {

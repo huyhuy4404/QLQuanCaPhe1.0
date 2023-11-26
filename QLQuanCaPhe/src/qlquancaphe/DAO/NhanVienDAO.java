@@ -72,7 +72,7 @@ public class NhanVienDAO extends QLQuanCaPhe<NhanVien, String> {
                 entity.setHoTen(rs.getString("HoTen"));
                 entity.setMatKhau(rs.getString("MatKhau"));
                 entity.setVaiTro(rs.getBoolean("VaiTro"));
-                entity.setNgaySinh(rs.getString("NgaySinh"));
+                entity.setNgaySinh(rs.getDate("NgaySinh"));
                 entity.setDienThoai(rs.getString("DienThoai"));
                 entity.setEmail(rs.getString("Email"));
                 list.add(entity);
