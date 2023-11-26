@@ -21,6 +21,7 @@ public class NhanVienDAO extends QLQuanCaPhe<NhanVien, String> {
     final String DELETE_SQL = "DELETE FROM NhanVien WHERE MaNV=?";
     final String SELECT_ALL_SQL = "SELECT * FROM NhanVien";
     final String SELECT_BY_ID_SQL = "SELECT * FROM NhanVien WHERE MaNV=?";
+    final String UPDATE_MK = "UPDATE NhanVien SET MatKhau=? WHERE MaNV=?";
 
     @Override
     public void insert(NhanVien entity) {
@@ -73,4 +74,7 @@ public class NhanVienDAO extends QLQuanCaPhe<NhanVien, String> {
         return list;
     }
 
+    public void updateMK(NhanVien entity) {
+        JDBCHelper.update(UPDATE_MK,entity.getMatKhau(),entity.getMaNV());
+    }    
 }

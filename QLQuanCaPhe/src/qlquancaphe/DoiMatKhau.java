@@ -7,13 +7,17 @@ package qlquancaphe;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import qlquancaphe.DAO.NhanVienDAO;
+import qlquancaphe.entity.NhanVien;
 import qlquancaphe.utils.Auth;
+import qlquancaphe.utils.MsgBox;
 
 /**
  *
  * @author huydz
  */
 public class DoiMatKhau extends javax.swing.JDialog {
+
+    NhanVienDAO nvDAO = new NhanVienDAO();
 
     /**
      * Creates new form DoiMatKhau
@@ -36,7 +40,7 @@ public class DoiMatKhau extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnDoiMatKhau = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         txtPassMoi = new javax.swing.JPasswordField();
         txtPassCu = new javax.swing.JPasswordField();
@@ -55,10 +59,10 @@ public class DoiMatKhau extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Mật khẩu mới");
 
-        jButton1.setText("Đổi mật khẩu");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnDoiMatKhau.setText("Đổi mật khẩu");
+        btnDoiMatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnDoiMatKhauActionPerformed(evt);
             }
         });
 
@@ -98,7 +102,7 @@ public class DoiMatKhau extends javax.swing.JDialog {
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnDoiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -123,7 +127,7 @@ public class DoiMatKhau extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtXNPass, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnDoiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -132,14 +136,14 @@ public class DoiMatKhau extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMatKhauActionPerformed
         if (validateForm()) {
             this.doimatkhau();
         } else {
             JOptionPane.showMessageDialog(this, "Bạn chưa nhập đầy đủ thông tin !");
 
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnDoiMatKhauActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
@@ -157,22 +161,25 @@ public class DoiMatKhau extends javax.swing.JDialog {
 
     private void doimatkhau() {
         String maNV = Auth.user.getMaNV();
+        String matKhauCu = Auth.user.getMatKhau();
         String matkhau = new String(txtPassCu.getPassword());
         String matkhaumoi = new String(txtPassMoi.getPassword());
         String matkhau2 = new String(txtXNPass.getPassword());
-        if (!maNV.equalsIgnoreCase(Auth.user.getMaNV())) {
-        } else if (!matkhau.equals(Auth.user.getMatKhau())) {
-            JOptionPane.showMessageDialog(this, "Mật khẩu hiện tại không đúng !");
-            txtPassCu.setBackground(Color.pink);
-        } else if (!matkhaumoi.equals(matkhau2)) {
-            JOptionPane.showMessageDialog(this, "Mật khẩu không trùng khớp !");
-            txtXNPass.setBackground(Color.pink);
+        if (!matkhau.equalsIgnoreCase(matKhauCu)) {
+            MsgBox.alert(this, "Mật khẩu cũ không đúng!");
+            return;
         } else {
-            NhanVienDAO dao = new NhanVienDAO();
-            Auth.user.setMatKhau(matkhaumoi);
-            dao.update(Auth.user);
-            JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công !");
-            this.dispose();
+            if (!matkhaumoi.equalsIgnoreCase(matkhau2)) {
+                MsgBox.alert(this, "Mật khẩu mới và mật khẩu xác nhận không giống nhau!");
+                return;
+            } else {
+                NhanVien nv = new NhanVien();
+                nv.setMatKhau(matkhaumoi);
+                nv.setMaNV(maNV);
+                nvDAO.updateMK(nv);
+                MsgBox.alert(this, "Đổi mật khẩu thành công");
+                this.dispose();
+            }
         }
 
     }
@@ -217,7 +224,7 @@ public class DoiMatKhau extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnDoiMatKhau;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
