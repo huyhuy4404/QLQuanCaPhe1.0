@@ -102,7 +102,7 @@ public class QLNhanVien extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -156,7 +156,7 @@ public class QLNhanVien extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(51, 51, 51)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtMaNV)
                     .addComponent(lblNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -189,7 +189,7 @@ public class QLNhanVien extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -356,94 +356,94 @@ public class QLNhanVien extends javax.swing.JDialog {
         tabs.setSelectedIndex(1);
 
     }
-
+//
     void fillTable() {
         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
         model.setRowCount(0);
         try {
             List<NhanVien> list = dao.selectAll();
             for (NhanVien nv : list) {
-                Object[] row = {nv.getMaNV(), nv.getHoTen(), nv.isVaiTro() ? "Trưởng Phòng" : "Nhân Viên"};
+                Object[] row = {nv.getMaNV(), nv.getHoTen(), nv.isVaiTro() ? "Trưởng Phòng" : "Nhân Viên",nv.getNgaySinh(),nv.getDienThoai(),nv.getEmail()};
                 model.addRow(row);
             }
         } catch (Exception e) {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
         }
     }
+//
+//    void setForm(NhanVien nv) {
+//        txtMaNV.setText(nv.getMaNV());
+//        txtHoTen.setText(nv.getHoTen());
+//        txtMatKhau.setText(nv.getMatKhau());
+//        rdoQuanLy.setSelected(nv.isVaiTro());
+//        rdoNhanVien.setSelected(!nv.isVaiTro());
+//        txtNgaySinh.setText(nv.getNgaySinh());
+//        txtSDT.setText(nv.getDienThoai());
+//        txtEmail.setText(nv.getEmail());
+//    }
+//
+//    NhanVien getForm() {
+//        NhanVien nv = new NhanVien();
+//        nv.setMaNV(txtMaNV.getText());
+//        nv.setHoTen(txtHoTen.getText());
+//        nv.setMatKhau(new String(txtMatKhau.getPassword()));
+//        nv.setVaiTro(rdoQuanLy.isSelected());
+//        nv.setNgaySinh(txtNgaySinh.getText());
+//        nv.setEmail(txtEmail.getText());
+//        return nv;
+//    }
+//
+//    void clearForm() {
+//        NhanVien nv = new NhanVien();
+//        this.setForm(nv);
+//        txtMaNV.requestFocus();
+//        this.row = -1;
+//        //  this.updateStatus();
+//    }
+//
+//    void insert() {
+//        NhanVien nv = getForm();
+//        String mk2 = new String(txtMatKhau.getPassword());
+//        boolean isSuccess = validated();
+//        if (!isSuccess) {
+//            MsgBox.alert(this, notice);
+//        } else {
+//            if (!mk2.equals(nv.getMatKhau())) {
+//                MsgBox.alert(this, "Xác nhận mật khẩu không đúng !");
+//            } else {
+//                try {
+//                    dao.insert(nv);
+//                    this.fillTable();
+//                    this.clearForm();
+//                    MsgBox.alert(this, "Thêm mới thành công !");
+//                    tabs.setSelectedIndex(1);
+//
+//                } catch (Exception e) {
+//                    MsgBox.alert(this, "Thêm mới thất bại");
+//                }
+//            }
+//        }
+//    }
 
-    void setForm(NhanVien nv) {
-        txtMaNV.setText(nv.getMaNV());
-        txtHoTen.setText(nv.getHoTen());
-        txtMatKhau.setText(nv.getMatKhau());
-        rdoQuanLy.setSelected(nv.isVaiTro());
-        rdoNhanVien.setSelected(!nv.isVaiTro());
-        txtNgaySinh.setText(nv.getNgaySinh());
-        txtSDT.setText(nv.getDienThoai());
-        txtEmail.setText(nv.getEmail());
-    }
-
-    NhanVien getForm() {
-        NhanVien nv = new NhanVien();
-        nv.setMaNV(txtMaNV.getText());
-        nv.setHoTen(txtHoTen.getText());
-        nv.setMatKhau(new String(txtMatKhau.getPassword()));
-        nv.setVaiTro(rdoQuanLy.isSelected());
-        nv.setNgaySinh(txtNgaySinh.getText());
-        nv.setEmail(txtEmail.getText());
-        return nv;
-    }
-
-    void clearForm() {
-        NhanVien nv = new NhanVien();
-        this.setForm(nv);
-        txtMaNV.requestFocus();
-        this.row = -1;
-        //  this.updateStatus();
-    }
-
-    void insert() {
-        NhanVien nv = getForm();
-        String mk2 = new String(txtMatKhau.getPassword());
-        boolean isSuccess = validated();
-        if (!isSuccess) {
-            MsgBox.alert(this, notice);
-        } else {
-            if (!mk2.equals(nv.getMatKhau())) {
-                MsgBox.alert(this, "Xác nhận mật khẩu không đúng !");
-            } else {
-                try {
-                    dao.insert(nv);
-                    this.fillTable();
-                    this.clearForm();
-                    MsgBox.alert(this, "Thêm mới thành công !");
-                    tabs.setSelectedIndex(1);
-
-                } catch (Exception e) {
-                    MsgBox.alert(this, "Thêm mới thất bại");
-                }
-            }
-        }
-    }
-
-    void delete() {
-        if (!Auth.isManager()) {
-            MsgBox.alert(this, "Bạn không có quyền xoá nhân viên này !");
-        } else {
-            String manv = txtMaNV.getText();
-            if (manv.equals(Auth.user.getMaNV())) {
-                MsgBox.alert(this, "Bạn không được xoá chính bạn !");
-            } else if (MsgBox.confirm(this, "Bạn có thực sự muốn xoá nhân viên này ?")) {
-                try {
-                    dao.delete(manv);
-                    this.fillTable();
-                    this.clearForm();
-                    MsgBox.alert(this, "Xoá thành công !");
-                } catch (Exception e) {
-                    MsgBox.alert(this, "Xoá thất bại");
-                }
-            }
-        }
-    }
+//    void delete() {
+//        if (!Auth.isManager()) {
+//            MsgBox.alert(this, "Bạn không có quyền xoá nhân viên này !");
+//        } else {
+//            String manv = txtMaNV.getText();
+//            if (manv.equals(Auth.user.getMaNV())) {
+//                MsgBox.alert(this, "Bạn không được xoá chính bạn !");
+//            } else if (MsgBox.confirm(this, "Bạn có thực sự muốn xoá nhân viên này ?")) {
+//                try {
+//                    dao.delete(manv);
+//                    this.fillTable();
+//                    this.clearForm();
+//                    MsgBox.alert(this, "Xoá thành công !");
+//                } catch (Exception e) {
+//                    MsgBox.alert(this, "Xoá thất bại");
+//                }
+//            }
+//        }
+//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnSua;
