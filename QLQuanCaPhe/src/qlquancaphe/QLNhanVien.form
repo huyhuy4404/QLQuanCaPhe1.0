@@ -339,9 +339,6 @@
             <Component class="javax.swing.JTextField" name="txtMaNV">
             </Component>
             <Component class="javax.swing.JPasswordField" name="txtMatKhau">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jPasswordField1"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtHoTen">
             </Component>
