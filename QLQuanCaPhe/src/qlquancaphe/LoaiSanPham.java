@@ -4,18 +4,109 @@
  */
 package qlquancaphe;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import qlquancaphe.DAO.LoaiSanPhamDAO;
+import qlquancaphe.utils.MsgBox;
+
 /**
  *
  * @author ADMIN
  */
-public class LoaiSanPhamJDialog extends javax.swing.JDialog {
+public class LoaiSanPham extends javax.swing.JDialog {
+
+    LoaiSanPhamDAO dao = new LoaiSanPhamDAO();
+    int row = -1;
 
     /**
      * Creates new form LoaiSanPham
      */
-    public LoaiSanPhamJDialog(java.awt.Frame parent, boolean modal) {
+    public LoaiSanPham(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        fillTable();
+    }
+    void init(){
+        txtMaSp.setEditable(false);
+    }
+    public void first(){
+        row = 0;
+        edit();
+    }
+    public void prev(){
+        if(row>0){
+            row -- ;
+        }
+        edit();
+    }
+    public void next(){
+        if(row<tblSanPham.getRowCount()-1){
+            row++;
+        }
+        edit();
+    }
+    public void flast(){
+       row = tblSanPham.getRowCount()-1;
+        edit();
+    }
+    public void insert() {
+        qlquancaphe.entity.LoaiSanPham sp = getFrom();
+        dao.insert(sp);
+        fillTable();
+        
+    }
+    public void clearForm(){
+        qlquancaphe.entity.LoaiSanPham sp = new  qlquancaphe.entity.LoaiSanPham();
+        setFrom(sp);
+    }
+    public void delete(){
+        try {
+            String masp = txtMaSp.getText();
+            dao.delete(masp);
+            fillTable();
+        } catch (Exception e) {
+            MsgBox.alert(this, "xóa thất bại");
+        }
+    }
+    public void update() {
+        try {
+            qlquancaphe.entity.LoaiSanPham sp = new qlquancaphe.entity.LoaiSanPham();
+            sp.setMaLSP(Integer.parseInt(txtMaSp.getText()));
+            sp.setTenLSP(txtTenSp.getText());
+            dao.update(sp);
+            fillTable();
+        } catch (Exception e) {
+            MsgBox.alert(this, "lỗi");
+        }
+    }
+
+    public qlquancaphe.entity.LoaiSanPham getFrom() {
+        qlquancaphe.entity.LoaiSanPham sp = new qlquancaphe.entity.LoaiSanPham();
+//        sp.setMaLSP(Integer.valueOf(txtMaSp.getText()));
+
+        sp.setTenLSP(txtTenSp.getText());
+        return sp;
+    }
+
+    void setFrom(qlquancaphe.entity.LoaiSanPham sp) {
+        txtMaSp.setText("" + sp.getMaLSP());
+        txtTenSp.setText(sp.getTenLSP());
+        tabs.setSelectedIndex(1);
+    }
+
+    public void fillTable() {
+        DefaultTableModel model = (DefaultTableModel) tblSanPham.getModel();
+        model.setRowCount(0);
+        List<qlquancaphe.entity.LoaiSanPham> list = dao.selectAll();
+        for (qlquancaphe.entity.LoaiSanPham sp : list) {
+            model.addRow(new Object[]{sp.getMaLSP(), sp.getTenLSP()});
+        }
+    }
+
+    public void edit() {
+        int maSP = (Integer) tblSanPham.getValueAt(row, 0);
+        qlquancaphe.entity.LoaiSanPham sp = dao.selectById(maSP);
+        setFrom(sp);
     }
 
     /**
@@ -76,18 +167,20 @@ public class LoaiSanPhamJDialog extends javax.swing.JDialog {
         );
         pnlListLayout.setVerticalGroup(
             pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 303, Short.MAX_VALUE)
+            .addGap(0, 253, Short.MAX_VALUE)
             .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlListLayout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(51, Short.MAX_VALUE)))
         );
 
         tabs.addTab("DANH SÁCH", pnlList);
 
         lblMaCD.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblMaCD.setText("Mã sản phẩm");
+
+        txtMaSp.setEditable(false);
 
         lblTenCD.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTenCD.setText("Tên sản phẩm");
@@ -259,55 +352,58 @@ public class LoaiSanPhamJDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
-        // TODO add your handling code here:
-        //        if (evt.getClickCount() == 2) {
-            //            this.row = tblSanPham.getSelectedRow();
-            //            if (this.row >= 0) {
-                //                this.edit();
-                //            }
-            //        }
+        row = tblSanPham.getSelectedRow();
+        edit();
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
         // TODO add your handling code here:
-        //clearForm();
+        clearForm();
     }//GEN-LAST:event_btnMoiActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        //        if (check()) {
-            //            insert();
-            //        }
+//                if (check()) {
+        //            insert();
+        //        }
+        insert();
+        fillTable();
+    
     }//GEN-LAST:event_btnThemActionPerformed
+    public void insert(LoaiSanPham sp) {
+
+    }
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-        //update();
+        update();
+        fillTable();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
-        //delete();
+        delete();
+        fillTable();
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
         // TODO add your handling code here:
-        //first();
+        first();
     }//GEN-LAST:event_btnFirstActionPerformed
 
     private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
         // TODO add your handling code here:
-        //prev();
+        prev();
     }//GEN-LAST:event_btnPrevActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         // TODO add your handling code here:
-        //next();
+        next();
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
         // TODO add your handling code here:
-        //last();
+        flast();
     }//GEN-LAST:event_btnLastActionPerformed
 
     /**
@@ -327,21 +423,23 @@ public class LoaiSanPhamJDialog extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoaiSanPhamJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoaiSanPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoaiSanPhamJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoaiSanPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoaiSanPhamJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoaiSanPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoaiSanPhamJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoaiSanPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                LoaiSanPhamJDialog dialog = new LoaiSanPhamJDialog(new javax.swing.JFrame(), true);
+                LoaiSanPham dialog = new LoaiSanPham(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
