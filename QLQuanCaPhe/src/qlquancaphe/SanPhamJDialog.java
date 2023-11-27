@@ -6,9 +6,11 @@ package qlquancaphe;
 
 import java.io.File;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
+import qlquancaphe.DAO.LoaiSanPhamDAO;
 import qlquancaphe.DAO.SanPhamDAO;
 import qlquancaphe.entity.LoaiSanPham;
 import qlquancaphe.entity.SanPham;
@@ -22,6 +24,8 @@ import qlquancaphe.utils.isValidated;
  * @author ADMIN
  */
 public class SanPhamJDialog extends javax.swing.JDialog {
+
+    LoaiSanPhamDAO lspDAO = new LoaiSanPhamDAO();
 
     /**
      * Creates new form SanPham
@@ -82,7 +86,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "MÃ SP", "TÊN SP", "ĐƠN GIÁ", "MÔ TẢ", "LOẠI SP", "ẢNH"
+                "MÃ SP", "TÊN SP", "ĐƠN GIÁ", "LOẠI SP", "MÔ TẢ", "ẢNH"
             }
         ));
         tblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -99,7 +103,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
             .addGroup(pnlListLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 730, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         pnlListLayout.setVerticalGroup(
             pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,7 +120,6 @@ public class SanPhamJDialog extends javax.swing.JDialog {
 
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        lblAnh.setText("                   Ảnh");
         lblAnh.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblAnhMouseClicked(evt);
@@ -127,7 +130,9 @@ public class SanPhamJDialog extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblAnh, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(lblAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 4, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,6 +141,8 @@ public class SanPhamJDialog extends javax.swing.JDialog {
 
         lblMaSP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblMaSP.setText("Mã sản phẩm");
+
+        txtMaSp.setEnabled(false);
 
         lblTenSP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTenSP.setText("Tên sản phẩm");
@@ -215,7 +222,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
         });
 
         lblMaLSP.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblMaLSP.setText("Mã loại SP");
+        lblMaLSP.setText("Loại sản phẩm");
 
         cboMaloaiSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mời chọn loại sản phẩm", "Item 2", "Item 3", "Item 4" }));
 
@@ -246,12 +253,12 @@ public class SanPhamJDialog extends javax.swing.JDialog {
                     .addGroup(pnlEditLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56)
-                        .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblTenSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTenSP)
                             .addComponent(lblMaSP)
                             .addComponent(tblDongia)
-                            .addComponent(lblMaLSP, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblMaLSP))
                         .addGap(18, 18, 18)
                         .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -345,7 +352,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
 
     private void lblAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnhMouseClicked
         // TODO add your handling code here:
-        //chonAnh();
+        chonAnh();
     }//GEN-LAST:event_lblAnhMouseClicked
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
@@ -356,8 +363,9 @@ public class SanPhamJDialog extends javax.swing.JDialog {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
 //        if (check()) {
-        insert();
+//        insert();
 //        }
+        themSP();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -393,12 +401,28 @@ public class SanPhamJDialog extends javax.swing.JDialog {
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
-            this.row = tblSanPham.getSelectedRow();
-            if (this.row >= 0) {
-                this.edit();
-            }
+            loadTheoSPDaChon();
         }
     }//GEN-LAST:event_tblSanPhamMouseClicked
+    void loadTheoSPDaChon() {
+        int row = tblSanPham.getSelectedRow();
+        int masp = (int) tblSanPham.getValueAt(row, 0);
+        List<SanPham> list = (List<SanPham>) dao.selectbyMaSP(masp);
+        for (SanPham sp : list) {
+            txtMaSp.setText(sp.getMaSP() + "");
+            txtTenSp.setText(sp.getTenSP());
+            txtDongia.setText(sp.getDonGia() + "");
+            txtMoTa.setText(sp.getMoTa());
+            LoaiSanPham lsp = lspDAO.selectById(sp.getMaLSP());
+            
+            
+//           if (!sp.getHinh().equals("")) {
+//            lblAnh.setIcon(XImage.read(sp.getHinh()));
+//            
+//        }
+        }
+
+    }
 
     /**
      * @param args the command line arguments
@@ -486,6 +510,25 @@ public class SanPhamJDialog extends javax.swing.JDialog {
         this.updateStatus();
         tblSanPham.setDefaultEditor(Object.class, null);
         tabs.setSelectedIndex(1);
+        fillComboboxLSP();
+    }
+
+    void themSP() {
+        try {
+            List<LoaiSanPham> list = lspDAO.selectByTenLSP(cboMaloaiSP.getSelectedItem().toString());
+            for (LoaiSanPham lsp : list) {
+                SanPham sp = new SanPham();
+                sp.setTenSP(txtTenSp.getText());
+                sp.setDonGia(Float.parseFloat(txtDongia.getText()));
+                sp.setMoTa(txtMoTa.getText());
+                sp.setHinh(lblAnh.getToolTipText());
+                sp.setMaLSP(lsp.getMaLSP());
+                dao.insert(sp);
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+        }
+
     }
 
     public void insert() {
@@ -601,25 +644,29 @@ public class SanPhamJDialog extends javax.swing.JDialog {
     }
 
     void setForm(SanPham sp) {
-        sp.setMaSP(Integer.valueOf(txtMaSp.getText()));
+        txtMaSp.setText(sp.getMaSP() + "");
         txtTenSp.setText(sp.getTenSP());
         txtDongia.setText(String.valueOf(sp.getDonGia()));
         cboMaloaiSP.setSelectedItem(sp.getMaLSP());
+
         txtMoTa.setText(sp.getMoTa());
-        if (sp.getHinh() != null) {
-            lblAnh.setToolTipText(sp.getHinh());
+        if (!sp.getHinh().equals("")) {
             lblAnh.setIcon(XImage.read(sp.getHinh()));
         }
     }
 
     SanPham getForm() {
         SanPham sp = new SanPham();
-        sp.setMaSP(Integer.valueOf(txtMaSp.getText()));
         sp.setTenSP(txtTenSp.getText());
         if (!txtDongia.getText().isEmpty()) {
             sp.setDonGia(Float.valueOf(txtDongia.getText()));
         }
-        Object selectedItem = cboMaloaiSP.getSelectedItem();
+        Object selectedItem = cboMaloaiSP.getSelectedItem().toString();
+        lspDAO.selectByTenLSP((String) selectedItem);
+        LoaiSanPham lsp = new LoaiSanPham();
+        int lsp1 = lsp.getMaLSP();
+        sp.setMaLSP(lsp1);
+
         if (selectedItem != null && selectedItem instanceof LoaiSanPham) {
             sp.setMaLSP(((LoaiSanPham) selectedItem).getMaLSP());
         }
@@ -671,16 +718,25 @@ public class SanPhamJDialog extends javax.swing.JDialog {
             lblAnh.setToolTipText(file.getName());
         }
     }
+
+    void fillComboboxLSP() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboMaloaiSP.getModel();
+        model.removeAllElements();
+        try {
+            List<LoaiSanPham> ds = lspDAO.selectAll();
+            for (LoaiSanPham cd : ds) {
+                model.addElement(cd);
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+        }
+
+    }
+
     boolean validated() {
         String masp = txtMaSp.getText();
         String tensp = txtTenSp.getText();
         String dongia = txtDongia.getText();
-
-        if (!isValidated.isBlank(masp)) {
-            txtMaSp.requestFocus();
-            notice = "Vui lòng nhập mã sản phẩm";
-            return false;
-        }
 
         if (!isValidated.isBlank(tensp)) {
             txtTenSp.requestFocus();

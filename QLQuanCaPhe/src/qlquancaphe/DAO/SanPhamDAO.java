@@ -13,7 +13,7 @@ import qlquancaphe.utils.JDBCHelper;
  */
 public class SanPhamDAO extends QLQuanCaPhe<SanPham, String> {
 
-    String INSERT_SQL = "INSERT INTO SanPham (MaSP, TenSP, DonGia, MaLSP, Hinh, MoTa) VALUES (?, ?, ?, ?, ?, ?)";
+    String INSERT_SQL = "INSERT INTO SanPham ( TenSP, DonGia, MaLSP, Hinh, MoTa) VALUES ( ?, ?, ?, ?, ?)";
     String UPDATE_SQL = "UPDATE SanPham SET TenSP=?, DonGia=?, MaLSP=?, Hinh=?, MoTa=? WHERE MaSP=?";
     String DELETE_SQL = "DELETE FROM SanPham WHERE MaSP=?";
     String SELECT_ALL_SQL = "SELECT * FROM SanPham";
@@ -24,7 +24,6 @@ public class SanPhamDAO extends QLQuanCaPhe<SanPham, String> {
     @Override
     public void insert(SanPham entity) {
         JDBCHelper.update(INSERT_SQL,
-                entity.getMaSP(),
                 entity.getTenSP(),
                 entity.getDonGia(),
                 entity.getMaLSP(),
