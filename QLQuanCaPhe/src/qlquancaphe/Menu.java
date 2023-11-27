@@ -11,6 +11,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import qlquancaphe.utils.Auth;
+import qlquancaphe.utils.MsgBox;
 
 /**
  *
@@ -213,7 +214,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDoanhThuActionPerformed
 
     private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
-        // TODO add your handling code here:
+        this.openNhanVien();
     }//GEN-LAST:event_btnNhanVienActionPerformed
 
     private void btnDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMatKhauActionPerformed
@@ -283,6 +284,13 @@ public class Menu extends javax.swing.JFrame {
 
     private void openHoaDon() {
         new HoaDon(this, true).setVisible(true);
+    }
+  void openNhanVien() {
+        if (Auth.isLogin()) {
+            new QLNhanVien(this, true).setVisible(true);
+        } else {
+            MsgBox.alert(this, "Vui lòng đăng nhập");
+        }
     }
 
     private void init() {

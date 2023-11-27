@@ -138,8 +138,6 @@ public class QLNhanVien extends javax.swing.JDialog {
 
         lblNhanVien.setText("Mã Nhân Viên:");
 
-        txtMatKhau.setText("jPasswordField1");
-
         txtSDT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSDTActionPerformed(evt);
@@ -343,7 +341,7 @@ public class QLNhanVien extends javax.swing.JDialog {
     }//GEN-LAST:event_tblNhanVienMousePressed
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
-        // TODO add your handling code here:
+        clearForm();
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
     /**
@@ -411,7 +409,7 @@ public class QLNhanVien extends javax.swing.JDialog {
             for (NhanVien nv : list) {
                 Object[] row = {nv.getMaNV(), nv.getHoTen(),
                     nv.isVaiTro() ? "Trưởng Phòng"  : "Nhân Viên",
-                    XDate.toString(nv.getNgaySinh(), "MM/dd/yyyy"),
+                    XDate.toString(nv.getNgaySinh(), "yyyy/dd/MM"),
                     nv.getDienThoai(),
                     nv.getEmail()};
                 model.addRow(row);
@@ -437,6 +435,7 @@ public class QLNhanVien extends javax.swing.JDialog {
         rdoQuanLy.setSelected(nv.isVaiTro());
         rdoNhanVien.setSelected(!nv.isVaiTro());
         txtNgaySinh.setText(nv.getNgaySinh().toString());
+      //  txtNgaySinh.setText(nv.getNgaySinh());
         txtSDT.setText(nv.getDienThoai());
         txtEmail.setText(nv.getEmail());
     }
@@ -447,8 +446,9 @@ public class QLNhanVien extends javax.swing.JDialog {
         nv.setHoTen(txtHoTen.getText());
         nv.setMatKhau(new String(txtMatKhau.getPassword()));
         nv.setVaiTro(rdoQuanLy.isSelected());
-//      nv.setNgaySinh(toString(txtNgaySinh.getText().toString());
-  //      nv.setNgaySinh(txtNgaySinh.getDate());
+//        nv.setNgaySinh(toString(txtNgaySinh.getText().toString());
+//        nv.setNgaySinh(txtNgaySinh.getDate);
+        nv.setDienThoai(txtSDT.getText());
         nv.setEmail(txtEmail.getText());
         return nv;
     }
@@ -508,13 +508,7 @@ public class QLNhanVien extends javax.swing.JDialog {
                 } catch (Exception e) {
 //                    MsgBox.alert(this, "Thêm mới thất bại");
                        e.printStackTrace();
-                    
-             
-                       
-                    
-
-                    
-
+   
                 }
             }
         }
