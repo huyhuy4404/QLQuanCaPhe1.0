@@ -21,7 +21,8 @@ public class ChiTietDonHangDAO extends QLQuanCaPhe<ChiTietDonHang, String> {
     final String DELETE_SQL = "DELETE FROM ChiTietDonHang WHERE MaCT=?";
     final String SELECT_ALL_SQL = "SELECT * FROM ChiTietDonHang";
     final String SELECT_BY_ID_SQL = "SELECT * FROM ChiTietDonHang WHERE MaCT=?";
-
+    final String DELETE_BY_MaDH = "DELETE FROM ChiTietDonHang WHERE MaDH=?";
+    final String SELECT_BY_MaDH_SQL = "SELECT * FROM ChiTietDonHang WHERE MaDH=?";
     @Override
     public void insert(ChiTietDonHang entity) {
         JDBCHelper.update(INSERT_SQL,  entity.getMaSP(), entity.getMaDH(), entity.getSl(), entity.getDonGia(), entity.getTongGia());
@@ -70,6 +71,12 @@ public class ChiTietDonHangDAO extends QLQuanCaPhe<ChiTietDonHang, String> {
             throw new RuntimeException();
         }
         return list;
+    }
+     public void deleteByMaDH(int key) {
+        JDBCHelper.update(DELETE_BY_MaDH, key);
+    }
+     public List<ChiTietDonHang> selectbyMaDH(int MaDH) {
+        return selectBySql(SELECT_BY_MaDH_SQL,MaDH);
     }
 
 }

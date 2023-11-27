@@ -44,7 +44,7 @@ public class HoaDon extends javax.swing.JDialog {
         fillComboboxLSP();
         DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
         model.setRowCount(0);
-
+        
     }
 
     /**
@@ -268,6 +268,7 @@ public class HoaDon extends javax.swing.JDialog {
 
     private void btnTroVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTroVeActionPerformed
         // TODO add your handling code here:
+        fillTableHoaDon2();
     }//GEN-LAST:event_btnTroVeActionPerformed
     void fillTableHoaDon() {
         String input = MsgBox.prompt(this, "Vui lòng nhập số lượng");
@@ -293,6 +294,31 @@ public class HoaDon extends javax.swing.JDialog {
             }
         } else {
             return;
+        }
+    }
+    void fillTableHoaDon2() {
+        List<DonHang> ds = dhDAO.selectAll();
+        DonHang lastDonHang = ds.get(ds.size() - 1);
+        int maDH = lastDonHang.getMaDH();
+        DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
+        model.setRowCount(0);
+        try {
+            List<ChiTietDonHang> ctList = CTDHDAO.selectbyMaDH(maDH);
+            for(ChiTietDonHang ctdh:ctList){
+                int sl =ctdh.getSl();
+                List<SanPham> list1 = (List<SanPham>) spDAO.selectbyMaSP(ctdh.getMaSP());
+                for (SanPham sp : list1) {
+                    Object[] row = {sp.getTenSP(),
+                        sl,
+                        sp.getDonGia(),
+                        sp.getDonGia() * sl};
+                    model.insertRow(0, row);
+                }
+            }
+            tinhTongTien();
+                
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -338,6 +364,9 @@ public class HoaDon extends javax.swing.JDialog {
                     CTDHDAO.insert(CTDH);
                 }
             }
+            TinhTien tinhTien = new TinhTien();
+            this.setVisible(false);
+            tinhTien.setVisible(true);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -358,7 +387,7 @@ public class HoaDon extends javax.swing.JDialog {
         }
 
     }
-
+    
     private void loadTableSanPham() {
         DefaultTableModel model = (DefaultTableModel) tblSanPham.getModel();
         model.setRowCount(0);
