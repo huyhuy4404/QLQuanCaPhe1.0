@@ -4,9 +4,13 @@
  */
 package qlquancaphe;
 
+import java.io.File;
 import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 import qlquancaphe.DAO.SanPhamDAO;
+import qlquancaphe.entity.LoaiSanPham;
 import qlquancaphe.entity.SanPham;
 import qlquancaphe.utils.Auth;
 import qlquancaphe.utils.MsgBox;
@@ -26,7 +30,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         fillTable();
-        //init();
+        init();
     }
 
     /**
@@ -38,7 +42,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        fileChooser = new javax.swing.JFileChooser();
         tabs = new javax.swing.JTabbedPane();
         pnlList = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -67,8 +71,6 @@ public class SanPhamJDialog extends javax.swing.JDialog {
         lblMaLSP = new javax.swing.JLabel();
         cboMaloaiSP = new javax.swing.JComboBox<>();
         lblTittle = new javax.swing.JLabel();
-
-        jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -294,7 +296,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
                 .addGap(27, 27, 27)
                 .addComponent(lblMoTa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addGap(18, 18, 18)
                 .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -451,7 +453,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cboMaloaiSP;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JFileChooser fileChooser;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -590,7 +592,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
         try {
             List<SanPham> list = dao.selectAll();
             for (SanPham sp : list) {
-                Object[] row = {sp.getMaSP(), sp.getTenSP(), sp.getDonGia(), sp.getMaLSP(), sp.getHinh()};
+                Object[] row = {sp.getMaSP(), sp.getTenSP(), sp.getDonGia(), sp.getMaLSP(), sp.getMoTa(), sp.getHinh()};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -614,17 +616,35 @@ public class SanPhamJDialog extends javax.swing.JDialog {
         SanPham sp = new SanPham();
         sp.setMaSP(Integer.valueOf(txtMaSp.getText()));
         sp.setTenSP(txtTenSp.getText());
-        if (cboMaloaiSP.getSelectedItem() != null) {
-            sp.setMaLSP(Integer.valueOf(cboMaloaiSP.getSelectedItem().toString()));
+        if (!txtDongia.getText().isEmpty()) {
+            sp.setDonGia(Float.valueOf(txtDongia.getText()));
+        }
+        Object selectedItem = cboMaloaiSP.getSelectedItem();
+        if (selectedItem != null && selectedItem instanceof LoaiSanPham) {
+            sp.setMaLSP(((LoaiSanPham) selectedItem).getMaLSP());
         }
         if (!txtDongia.getText().isEmpty()) {
             sp.setDonGia(Float.valueOf(txtDongia.getText()));
         }
-        sp.setDonGia(Float.valueOf(txtDongia.getText()));
         sp.setMoTa(txtMoTa.getText());
         sp.setHinh(lblAnh.getToolTipText());
         return sp;
     }
+//    SanPham getForm() {
+//        SanPham sp = new SanPham();
+//        sp.setMaSP(Integer.valueOf(txtMaSp.getText()));
+//        sp.setTenSP(txtTenSp.getText());
+//        if (cboMaloaiSP.getSelectedItem() != null) {
+//            sp.setMaLSP(Integer.valueOf(cboMaloaiSP.getSelectedItem().toString()));
+//        }
+//        if (!txtDongia.getText().isEmpty()) {
+//            sp.setDonGia(Float.valueOf(txtDongia.getText()));
+//        }
+//        sp.setDonGia(Float.valueOf(txtDongia.getText()));
+//        sp.setMoTa(txtMoTa.getText());
+//        sp.setHinh(lblAnh.getToolTipText());
+//        return sp;
+//    }
 
     void updateStatus() {
         boolean edit = (this.row >= 0);
@@ -642,15 +662,15 @@ public class SanPhamJDialog extends javax.swing.JDialog {
         btnLast.setEnabled(edit && !last);
     }
 
-//    void chonAnh() {
-//        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-//            File file = fileChooser.getSelectedFile();
-//            XImage.save(file);
-//            ImageIcon icon = XImage.read(file.getName());
-//            lblAnh.setIcon(icon);
-//            lblAnh.setToolTipText(file.getName());
-//        }
-//    }
+    void chonAnh() {
+        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            XImage.save(file);
+            ImageIcon icon = XImage.read(file.getName());
+            lblAnh.setIcon(icon);
+            lblAnh.setToolTipText(file.getName());
+        }
+    }
     boolean validated() {
         String masp = txtMaSp.getText();
         String tensp = txtTenSp.getText();

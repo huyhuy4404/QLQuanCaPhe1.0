@@ -19,9 +19,24 @@ import javax.swing.ImageIcon;
  * @author huydz
  */
 public class XImage {
+
     public static Image getAppIcon() {
         URL url = XImage.class.getResource("qlquancaphe/icons");
-        return new ImageIcon(url).getImage();
+        if (url != null) {
+            // Tạo ImageIcon chỉ khi URL không phải là null
+            ImageIcon icon = new ImageIcon(url);
+            // Tiếp tục xử lý khác (nếu cần)
+            return icon.getImage();
+        } else {
+            // Xử lý trường hợp khi URL là null
+            // Ví dụ: trả về một hình ảnh mặc định hoặc thông báo lỗi
+            return getDefaultImage();
+        }
+    }
+    private static Image getDefaultImage() {
+        // Xử lý trả về hình ảnh mặc định hoặc thông báo lỗi
+        // Ví dụ: return new ImageIcon(XImage.class.getResource("path_to_default_image")).getImage();
+        return null;
     }
 
     public static void save(File src) {

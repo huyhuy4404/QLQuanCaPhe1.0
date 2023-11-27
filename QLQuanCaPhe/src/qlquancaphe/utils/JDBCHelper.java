@@ -19,7 +19,7 @@ public class JDBCHelper {
     static String connectionUrl = "jdbc:sqlserver://localhost:1433;encrypt=true;database=QLQUANCAPHE;trustServerCertificate=true;sslProtocol=TLSv1.2";
 
     static String userName = "sa";
-    static String passWord = "vanhau123";
+    static String passWord = "thuan12345";
 
     static {
         try {
