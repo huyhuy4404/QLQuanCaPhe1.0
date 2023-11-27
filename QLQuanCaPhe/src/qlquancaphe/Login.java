@@ -197,7 +197,7 @@ public class Login extends javax.swing.JDialog {
             if(!nv.getMatKhau().equals(pass)){
                 MsgBox.alert(this, "Sai mật khẩu");
             }else{
-                Auth.user=nv;
+                Auth.user=nv;            
                 this.dispose();
             }
         }
