@@ -4,6 +4,8 @@
  */
 package qlquancaphe;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import qlquancaphe.entity.NhanVien;
 import java.util.List;
 import java.util.Date;
@@ -324,7 +326,7 @@ public class QLNhanVien extends javax.swing.JDialog {
     }//GEN-LAST:event_txtSDTActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-       insert();
+        insert();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -332,7 +334,7 @@ public class QLNhanVien extends javax.swing.JDialog {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void tblNhanVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMousePressed
-       if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 2) {
             this.row = tblNhanVien.getSelectedRow();
             if (this.row >= 0) {
                 this.edit();
@@ -401,6 +403,7 @@ public class QLNhanVien extends javax.swing.JDialog {
 
     }
 //
+
     void fillTable() {
         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
         model.setRowCount(0);
@@ -408,7 +411,7 @@ public class QLNhanVien extends javax.swing.JDialog {
             List<NhanVien> list = dao.selectAll();
             for (NhanVien nv : list) {
                 Object[] row = {nv.getMaNV(), nv.getHoTen(),
-                    nv.isVaiTro() ? "Trưởng Phòng"  : "Nhân Viên",
+                    nv.isVaiTro() ? "Trưởng Phòng" : "Nhân Viên",
                     XDate.toString(nv.getNgaySinh(), "yyyy/dd/MM"),
                     nv.getDienThoai(),
                     nv.getEmail()};
@@ -418,14 +421,13 @@ public class QLNhanVien extends javax.swing.JDialog {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
         }
     }
-    
-    
-     void edit() {
+
+    void edit() {
         String manh = (String) tblNhanVien.getValueAt(this.row, 0);
         NhanVien nv = dao.selectById(manh);
         this.setForm(nv);
         tabs.setSelectedIndex(1);
-        
+
     }
 
     void setForm(NhanVien nv) {
@@ -434,8 +436,11 @@ public class QLNhanVien extends javax.swing.JDialog {
         txtMatKhau.setText(nv.getMatKhau());
         rdoQuanLy.setSelected(nv.isVaiTro());
         rdoNhanVien.setSelected(!nv.isVaiTro());
-        txtNgaySinh.setText(nv.getNgaySinh().toString());
-      //  txtNgaySinh.setText(nv.getNgaySinh());
+        Date day = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String ngaySinh = dateFormat.format(nv.getNgaySinh());
+        txtNgaySinh.setText(ngaySinh);
+        //  txtNgaySinh.setText(nv.getNgaySinh());
         txtSDT.setText(nv.getDienThoai());
         txtEmail.setText(nv.getEmail());
     }
@@ -446,17 +451,24 @@ public class QLNhanVien extends javax.swing.JDialog {
         nv.setHoTen(txtHoTen.getText());
         nv.setMatKhau(new String(txtMatKhau.getPassword()));
         nv.setVaiTro(rdoQuanLy.isSelected());
-//        nv.setNgaySinh(toString(txtNgaySinh.getText().toString());
+        Date day = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date ngaySinh = dateFormat.parse(txtNgaySinh.getText());
+            nv.setNgaySinh(ngaySinh);
+        } catch (ParseException e) {
+            MsgBox.alert(this, "Không thể chuyển đổi kiểu dữ liệu!");
+        }
 //        nv.setNgaySinh(txtNgaySinh.getDate);
         nv.setDienThoai(txtSDT.getText());
         nv.setEmail(txtEmail.getText());
         return nv;
     }
-    
+
     boolean validated() {
         String manv = txtMaNV.getText();
         String mk = String.valueOf(txtMatKhau.getPassword());
-    
+
         String hoten = txtHoTen.getText();
 
         if (!isValidated.isBlank(manv)) {
@@ -478,7 +490,6 @@ public class QLNhanVien extends javax.swing.JDialog {
         }
         return true;
     }
-
 
     void clearForm() {
         NhanVien nv = new NhanVien();
@@ -507,8 +518,8 @@ public class QLNhanVien extends javax.swing.JDialog {
 
                 } catch (Exception e) {
 //                    MsgBox.alert(this, "Thêm mới thất bại");
-                       e.printStackTrace();
-   
+                    e.printStackTrace();
+
                 }
             }
         }
