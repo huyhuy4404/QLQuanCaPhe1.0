@@ -109,7 +109,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
             pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlListLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -343,8 +343,8 @@ public class SanPhamJDialog extends javax.swing.JDialog {
                 .addGap(21, 21, 21)
                 .addComponent(lblTittle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -402,6 +402,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
             loadTheoSPDaChon();
+            tabs.setSelectedIndex(1);
         }
     }//GEN-LAST:event_tblSanPhamMouseClicked
     void loadTheoSPDaChon() {
@@ -414,12 +415,12 @@ public class SanPhamJDialog extends javax.swing.JDialog {
             txtDongia.setText(sp.getDonGia() + "");
             txtMoTa.setText(sp.getMoTa());
             LoaiSanPham lsp = lspDAO.selectById(sp.getMaLSP());
-            
-            
-//           if (!sp.getHinh().equals("")) {
-//            lblAnh.setIcon(XImage.read(sp.getHinh()));
-//            
-//        }
+            String tenLSP = lsp.getTenLSP();
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cboMaloaiSP.getModel();
+            model.setSelectedItem(tenLSP);
+            if (sp.getHinh() != null) {
+                lblAnh.setIcon(XImage.read(sp.getHinh()));
+            }
         }
 
     }
