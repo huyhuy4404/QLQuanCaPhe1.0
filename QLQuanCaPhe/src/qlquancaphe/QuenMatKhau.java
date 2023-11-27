@@ -4,18 +4,16 @@
  */
 package qlquancaphe;
 
-import java.net.PasswordAuthentication;
 import java.util.Properties;
 import java.util.Random;
 import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import qlquancaphe.DAO.NhanVienDAO;
-import qlquancaphe.entity.NhanVien;
-import javax.mail.*;
-import javax.swing.JOptionPane;
+import qlquancaphe.utils.MsgBox;
 
 
 /**
@@ -136,51 +134,44 @@ public class QuenMatKhau extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiActionPerformed
-        Random rand = new Random();
-        randomCode = rand.nextInt(999999);
-        String host = "smtp.gmail.com";
-        String user = "haunvpc06859@fpt.edu.vn";
-        String pass = "bbndafillnmhgoac";
-        String to = txtEmailss.getText();
-        String suject = "Mã Code";
-        String message = "Mã Code của bạn là " + randomCode;
-        boolean sessDebug = false;
-        Properties pros = new Properties();
-        pros.put("mail.smtp.host", "smtp.gmail.com");
-        pros.put("mail.smtp.port", "587");
-        pros.put("mail.smtp.auth", "true");
-        pros.put("mail.smtp.starttls.enable", "true");
-        pros.put("mail.smtp.starttls.required", "true");
-        Session session = Session.getInstance(pros,
-                new javax.mail.Authenticator() {
-            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-                return new javax.mail.PasswordAuthentication((user), (pass));
-            }
-        });
-        try {
-            Message msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress(user));
-            msg.setRecipients(
-                    Message.RecipientType.TO,
-                    InternetAddress.parse(to)
-            );
-            msg.setSubject(suject);
-            msg.setText(message);
-
-            Transport.send(msg);
-            JOptionPane.showMessageDialog(this, "Mã đã được gửi thành công");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
+        GuiMa();
     }//GEN-LAST:event_btnGuiActionPerformed
 
     private void btnCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCodeActionPerformed
-        if(Integer.valueOf(txtCode.getText())==randomCode){
-            
-        }
-    }//GEN-LAST:event_btnCodeActionPerformed
 
+    }//GEN-LAST:event_btnCodeActionPerformed
+    void GuiMa(){
+        Properties prop = new Properties();
+		prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true"); //TLS
+        
+        Session session = Session.getInstance(prop,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication("huyntpc06811@fpt.edu.vn","ihnceqzwwtowqxcn" );
+                    }
+                });
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("huyntpc06811@fpt.edu.vn"));
+            message.setRecipients(
+                    Message.RecipientType.TO,
+                    InternetAddress.parse(txtEmailss.getText())
+            );
+            message.setSubject("Quên mật khẩu!");
+            Random ranDom = new Random();
+            randomCode =ranDom.nextInt(900000)+100000;
+            message.setText(randomCode+"");
+
+            Transport.send(message);
+
+            System.out.println("Done");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * @param args the command line arguments
      */
