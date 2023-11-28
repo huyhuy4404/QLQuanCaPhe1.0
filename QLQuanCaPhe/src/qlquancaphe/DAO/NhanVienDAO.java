@@ -32,7 +32,7 @@ public class NhanVienDAO extends QLQuanCaPhe<NhanVien, String> {
 
     @Override
     public void update(NhanVien entity) {
-        JDBCHelper.update(INSERT_SQL, entity.getHoTen(), entity.getMatKhau(), entity.isVaiTro(), entity.getNgaySinh(), entity.getDienThoai(),entity.getEmail(), entity.getMaNV());
+        JDBCHelper.update(UPDATE_SQL, entity.getHoTen(), entity.getMatKhau(), entity.isVaiTro(), entity.getNgaySinh(), entity.getDienThoai(),entity.getEmail(), entity.getMaNV());
     }
 
     @Override
