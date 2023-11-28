@@ -91,5 +91,8 @@ public class SanPhamDAO extends QLQuanCaPhe<SanPham, String> {
     public List<SanPham> selectbyMaSP(int MaSP) {
         return selectBySql(SELECT_BY_ID_SQL,MaSP);
     }
-
+    public List<SanPham> selectByKeyword(String keyword) {
+        String SQL = "SELECT * FROM SanPham WHERE TenSP LIKE ?";
+        return this.selectBySql(SQL, "%" + keyword + "%");
+    }
 }

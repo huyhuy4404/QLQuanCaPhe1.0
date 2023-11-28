@@ -57,6 +57,11 @@ public class Menu extends javax.swing.JFrame {
 
         btnSanPham.setText("Quản lí sản phẩm");
         btnSanPham.setPreferredSize(new java.awt.Dimension(145, 35));
+        btnSanPham.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSanPhamActionPerformed(evt);
+            }
+        });
 
         btnNhanVien.setText("Quản lí nhân viên");
         btnNhanVien.setPreferredSize(new java.awt.Dimension(145, 35));
@@ -231,6 +236,10 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDangXuatActionPerformed
 
+    private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
+        this.openSanPham();
+    }//GEN-LAST:event_btnSanPhamActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -285,9 +294,17 @@ public class Menu extends javax.swing.JFrame {
     private void openHoaDon() {
         new HoaDon(this, true).setVisible(true);
     }
-  void openNhanVien() {
+
+    void openNhanVien() {
         if (Auth.isLogin()) {
             new QLNhanVien(this, true).setVisible(true);
+        } else {
+            MsgBox.alert(this, "Vui lòng đăng nhập");
+        }
+    }
+    void openSanPham() {
+        if (Auth.isLogin()) {
+            new SanPhamJDialog(this, true).setVisible(true);
         } else {
             MsgBox.alert(this, "Vui lòng đăng nhập");
         }
