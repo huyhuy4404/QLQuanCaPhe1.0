@@ -51,6 +51,9 @@ public class SanPhamJDialog extends javax.swing.JDialog {
         pnlList = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSanPham = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        txtTimkiem = new javax.swing.JTextField();
+        btnTimkiem = new javax.swing.JButton();
         pnlEdit = new javax.swing.JPanel();
         lblHinhLogo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -96,20 +99,54 @@ public class SanPhamJDialog extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(tblSanPham);
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm theo tên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 0, 0))); // NOI18N
+
+        btnTimkiem.setText("Tìm kiếm");
+        btnTimkiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimkiemActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtTimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnTimkiem)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtTimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(8, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(btnTimkiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout pnlListLayout = new javax.swing.GroupLayout(pnlList);
         pnlList.setLayout(pnlListLayout);
         pnlListLayout.setHorizontalGroup(
             pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlListLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 730, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addContainerGap())
         );
         pnlListLayout.setVerticalGroup(
             pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlListLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -362,7 +399,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-if (check()) {
+        if (check()) {
             themSP();
             MsgBox.alert(this, "Thêm thành công!");
             fillTable();
@@ -409,6 +446,10 @@ if (check()) {
             btnThem.setEnabled(false);
         }
     }//GEN-LAST:event_tblSanPhamMouseClicked
+
+    private void btnTimkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimkiemActionPerformed
+        fillTableSanPham();
+    }//GEN-LAST:event_btnTimkiemActionPerformed
     void loadTheoSPDaChon() {
         int row = tblSanPham.getSelectedRow();
         int masp = (int) tblSanPham.getValueAt(row, 0);
@@ -480,9 +521,11 @@ if (check()) {
     private javax.swing.JButton btnPrev;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnTimkiem;
     private javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cboMaloaiSP;
     private javax.swing.JFileChooser fileChooser;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -502,6 +545,7 @@ if (check()) {
     private javax.swing.JTextField txtMaSp;
     private javax.swing.JTextArea txtMoTa;
     private javax.swing.JTextField txtTenSp;
+    private javax.swing.JTextField txtTimkiem;
     // End of variables declaration//GEN-END:variables
     SanPhamDAO dao = new SanPhamDAO();
     int row = -1;
@@ -567,8 +611,8 @@ if (check()) {
                 sp.setMaSP(Integer.parseInt(txtMaSp.getText()));
                 dao.update(sp);
             }
-            MsgBox.alert(this,"Cập nhật thành công");
-        fillTable();
+            MsgBox.alert(this, "Cập nhật thành công");
+            fillTable();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -659,7 +703,8 @@ if (check()) {
         cboMaloaiSP.setSelectedItem(sp.getMaLSP());
 
         txtMoTa.setText(sp.getMoTa());
-        if (!sp.getHinh().equals("")) {
+        if (sp.getHinh() != null) {
+            lblAnh.setToolTipText(sp.getHinh());
             lblAnh.setIcon(XImage.read(sp.getHinh()));
         }
     }
@@ -686,21 +731,6 @@ if (check()) {
         sp.setHinh(lblAnh.getToolTipText());
         return sp;
     }
-//    SanPham getForm() {
-//        SanPham sp = new SanPham();
-//        sp.setMaSP(Integer.valueOf(txtMaSp.getText()));
-//        sp.setTenSP(txtTenSp.getText());
-//        if (cboMaloaiSP.getSelectedItem() != null) {
-//            sp.setMaLSP(Integer.valueOf(cboMaloaiSP.getSelectedItem().toString()));
-//        }
-//        if (!txtDongia.getText().isEmpty()) {
-//            sp.setDonGia(Float.valueOf(txtDongia.getText()));
-//        }
-//        sp.setDonGia(Float.valueOf(txtDongia.getText()));
-//        sp.setMoTa(txtMoTa.getText());
-//        sp.setHinh(lblAnh.getToolTipText());
-//        return sp;
-//    }
 
     void updateStatus() {
         boolean edit = (this.row >= 0);
@@ -718,6 +748,70 @@ if (check()) {
         btnLast.setEnabled(edit && !last);
     }
 
+
+    void chonAnh() {
+        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            XImage.save(file);
+            ImageIcon icon = XImage.read(file.getName());
+            lblAnh.setIcon(icon);
+            lblAnh.setToolTipText(file.getName());
+        }
+    }
+
+    void fillComboboxLSP() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboMaloaiSP.getModel();
+        model.removeAllElements();
+        try {
+            List<LoaiSanPham> ds = lspDAO.selectAll();
+            for (LoaiSanPham cd : ds) {
+                model.addElement(cd);
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+        }
+    }
+    
+    void fillTableSanPham() {
+        DefaultTableModel model = (DefaultTableModel) tblSanPham.getModel();
+        model.setRowCount(0);
+        try {
+            String keyword = txtTimkiem.getText();
+            List<SanPham> list = dao.selectByKeyword(keyword);
+            for (SanPham sp : list) {
+                Object[] row = {
+                    sp.getMaSP(),
+                    sp.getTenSP(),
+                    sp.getDonGia(),
+                    sp.getMaLSP(),
+                    sp.getMoTa(),
+                    sp.getHinh()
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    boolean validated() {
+        String masp = txtMaSp.getText();
+        String tensp = txtTenSp.getText();
+        String dongia = txtDongia.getText();
+
+        if (!isValidated.isBlank(tensp)) {
+            txtTenSp.requestFocus();
+            notice = "Vui lòng nhập tên sản phẩm";
+            return false;
+        }
+
+        if (!isValidated.isBlank(dongia)) {
+            txtDongia.requestFocus();
+            notice = "Vui lòng nhập học phí của sản phẩm";
+            return false;
+        }
+        return true;
+    }
+    
     public boolean check() {
         String tensp = txtTenSp.getText();
         String dongia = txtDongia.getText();
@@ -747,47 +841,13 @@ if (check()) {
             MsgBox.alert(this, "Đơn giá sai định dạng!");
             return false;
         }
-        return true;
-    }
-    void chonAnh() {
-        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            File file = fileChooser.getSelectedFile();
-            XImage.save(file);
-            ImageIcon icon = XImage.read(file.getName());
-            lblAnh.setIcon(icon);
-            lblAnh.setToolTipText(file.getName());
-        }
-    }
-
-    void fillComboboxLSP() {
-        DefaultComboBoxModel model = (DefaultComboBoxModel) cboMaloaiSP.getModel();
-        model.removeAllElements();
-        try {
-            List<LoaiSanPham> ds = lspDAO.selectAll();
-            for (LoaiSanPham cd : ds) {
-                model.addElement(cd);
+        DefaultTableModel model = (DefaultTableModel) tblSanPham.getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            String tenSanPhamTrongBang = (String) model.getValueAt(i, 1); // Lấy tên sản phẩm từ cột 1 (đánh index từ 0)
+            if (tensp.equalsIgnoreCase(tenSanPhamTrongBang)) {
+                MsgBox.alert(this, "Tên sản phẩm đã tồn tại!");
+                return false;
             }
-        } catch (Exception e) {
-            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
-        }
-
-    }
-
-    boolean validated() {
-        String masp = txtMaSp.getText();
-        String tensp = txtTenSp.getText();
-        String dongia = txtDongia.getText();
-
-        if (!isValidated.isBlank(tensp)) {
-            txtTenSp.requestFocus();
-            notice = "Vui lòng nhập tên sản phẩm";
-            return false;
-        }
-
-        if (!isValidated.isBlank(dongia)) {
-            txtDongia.requestFocus();
-            notice = "Vui lòng nhập học phí của sản phẩm";
-            return false;
         }
         return true;
     }

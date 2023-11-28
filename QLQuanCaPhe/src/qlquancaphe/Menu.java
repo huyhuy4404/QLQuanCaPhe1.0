@@ -326,9 +326,11 @@ public class Menu extends javax.swing.JFrame {
         if (!Auth.isManager()) {
             btnNhanVien.setEnabled(false);
             btnDoanhThu.setEnabled(false);
+            btnSanPham.setEnabled(false);
         } else {
             btnNhanVien.setEnabled(true);
             btnDoanhThu.setEnabled(true);
+            btnSanPham.setEnabled(true);
         }
     }
 
