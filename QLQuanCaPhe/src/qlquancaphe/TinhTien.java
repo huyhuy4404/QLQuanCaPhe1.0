@@ -376,6 +376,11 @@ public class TinhTien extends javax.swing.JFrame {
 
         btnThanhToan.setText("Thanh toán");
         btnThanhToan.setEnabled(false);
+        btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThanhToanActionPerformed(evt);
+            }
+        });
         jPanel7.add(btnThanhToan);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -537,6 +542,19 @@ public class TinhTien extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnTroVeActionPerformed
+
+    private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
+        // TODO add your handling code here:
+        ThanhToan();
+    }//GEN-LAST:event_btnThanhToanActionPerformed
+    void ThanhToan(){
+        int soTienKhachTra = Integer.parseInt(lblTienKhachTra.getText());
+        int soTienCanThanhToan = Integer.parseInt(lblTienCanThanhToan.getText());
+        if(soTienKhachTra<soTienCanThanhToan){
+            MsgBox.alert(this, "Số tiền phải lớn hơn hoặc bằng số tiền cần thanh toán!");
+            return;
+        }
+    }
     void init() {
         lblTienKhachTra.setText(txtSoTien.getText());
     }

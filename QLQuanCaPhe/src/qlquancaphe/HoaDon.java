@@ -44,7 +44,7 @@ public class HoaDon extends javax.swing.JDialog {
         fillComboboxLSP();
         DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
         model.setRowCount(0);
-        
+        loadThanhToan();
     }
 
     /**
@@ -239,6 +239,7 @@ public class HoaDon extends javax.swing.JDialog {
         // TODO add your handling code here:
         deleteMon();
         tinhTongTien();
+        loadThanhToan();
     }//GEN-LAST:event_btnHuyMonActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
@@ -259,7 +260,7 @@ public class HoaDon extends javax.swing.JDialog {
         // TODO add your handling code here:
         fillTableHoaDon();
         tinhTongTien();
-
+        loadThanhToan();
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
     private void btnInHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInHoaDonActionPerformed
@@ -296,6 +297,15 @@ public class HoaDon extends javax.swing.JDialog {
             return;
         }
     }
+
+    void loadThanhToan() {
+        if (tblHoaDon.getRowCount() == 0) {
+            btnThanhToan.setEnabled(false);
+        } else {
+            btnThanhToan.setEnabled(true);
+        }
+    }
+
     void fillTableHoaDon2() {
         List<DonHang> ds = dhDAO.selectAll();
         DonHang lastDonHang = ds.get(ds.size() - 1);
@@ -304,8 +314,8 @@ public class HoaDon extends javax.swing.JDialog {
         model.setRowCount(0);
         try {
             List<ChiTietDonHang> ctList = CTDHDAO.selectbyMaDH(maDH);
-            for(ChiTietDonHang ctdh:ctList){
-                int sl =ctdh.getSl();
+            for (ChiTietDonHang ctdh : ctList) {
+                int sl = ctdh.getSl();
                 List<SanPham> list1 = (List<SanPham>) spDAO.selectbyMaSP(ctdh.getMaSP());
                 for (SanPham sp : list1) {
                     Object[] row = {sp.getTenSP(),
@@ -316,16 +326,21 @@ public class HoaDon extends javax.swing.JDialog {
                 }
             }
             tinhTongTien();
-                
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     void deleteMon() {
-        int hoaDon = tblHoaDon.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
-        model.removeRow(hoaDon);
+        try {
+            int hoaDon = tblHoaDon.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
+            model.removeRow(hoaDon);
+        } catch (Exception e) {
+            MsgBox.alert(this, "Vui lòng chọn món cần hủy");
+            return;
+        }
     }
 
     void ThanhToan() {
@@ -387,7 +402,7 @@ public class HoaDon extends javax.swing.JDialog {
         }
 
     }
-    
+
     private void loadTableSanPham() {
         DefaultTableModel model = (DefaultTableModel) tblSanPham.getModel();
         model.setRowCount(0);
@@ -404,6 +419,9 @@ public class HoaDon extends javax.swing.JDialog {
 
     void tinhTongTien() {
         DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
+        if(model.getRowCount()==0){
+            lblTongTien.setText(0+"");
+        }
         int soHang = model.getRowCount();
         int tongTien = 0;
         for (int i = 0; i < soHang; i++) {

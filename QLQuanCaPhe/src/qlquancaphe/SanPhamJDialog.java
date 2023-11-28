@@ -362,10 +362,11 @@ public class SanPhamJDialog extends javax.swing.JDialog {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-//        if (check()) {
-//        insert();
-//        }
-        themSP();
+if (check()) {
+            themSP();
+            MsgBox.alert(this, "Thêm thành công!");
+            fillTable();
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -403,6 +404,9 @@ public class SanPhamJDialog extends javax.swing.JDialog {
         if (evt.getClickCount() == 2) {
             loadTheoSPDaChon();
             tabs.setSelectedIndex(1);
+            btnSua.setEnabled(true);
+            btnXoa.setEnabled(true);
+            btnThem.setEnabled(false);
         }
     }//GEN-LAST:event_tblSanPhamMouseClicked
     void loadTheoSPDaChon() {
@@ -551,18 +555,22 @@ public class SanPhamJDialog extends javax.swing.JDialog {
     }
 
     void update() {
-        SanPham sp = getForm();
-        boolean isSuccess = validated();
-        if (!isSuccess) {
-            MsgBox.alert(this, notice);
-        } else {
-            try {
+        try {
+            List<LoaiSanPham> list = lspDAO.selectByTenLSP(cboMaloaiSP.getSelectedItem().toString());
+            for (LoaiSanPham lsp : list) {
+                SanPham sp = new SanPham();
+                sp.setTenSP(txtTenSp.getText());
+                sp.setDonGia(Float.parseFloat(txtDongia.getText()));
+                sp.setMoTa(txtMoTa.getText());
+                sp.setHinh(lblAnh.getToolTipText());
+                sp.setMaLSP(lsp.getMaLSP());
+                sp.setMaSP(Integer.parseInt(txtMaSp.getText()));
                 dao.update(sp);
-                this.fillTable();
-                MsgBox.alert(this, "Cập nhật thành công !");
-            } catch (Exception e) {
-                MsgBox.alert(this, "Cập nhật thất bại");
             }
+            MsgBox.alert(this,"Cập nhật thành công");
+        fillTable();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
@@ -710,6 +718,37 @@ public class SanPhamJDialog extends javax.swing.JDialog {
         btnLast.setEnabled(edit && !last);
     }
 
+    public boolean check() {
+        String tensp = txtTenSp.getText();
+        String dongia = txtDongia.getText();
+
+        if (tensp.isEmpty()) {
+            if (dongia.isEmpty()) {
+                MsgBox.alert(this, "Vui lòng nhập tên sản phẩm!\n"
+                        + "Vui lòng nhập đơn giá!\n");
+                return false;
+            } else {
+                MsgBox.alert(this, "Vui lòng nhập tên sản phẩm!\n");
+                return false;
+            }
+        } else {
+            if (dongia.isEmpty()) {
+                MsgBox.alert(this, "Vui lòng nhập đơn giá!\n");
+                return false;
+            }
+        }
+        try {
+            float donGia = Float.parseFloat(dongia);
+            if (donGia < 0) {
+                MsgBox.alert(this, "Đơn giá phải là số dương!");
+                return false;
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Đơn giá sai định dạng!");
+            return false;
+        }
+        return true;
+    }
     void chonAnh() {
         if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
