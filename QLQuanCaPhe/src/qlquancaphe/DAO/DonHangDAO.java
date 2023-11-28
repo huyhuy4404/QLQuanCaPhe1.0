@@ -21,6 +21,7 @@ public class DonHangDAO extends QLQuanCaPhe<DonHang, String> {
     final String DELETE_SQL = "DELETE FROM DonHang WHERE MaDH=?";
     final String SELECT_ALL_SQL = "SELECT * FROM DonHang";
     final String SELECT_BY_ID_SQL = "SELECT * FROM DonHang WHERE MaDH=?";
+    final String SELECT_BY_MaDH_SQL = "SELECT * FROM DonHang WHERE MaDH=?";
 
     @Override
     public void insert(DonHang entity) {
@@ -70,5 +71,7 @@ public class DonHangDAO extends QLQuanCaPhe<DonHang, String> {
         }
         return list;
     }
-
+    public List<DonHang> selectByMaDH(int maDH) {
+        return selectBySql(SELECT_BY_MaDH_SQL,maDH);
+    }
 }
