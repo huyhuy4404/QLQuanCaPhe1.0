@@ -57,6 +57,11 @@ public class Menu extends javax.swing.JFrame {
 
         btnSanPham.setText("Quản lí sản phẩm");
         btnSanPham.setPreferredSize(new java.awt.Dimension(145, 35));
+        btnSanPham.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSanPhamActionPerformed(evt);
+            }
+        });
 
         btnNhanVien.setText("Quản lí nhân viên");
         btnNhanVien.setPreferredSize(new java.awt.Dimension(145, 35));
@@ -68,6 +73,11 @@ public class Menu extends javax.swing.JFrame {
 
         btnLoaiSanPham.setText("Quản lí loại sản phẩm");
         btnLoaiSanPham.setPreferredSize(new java.awt.Dimension(145, 35));
+        btnLoaiSanPham.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoaiSanPhamActionPerformed(evt);
+            }
+        });
 
         btnDonHang.setText("Đơn hàng");
         btnDonHang.setMaximumSize(new java.awt.Dimension(100, 200));
@@ -231,6 +241,16 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDangXuatActionPerformed
 
+    private void btnLoaiSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoaiSanPhamActionPerformed
+        // TODO add your handling code here:
+        this.openLSP();
+    }//GEN-LAST:event_btnLoaiSanPhamActionPerformed
+
+    private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
+        // TODO add your handling code here:
+        this.openQLSanPham();
+    }//GEN-LAST:event_btnSanPhamActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -294,7 +314,6 @@ public class Menu extends javax.swing.JFrame {
     }
 
     private void init() {
-        new Login(this, true).setVisible(true);
         new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -322,5 +341,13 @@ public class Menu extends javax.swing.JFrame {
 
     private void openDoiMatKhau() {
         new DoiMatKhau(this, true).setVisible(true);
+    }
+
+    private void openLSP() {
+        new LoaiSanPham(this, true).setVisible(true);
+    }
+
+    private void openQLSanPham() {
+        new SanPhamJDialog(this, true).setVisible(true);
     }
 }

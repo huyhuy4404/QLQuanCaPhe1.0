@@ -184,8 +184,11 @@ public class Login extends javax.swing.JDialog {
 
     private void txtQuenMKMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQuenMKMousePressed
         QuenMatKhau qmk = new QuenMatKhau();
-        this.setVisible(false);
         qmk.setVisible(true);
+        this.setVisible(false);
+
+        
+        
     }//GEN-LAST:event_txtQuenMKMousePressed
     void dangNhap(){
         String maNV = txtTaiKhoan.getText();
@@ -199,6 +202,8 @@ public class Login extends javax.swing.JDialog {
             }else{
                 Auth.user=nv;            
                 this.dispose();
+                Menu mn = new Menu();
+                mn.setVisible(true);
             }
         }
         
