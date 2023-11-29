@@ -656,9 +656,9 @@ public class QLNhanVien extends javax.swing.JDialog {
                 dao.update(nv);
                 this.fillTable();
                 this.clearForm();
-                MsgBox.alert(this, "Thêm mới thành công !");
+                MsgBox.alert(this, "Cập nhật thành công !");
             } catch (Exception e) {
-                MsgBox.alert(this, "Thêm mới thất bại");
+                MsgBox.alert(this, "Cập nhật thất bại");
                 e.printStackTrace();
             }
         }
