@@ -419,21 +419,25 @@ public class SanPhamJDialog extends javax.swing.JDialog {
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
         // TODO add your handling code here:
         first();
+        fillComBoBox1();
     }//GEN-LAST:event_btnFirstActionPerformed
 
     private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
         // TODO add your handling code here:
         prev();
+        fillComBoBox1();
     }//GEN-LAST:event_btnPrevActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         // TODO add your handling code here:
         next();
+        fillComBoBox1();
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
         // TODO add your handling code here:
         last();
+        fillComBoBox1();
     }//GEN-LAST:event_btnLastActionPerformed
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
@@ -848,5 +852,22 @@ public class SanPhamJDialog extends javax.swing.JDialog {
             }
         }
         return true;
+    }
+    void fillComBoBox1(){
+        int masp = Integer.parseInt(txtMaSp.getText());
+        List<SanPham> list = (List<SanPham>) dao.selectbyMaSP(masp);
+        for (SanPham sp : list) {
+            txtMaSp.setText(sp.getMaSP() + "");
+            txtTenSp.setText(sp.getTenSP());
+            txtDongia.setText(sp.getDonGia() + "");
+            txtMoTa.setText(sp.getMoTa());
+            LoaiSanPham lsp = lspDAO.selectById(sp.getMaLSP());
+            String tenLSP = lsp.getTenLSP();
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cboMaloaiSP.getModel();
+            model.setSelectedItem(tenLSP);
+            if (sp.getHinh() != null) {
+                lblAnh.setIcon(XImage.read(sp.getHinh()));
+            }
+        }
     }
 }
