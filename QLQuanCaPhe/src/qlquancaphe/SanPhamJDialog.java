@@ -437,13 +437,14 @@ public class SanPhamJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnLastActionPerformed
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
-        // TODO add your handling code here:
+
         if (evt.getClickCount() == 2) {
             loadTheoSPDaChon();
             tabs.setSelectedIndex(1);
-            btnSua.setEnabled(true);
-            btnXoa.setEnabled(true);
-            btnThem.setEnabled(false);
+            this.row = tblSanPham.getSelectedRow();
+            if (this.row >= 0) {
+                this.edit();
+            }
         }
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
@@ -651,10 +652,10 @@ public class SanPhamJDialog extends javax.swing.JDialog {
     }
 
     void edit() {
-        String masp = (String) tblSanPham.getValueAt(this.row, 0);
+        String masp = tblSanPham.getValueAt(this.row, 0).toString();
         SanPham sp = dao.selectById(masp);
         this.setForm(sp);
-        tabs.setSelectedIndex(0);
+        tabs.setSelectedIndex(1);
         this.updateStatus();
     }
 
@@ -737,8 +738,6 @@ public class SanPhamJDialog extends javax.swing.JDialog {
         boolean first = (this.row == 0);
         boolean last = (this.row == tblSanPham.getRowCount() - 1);
 
-        txtMaSp.setEditable(!edit);
-        btnThem.setEnabled(!edit);
         btnSua.setEnabled(edit);
         btnXoa.setEnabled(edit);
 
@@ -747,7 +746,6 @@ public class SanPhamJDialog extends javax.swing.JDialog {
         btnNext.setEnabled(edit && !last);
         btnLast.setEnabled(edit && !last);
     }
-
 
     void chonAnh() {
         if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -771,7 +769,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
         }
     }
-    
+
     void fillTableSanPham() {
         DefaultTableModel model = (DefaultTableModel) tblSanPham.getModel();
         model.setRowCount(0);
@@ -811,7 +809,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
         }
         return true;
     }
-    
+
     public boolean check() {
         String tensp = txtTenSp.getText();
         String dongia = txtDongia.getText();
