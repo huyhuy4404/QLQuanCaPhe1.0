@@ -159,6 +159,7 @@ public class DoiMatKhau extends javax.swing.JDialog {
         if (txtPassCu.getText().isEmpty() || txtPassMoi.getText().isEmpty() || txtXNPass.getText().isEmpty()) {
             return false;
         }
+        
         return true;
     }
 

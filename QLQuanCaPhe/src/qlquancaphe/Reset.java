@@ -117,7 +117,7 @@ public class Reset extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMatKhauActionPerformed
-        if (txtmk.getText().equalsIgnoreCase(txtxnmk.getText())) {
+        if (validateForm()&&txtmk.getText().equalsIgnoreCase(txtxnmk.getText())) {
             Reset();
         } else {
             MsgBox.alert(this, "Mật khẩu xác nhận không trùng với mật khẩu mới");
@@ -142,7 +142,13 @@ public class Reset extends javax.swing.JFrame {
         }
 
     }
-
+    public boolean validateForm() {
+        if (txtmk.getText().isEmpty() || txtxnmk.getText().isEmpty()) {
+            return false;
+        }
+        
+        return true;
+    }
     /**
      * @param args the command line arguments
      */

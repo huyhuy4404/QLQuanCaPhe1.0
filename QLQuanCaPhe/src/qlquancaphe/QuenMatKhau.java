@@ -4,6 +4,7 @@
  */
 package qlquancaphe;
 
+import java.awt.Color;
 import java.util.Properties;
 import java.util.Random;
 import javax.mail.Message;
@@ -16,7 +17,6 @@ import javax.swing.JOptionPane;
 import qlquancaphe.DAO.NhanVienDAO;
 import qlquancaphe.utils.MsgBox;
 
-
 /**
  *
  * @author Admin
@@ -28,6 +28,8 @@ public class QuenMatKhau extends javax.swing.JFrame {
      */
     NhanVienDAO dao = new NhanVienDAO();
     int randomCode;
+    String pantents = "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$";
+
     public QuenMatKhau() {
         initComponents();
         setLocationRelativeTo(null);
@@ -135,36 +137,44 @@ public class QuenMatKhau extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiActionPerformed
-        GuiMa();
+        if (validateForm()) {
+                GuiMa();
+        }else{
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin");
+        }
+
+
     }//GEN-LAST:event_btnGuiActionPerformed
 
     private void btnCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCodeActionPerformed
-         if(Integer.valueOf(txtCode.getText())==randomCode){
-             luuEmail();
-             Reset rs = new Reset();
-             rs.setVisible(true);
-             this.setVisible(false);
-         }else{
-             JOptionPane.showMessageDialog(this, "Mã code không chính xác");
-         }
+        if (Integer.valueOf(txtCode.getText()) == randomCode) {
+            luuEmail();
+            Reset rs = new Reset();
+            rs.setVisible(true);
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Mã code không chính xác");
+        }
     }//GEN-LAST:event_btnCodeActionPerformed
     public static String mail;
-    public void luuEmail(){
-        mail=txtEmailss.getText();
+
+    public void luuEmail() {
+        mail = txtEmailss.getText();
     }
-    void GuiMa(){
+
+    void GuiMa() {
         Properties prop = new Properties();
-		prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "587");
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.smtp.starttls.enable", "true"); //TLS
-        
+
         Session session = Session.getInstance(prop,
                 new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication("huyntpc06811@fpt.edu.vn","ihnceqzwwtowqxcn" );
-                    }
-                });
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("huyntpc06811@fpt.edu.vn", "ihnceqzwwtowqxcn");
+            }
+        });
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("huyntpc06811@fpt.edu.vn"));
@@ -174,8 +184,8 @@ public class QuenMatKhau extends javax.swing.JFrame {
             );
             message.setSubject("Quên mật khẩu!");
             Random ranDom = new Random();
-            randomCode =ranDom.nextInt(900000)+100000;
-            message.setText(randomCode+"");
+            randomCode = ranDom.nextInt(900000) + 100000;
+            message.setText(randomCode + "");
 
             Transport.send(message);
 
@@ -185,6 +195,27 @@ public class QuenMatKhau extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
+
+    public boolean validateForm() {
+        if (txtEmailss.getText().isEmpty()) {
+            return false;
+        }       
+        if (txtEmailss.getText().matches(pantents)) {
+            return false;
+        } else {
+            JOptionPane.showMessageDialog(this, "Email không đúng định dạng");
+            
+        }
+        return true;
+    }
+
+//    public boolean check() {
+//        
+//        //^[a-zA-Z0-9.]+@+[a-zA-Z0-9.]+$
+//        
+//        return true;
+//    }
+
     /**
      * @param args the command line arguments
      */
