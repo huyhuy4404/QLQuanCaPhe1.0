@@ -175,6 +175,7 @@ public class QuenMatKhau extends javax.swing.JFrame {
             Transport.send(message);
 
             System.out.println("Done");
+            JOptionPane.showMessageDialog(this, "Mã đã được gửi thành công");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -4,6 +4,7 @@
  */
 package qlquancaphe;
 
+import javax.swing.JOptionPane;
 import qlquancaphe.DAO.NhanVienDAO;
 import qlquancaphe.entity.NhanVien;
 import qlquancaphe.utils.Auth;
@@ -14,15 +15,19 @@ import qlquancaphe.utils.MsgBox;
  * @author Admin
  */
 public class Reset extends javax.swing.JFrame {
+
     NhanVienDAO nvDAO = new NhanVienDAO();
     public String user;
+
     /**
      * Creates new form Reset
      */
     public Reset() {
         initComponents();
+        setLocationRelativeTo(null);
     }
-    public Reset(String username){
+
+    public Reset(String username) {
         this.user = username;
         initComponents();
     }
@@ -114,23 +119,22 @@ public class Reset extends javax.swing.JFrame {
     private void btnDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMatKhauActionPerformed
         Reset();
     }//GEN-LAST:event_btnDoiMatKhauActionPerformed
-    public void Reset(){
-        String maNV = Auth.user.getMaNV();
-        String matkhaumoi = new String(txtmk.getText());
-        String matkhau2 = new String(txtxnmk.getText());
-            if (!matkhaumoi.equalsIgnoreCase(matkhau2)) {
-                MsgBox.alert(this, "Mật khẩu mới và mật khẩu xác nhận không giống nhau!");
-                return;
-            } else {
+    public void Reset() {
+        if (txtmk.getText().equals(txtmk.getText())) {
+            try {
                 NhanVien nv = new NhanVien();
-                nv.setMatKhau(matkhaumoi);
-                nv.setMaNV(maNV);
+                nv.setMatKhau(txtmk.getText());
+                nv.setMaNV(Auth.user.getMaNV());
                 nvDAO.updateMK(nv);
                 MsgBox.alert(this, "Đổi mật khẩu thành công");
-                this.dispose();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Đổi mật khẩu không thành công");
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Mật khẩu không trùng khớp");
         }
-    
+    }
+
     /**
      * @param args the command line arguments
      */
