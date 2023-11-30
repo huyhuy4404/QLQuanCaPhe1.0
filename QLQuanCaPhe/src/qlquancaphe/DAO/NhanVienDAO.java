@@ -85,5 +85,8 @@ public class NhanVienDAO extends QLQuanCaPhe<NhanVien, String> {
 
     public void updateMK(NhanVien entity) {
         JDBCHelper.update(UPDATE_MK,entity.getMatKhau(),entity.getMaNV());
-    }    
+    } 
+    public List<NhanVien> selectbyEmail(String email) {
+        return selectBySql(SELECT_BY_EMAIL_SQL,email);
+    } 
 }

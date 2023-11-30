@@ -4,6 +4,7 @@
  */
 package qlquancaphe;
 
+import java.util.List;
 import javax.swing.JOptionPane;
 import qlquancaphe.DAO.NhanVienDAO;
 import qlquancaphe.entity.NhanVien;
@@ -18,6 +19,7 @@ public class Reset extends javax.swing.JFrame {
 
     NhanVienDAO nvDAO = new NhanVienDAO();
     public String user;
+    public String email;
 
     /**
      * Creates new form Reset
@@ -77,12 +79,9 @@ public class Reset extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,7 +92,7 @@ public class Reset extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(59, 59, 59)
                         .addComponent(btnDoiMatKhau)
-                        .addContainerGap())))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,25 +113,34 @@ public class Reset extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMatKhauActionPerformed
-        Reset();
+        if (txtmk.getText().equalsIgnoreCase(txtxnmk.getText())) {
+            Reset();
+        } else {
+            MsgBox.alert(this, "Mật khẩu xác nhận không trùng với mật khẩu mới");
+        }
+
     }//GEN-LAST:event_btnDoiMatKhauActionPerformed
     public void Reset() {
-        if (txtmk.getText().equals(txtmk.getText())) {
-            try {
-                NhanVien nv = new NhanVien();
+        String email = QuenMatKhau.mail;
+        try {
+
+            List<NhanVien> maNV = nvDAO.selectbyEmail(email);
+            for (NhanVien nv : maNV) {
+                nv.getMaNV();
                 nv.setMatKhau(txtmk.getText());
-                nv.setMaNV(Auth.user.getMaNV());
                 nvDAO.updateMK(nv);
-                MsgBox.alert(this, "Đổi mật khẩu thành công");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Đổi mật khẩu không thành công");
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Mật khẩu không trùng khớp");
+
+            MsgBox.alert(this, "Tạo mật khẩu mới thành công");
+        } catch (Exception e) {
+            e.printStackTrace();
+            MsgBox.alert(this, "Lỗi tạo mật khẩu mới!");
         }
+
     }
 
     /**

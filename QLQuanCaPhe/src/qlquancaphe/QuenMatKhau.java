@@ -140,13 +140,18 @@ public class QuenMatKhau extends javax.swing.JFrame {
 
     private void btnCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCodeActionPerformed
          if(Integer.valueOf(txtCode.getText())==randomCode){
-             Reset rs = new Reset(txtEmailss.getText());
+             luuEmail();
+             Reset rs = new Reset();
              rs.setVisible(true);
              this.setVisible(false);
          }else{
              JOptionPane.showMessageDialog(this, "Mã code không chính xác");
          }
     }//GEN-LAST:event_btnCodeActionPerformed
+    public static String mail;
+    public void luuEmail(){
+        mail=txtEmailss.getText();
+    }
     void GuiMa(){
         Properties prop = new Properties();
 		prop.put("mail.smtp.host", "smtp.gmail.com");
