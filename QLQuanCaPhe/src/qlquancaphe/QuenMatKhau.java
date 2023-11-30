@@ -12,6 +12,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 import qlquancaphe.DAO.NhanVienDAO;
 import qlquancaphe.utils.MsgBox;
 
@@ -138,7 +139,13 @@ public class QuenMatKhau extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuiActionPerformed
 
     private void btnCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCodeActionPerformed
-
+         if(Integer.valueOf(txtCode.getText())==randomCode){
+             Reset rs = new Reset(txtEmailss.getText());
+             rs.setVisible(true);
+             this.setVisible(false);
+         }else{
+             JOptionPane.showMessageDialog(this, "Mã code không chính xác");
+         }
     }//GEN-LAST:event_btnCodeActionPerformed
     void GuiMa(){
         Properties prop = new Properties();
