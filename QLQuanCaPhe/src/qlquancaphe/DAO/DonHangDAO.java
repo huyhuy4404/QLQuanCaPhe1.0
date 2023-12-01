@@ -74,4 +74,18 @@ public class DonHangDAO extends QLQuanCaPhe<DonHang, String> {
     public List<DonHang> selectByMaDH(int maDH) {
         return selectBySql(SELECT_BY_MaDH_SQL,maDH);
     }
+    public List<Integer> selectYears() {
+        String sql ="SELECT DISTINCT YEAR (NgayMua) YEAR FROM DonHang ORDER BY YEAR DESC";
+        List<Integer> list = new ArrayList<>();
+        try {
+            ResultSet rs = JDBCHelper.query(sql);
+            while (rs.next()) {                
+                list.add(rs.getInt(1));
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+    }
 }
