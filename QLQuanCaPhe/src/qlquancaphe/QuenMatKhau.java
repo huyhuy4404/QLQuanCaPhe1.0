@@ -155,7 +155,7 @@ public class QuenMatKhau extends javax.swing.JFrame {
         if (validateForm()) {
             GuiMa();
         } else {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin");
+            return;
         }
         btnCode.setEnabled(true);
 

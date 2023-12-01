@@ -6,6 +6,7 @@ package qlquancaphe;
 
 import java.util.List;
 import javax.swing.JOptionPane;
+import org.mindrot.jbcrypt.BCrypt;
 import qlquancaphe.DAO.NhanVienDAO;
 import qlquancaphe.entity.NhanVien;
 import qlquancaphe.utils.Auth;
@@ -45,12 +46,12 @@ public class Reset extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtxnmk = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtmk = new javax.swing.JTextField();
         btnDoiMatKhau = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        txtmk = new javax.swing.JPasswordField();
+        txtxnmk = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,10 +93,10 @@ public class Reset extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4)
-                            .addComponent(txtxnmk, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtmk, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtmk)
+                            .addComponent(txtxnmk, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
                         .addGap(21, 21, 21))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(59, 59, 59)
@@ -114,9 +115,9 @@ public class Reset extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(26, 26, 26)
                 .addComponent(jLabel3)
-                .addGap(12, 12, 12)
-                .addComponent(txtmk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtmk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtxnmk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -131,7 +132,7 @@ public class Reset extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMatKhauActionPerformed
-        if (validateForm()&&txtmk.getText().equalsIgnoreCase(txtxnmk.getText())) {
+        if (validateForm() && txtmk.getText().equalsIgnoreCase(txtxnmk.getText())) {
             Reset();
         } else {
             MsgBox.alert(this, "Mật khẩu xác nhận không trùng với mật khẩu mới");
@@ -151,7 +152,10 @@ public class Reset extends javax.swing.JFrame {
             List<NhanVien> maNV = nvDAO.selectbyEmail(email);
             for (NhanVien nv : maNV) {
                 nv.getMaNV();
-                nv.setMatKhau(txtmk.getText());
+                String pass = new String(txtmk.getPassword());
+                String passMaHoa = BCrypt.hashpw(pass, BCrypt.gensalt());
+
+                nv.setMatKhau(passMaHoa);
                 nvDAO.updateMK(nv);
             }
 
@@ -162,13 +166,15 @@ public class Reset extends javax.swing.JFrame {
         }
 
     }
+
     public boolean validateForm() {
         if (txtmk.getText().isEmpty() || txtxnmk.getText().isEmpty()) {
             return false;
         }
-        
+
         return true;
     }
+
     /**
      * @param args the command line arguments
      */
@@ -211,7 +217,7 @@ public class Reset extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField txtmk;
-    private javax.swing.JTextField txtxnmk;
+    private javax.swing.JPasswordField txtmk;
+    private javax.swing.JPasswordField txtxnmk;
     // End of variables declaration//GEN-END:variables
 }

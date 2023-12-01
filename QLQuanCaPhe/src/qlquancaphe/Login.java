@@ -5,6 +5,7 @@
 package qlquancaphe;
 
 import java.awt.Cursor;
+import org.mindrot.jbcrypt.BCrypt;
 import qlquancaphe.DAO.NhanVienDAO;
 import qlquancaphe.entity.NhanVien;
 import qlquancaphe.utils.Auth;
@@ -193,17 +194,20 @@ public class Login extends javax.swing.JDialog {
     void dangNhap(){
         String maNV = txtTaiKhoan.getText();
         String pass = new String(txtMatKhau.getPassword());
+        
         NhanVien nv = dao.selectById(maNV);
+        String passMaHoa = nv.getMatKhau();
+        boolean passwordMatch = BCrypt.checkpw(pass, passMaHoa);
         if(nv==null){
             MsgBox.alert(this, "Sai tên đăng nhập");
         }else{
-            if(!nv.getMatKhau().equals(pass)){
-                MsgBox.alert(this, "Sai mật khẩu");
-            }else{
+            if(passwordMatch){
                 Auth.user=nv;            
                 this.dispose();
                 Menu mn = new Menu();
                 mn.setVisible(true);
+            }else{
+                MsgBox.alert(this, "Sai mật khẩu");
             }
         }
         

@@ -14,7 +14,7 @@ import qlquancaphe.DAO.NhanVienDAO;
 import qlquancaphe.utils.MsgBox;
 import qlquancaphe.utils.XImage;
 import qlquancaphe.utils.Auth;
-
+import org.mindrot.jbcrypt.BCrypt;
 import qlquancaphe.utils.XDate;
 import qlquancaphe.utils.isValidated;
 
@@ -544,7 +544,12 @@ public class QLNhanVien extends javax.swing.JDialog {
         NhanVien nv = new NhanVien();
         nv.setMaNV(txtMaNV.getText());
         nv.setHoTen(txtHoTen.getText());
-        nv.setMatKhau(new String(txtMatKhau.getPassword()));
+        //test mã hóa password
+        String passMaHoa = new String(txtMatKhau.getPassword());
+        String maHoa = BCrypt.hashpw(passMaHoa, BCrypt.gensalt());
+        System.out.println("Mật khẩu đã mã hóa: "+maHoa);
+        nv.setMatKhau(maHoa);
+//        nv.setMatKhau(new String(txtMatKhau.getPassword());
         nv.setVaiTro(rdoQuanLy.isSelected());
         Date day = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
