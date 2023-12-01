@@ -15,6 +15,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import qlquancaphe.DAO.NhanVienDAO;
+import qlquancaphe.entity.NhanVien;
 import qlquancaphe.utils.MsgBox;
 
 /**
@@ -28,8 +29,7 @@ public class QuenMatKhau extends javax.swing.JFrame {
      */
     NhanVienDAO dao = new NhanVienDAO();
     int randomCode;
-    String pantents = "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$";
-
+    
     public QuenMatKhau() {
         initComponents();
         setLocationRelativeTo(null);
@@ -52,6 +52,7 @@ public class QuenMatKhau extends javax.swing.JFrame {
         txtEmailss = new javax.swing.JTextField();
         btnCode = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        btnTrolai = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,14 +63,15 @@ public class QuenMatKhau extends javax.swing.JFrame {
 
         jLabel3.setText("Email");
 
-        btnGui.setText("Send");
+        btnGui.setText("Gửi");
         btnGui.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuiActionPerformed(evt);
             }
         });
 
-        btnCode.setText("Verify Code");
+        btnCode.setText("Xác nhận");
+        btnCode.setEnabled(false);
         btnCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCodeActionPerformed(evt);
@@ -77,6 +79,13 @@ public class QuenMatKhau extends javax.swing.JFrame {
         });
 
         jLabel4.setText("Verify");
+
+        btnTrolai.setText("Trở lại");
+        btnTrolai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTrolaiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,7 +111,10 @@ public class QuenMatKhau extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnCode)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnTrolai)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(btnCode))
                                 .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())))
@@ -129,7 +141,9 @@ public class QuenMatKhau extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCode)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCode)
+                    .addComponent(btnTrolai))
                 .addGap(0, 21, Short.MAX_VALUE))
         );
 
@@ -137,12 +151,13 @@ public class QuenMatKhau extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiActionPerformed
+        
         if (validateForm()) {
-                GuiMa();
-        }else{
+            GuiMa();
+        } else {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin");
         }
-
+        btnCode.setEnabled(true);
 
     }//GEN-LAST:event_btnGuiActionPerformed
 
@@ -156,12 +171,18 @@ public class QuenMatKhau extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Mã code không chính xác");
         }
     }//GEN-LAST:event_btnCodeActionPerformed
-    public static String mail;
 
+    private void btnTrolaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrolaiActionPerformed
+        this.dispose();
+        Login mn = new Login(this, rootPaneCheckingEnabled);
+        mn.setVisible(true);
+    }//GEN-LAST:event_btnTrolaiActionPerformed
+    public static String mail;
+    
     public void luuEmail() {
         mail = txtEmailss.getText();
     }
-
+    
     void GuiMa() {
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -186,25 +207,33 @@ public class QuenMatKhau extends javax.swing.JFrame {
             Random ranDom = new Random();
             randomCode = ranDom.nextInt(900000) + 100000;
             message.setText(randomCode + "");
-
+            
             Transport.send(message);
-
+            
             System.out.println("Done");
             JOptionPane.showMessageDialog(this, "Mã đã được gửi thành công");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
+    
     public boolean validateForm() {
+        String Emails = txtEmailss.getText();
+        NhanVien nv = dao.select_byEmail(Emails);
         if (txtEmailss.getText().isEmpty()) {
-            return false;
-        }       
-        if (txtEmailss.getText().matches(pantents)) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập Email!");
             return false;
         } else {
-            JOptionPane.showMessageDialog(this, "Email không đúng định dạng");
-            
+            String pantents = "^[a-zA-Z0-9.]+@+[a-zA-Z0-9.]+$";
+            //
+            //^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$
+            if (!txtEmailss.getText().matches(pantents)) {
+                JOptionPane.showMessageDialog(this, "Email không đúng định dạng!");
+                return false;
+            } else if (nv == null) {
+                JOptionPane.showMessageDialog(this, "Email không tồn tại!");
+                return false;
+            }
         }
         return true;
     }
@@ -215,7 +244,6 @@ public class QuenMatKhau extends javax.swing.JFrame {
 //        
 //        return true;
 //    }
-
     /**
      * @param args the command line arguments
      */
@@ -254,6 +282,7 @@ public class QuenMatKhau extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCode;
     private javax.swing.JButton btnGui;
+    private javax.swing.JButton btnTrolai;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

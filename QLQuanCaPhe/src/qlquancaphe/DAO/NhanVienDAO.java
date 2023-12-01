@@ -23,6 +23,7 @@ public class NhanVienDAO extends QLQuanCaPhe<NhanVien, String> {
     final String SELECT_BY_ID_SQL = "SELECT * FROM NhanVien WHERE MaNV=?";
     final String UPDATE_MK = "UPDATE NhanVien SET MatKhau=? WHERE MaNV=?";
     final String SELECT_BY_EMAIL_SQL = "SELECT * FROM NhanVien WHERE Email=?";
+    
 
 
     @Override
