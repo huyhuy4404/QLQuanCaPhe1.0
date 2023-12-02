@@ -21,6 +21,7 @@ import qlquancaphe.entity.LoaiSanPham;
 import qlquancaphe.entity.SanPham;
 import qlquancaphe.utils.Auth;
 import qlquancaphe.utils.MsgBox;
+import qlquancaphe.utils.XImage;
 
 /**
  *
@@ -69,9 +70,11 @@ public class HoaDon extends javax.swing.JDialog {
         cboLoaiSP = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSanPham = new javax.swing.JTable();
+        lblHinh = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("ĐƠN HÀNG");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -163,6 +166,8 @@ public class HoaDon extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         cboLoaiSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -188,9 +193,16 @@ public class HoaDon extends javax.swing.JDialog {
                 "Mã sản phẩm", "Tên sản phẩm", "Đơn giá"
             }
         ));
+        tblSanPham.setColumnSelectionAllowed(true);
         tblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblSanPhamMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tblSanPhamMouseEntered(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblSanPhamMousePressed(evt);
             }
         });
         jScrollPane2.setViewportView(tblSanPham);
@@ -198,14 +210,22 @@ public class HoaDon extends javax.swing.JDialog {
             tblSanPham.getColumnModel().getColumn(2).setResizable(false);
         }
 
+        lblHinh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHinh.setText("Hình");
+        lblHinh.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(cboLoaiSP, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane2)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cboLoaiSP, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(136, 136, 136)
+                        .addComponent(lblHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,23 +233,13 @@ public class HoaDon extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(cboLoaiSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblHinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(441, 0, -1, 500));
 
         pack();
         setLocationRelativeTo(null);
@@ -258,9 +268,7 @@ public class HoaDon extends javax.swing.JDialog {
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
         // TODO add your handling code here:
-        fillTableHoaDon();
-        tinhTongTien();
-        loadThanhToan();
+        loadHinh();
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
     private void btnInHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInHoaDonActionPerformed
@@ -271,6 +279,22 @@ public class HoaDon extends javax.swing.JDialog {
         // TODO add your handling code here:
         fillTableHoaDon2();
     }//GEN-LAST:event_btnTroVeActionPerformed
+
+    private void tblSanPhamMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblSanPhamMouseEntered
+
+    private void tblSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMousePressed
+        // TODO add your handling code here:
+        try {
+            if (evt.getClickCount() == 2) {
+                fillTableHoaDon();
+                tinhTongTien();
+                loadThanhToan();
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_tblSanPhamMousePressed
     void fillTableHoaDon() {
         String input = MsgBox.prompt(this, "Vui lòng nhập số lượng");
         if (input != null && !input.isEmpty()) {
@@ -287,10 +311,8 @@ public class HoaDon extends javax.swing.JDialog {
                     model.insertRow(0, row);
                 }
             } catch (NumberFormatException e) {
-                e.printStackTrace();
                 MsgBox.alert(this, "Số lượng không hợp lệ");
             } catch (Exception e) {
-                e.printStackTrace();
                 MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
             }
         } else {
@@ -389,6 +411,18 @@ public class HoaDon extends javax.swing.JDialog {
         }
     }
 
+    void loadHinh() {
+        int maSP = tblSanPham.getSelectedRow();
+        List<SanPham> list = (List<SanPham>) spDAO.selectbyMaSP((int) tblSanPham.getValueAt(maSP, 0));
+        for (SanPham sp : list) {
+            if (sp.getHinh() != null) {
+                lblHinh.setToolTipText(sp.getHinh());
+                lblHinh.setIcon(XImage.read(sp.getHinh()));
+            }
+        }
+
+    }
+
     private void fillComboboxLSP() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboLoaiSP.getModel();
         model.removeAllElements();
@@ -419,8 +453,8 @@ public class HoaDon extends javax.swing.JDialog {
 
     void tinhTongTien() {
         DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
-        if(model.getRowCount()==0){
-            lblTongTien.setText(0+"");
+        if (model.getRowCount() == 0) {
+            lblTongTien.setText(0 + "");
         }
         int soHang = model.getRowCount();
         int tongTien = 0;
@@ -484,6 +518,7 @@ public class HoaDon extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblHinh;
     private javax.swing.JLabel lblTongTien;
     private javax.swing.JTable tblHoaDon;
     private javax.swing.JTable tblSanPham;

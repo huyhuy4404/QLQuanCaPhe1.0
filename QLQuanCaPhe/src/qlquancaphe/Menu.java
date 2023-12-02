@@ -44,8 +44,8 @@ public class Menu extends javax.swing.JFrame {
         btnDoanhThu = new javax.swing.JButton();
         lblTenNV = new javax.swing.JLabel();
         lblTime = new javax.swing.JLabel();
-        pnlMenu2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        pnlMenu2 = new javax.swing.JPanel();
         btnDoiMatKhau = new javax.swing.JButton();
         btnDangXuat = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -54,32 +54,36 @@ public class Menu extends javax.swing.JFrame {
         setTitle("MENU");
 
         pnlMenu.setBackground(new java.awt.Color(255, 153, 102));
+        pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnSanPham.setText("Quản lí sản phẩm");
+        btnSanPham.setText("Quản Lý Sản Phẩm");
         btnSanPham.setPreferredSize(new java.awt.Dimension(145, 35));
         btnSanPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSanPhamActionPerformed(evt);
             }
         });
+        pnlMenu.add(btnSanPham, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 160, 50));
 
-        btnNhanVien.setText("Quản lí nhân viên");
+        btnNhanVien.setText("Quản Lý Nhân Viên");
         btnNhanVien.setPreferredSize(new java.awt.Dimension(145, 35));
         btnNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNhanVienActionPerformed(evt);
             }
         });
+        pnlMenu.add(btnNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 160, 50));
 
-        btnLoaiSanPham.setText("Quản lí loại sản phẩm");
+        btnLoaiSanPham.setText("Quản Lý Sản Phẩm");
         btnLoaiSanPham.setPreferredSize(new java.awt.Dimension(145, 35));
         btnLoaiSanPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoaiSanPhamActionPerformed(evt);
             }
         });
+        pnlMenu.add(btnLoaiSanPham, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 160, 50));
 
-        btnDonHang.setText("Đơn hàng");
+        btnDonHang.setText("Đơn Hàng");
         btnDonHang.setMaximumSize(new java.awt.Dimension(100, 200));
         btnDonHang.setPreferredSize(new java.awt.Dimension(145, 35));
         btnDonHang.addActionListener(new java.awt.event.ActionListener() {
@@ -87,59 +91,26 @@ public class Menu extends javax.swing.JFrame {
                 btnDonHangActionPerformed(evt);
             }
         });
+        pnlMenu.add(btnDonHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 160, 50));
 
-        btnDoanhThu.setText("Doanh thu");
+        btnDoanhThu.setText("Quản Lý Doanh Thu");
         btnDoanhThu.setPreferredSize(new java.awt.Dimension(145, 35));
         btnDoanhThu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDoanhThuActionPerformed(evt);
             }
         });
+        pnlMenu.add(btnDoanhThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 160, 50));
 
         lblTenNV.setText("Nguyễn Nhật Phát");
+        pnlMenu.add(lblTenNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, -1));
 
         lblTime.setText("Time");
-
-        javax.swing.GroupLayout pnlMenuLayout = new javax.swing.GroupLayout(pnlMenu);
-        pnlMenu.setLayout(pnlMenuLayout);
-        pnlMenuLayout.setHorizontalGroup(
-            pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMenuLayout.createSequentialGroup()
-                .addComponent(lblTenNV)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(lblTime, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(pnlMenuLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLoaiSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDonHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pnlMenuLayout.setVerticalGroup(
-            pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMenuLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(btnSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(btnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(btnLoaiSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(btnDonHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(btnDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTenNV)
-                    .addComponent(lblTime)))
-        );
+        pnlMenu.add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, 73, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("PHỐ 24H");
+        pnlMenu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
 
         btnDoiMatKhau.setBackground(new java.awt.Color(0, 204, 255));
         btnDoiMatKhau.setText("Đổi mật khẩu");
@@ -163,9 +134,7 @@ public class Menu extends javax.swing.JFrame {
         pnlMenu2Layout.setHorizontalGroup(
             pnlMenu2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMenu2Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnDoiMatKhau)
                 .addGap(9, 9, 9)
                 .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,15 +142,10 @@ public class Menu extends javax.swing.JFrame {
         );
         pnlMenu2Layout.setVerticalGroup(
             pnlMenu2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMenu2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlMenu2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnDoiMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pnlMenu2Layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(btnDangXuat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMenu2Layout.createSequentialGroup()
+                .addGroup(pnlMenu2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                    .addComponent(btnDoiMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(4, 4, 4))
         );
 
@@ -195,19 +159,18 @@ public class Menu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlMenu2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
+                    .addComponent(pnlMenu2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pnlMenu2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(pnlMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -327,10 +290,12 @@ public class Menu extends javax.swing.JFrame {
             btnNhanVien.setEnabled(false);
             btnDoanhThu.setEnabled(false);
             btnSanPham.setEnabled(false);
+            btnLoaiSanPham.setEnabled(false);
         } else {
             btnNhanVien.setEnabled(true);
             btnDoanhThu.setEnabled(true);
             btnSanPham.setEnabled(true);
+            btnLoaiSanPham.setEnabled(true);
         }
     }
 
