@@ -525,6 +525,8 @@ public class TinhTien extends javax.swing.JFrame {
         // TODO add your handling code here:
         btnThanhToan.setText("Thanh toán CK");
         btnThanhToan.setEnabled(true);
+        new ChuyenKhoan(this, true).setVisible(true);
+        
     }//GEN-LAST:event_btnChuyenKhoanActionPerformed
 
     private void btnTroVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTroVeActionPerformed
@@ -553,6 +555,11 @@ public class TinhTien extends javax.swing.JFrame {
         if(soTienKhachTra<soTienCanThanhToan){
             MsgBox.alert(this, "Số tiền phải lớn hơn hoặc bằng số tiền cần thanh toán!");
             return;
+        }else{
+            MsgBox.alert(this, "Thanh toán thành công");
+            int soTienTraLai = soTienKhachTra-soTienCanThanhToan;
+            lblTienTraLai.setText(soTienTraLai+"");
+            txtSoTien.setText("");
         }
     }
     void init() {

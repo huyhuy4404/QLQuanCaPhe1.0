@@ -327,10 +327,12 @@ public class Menu extends javax.swing.JFrame {
             btnNhanVien.setEnabled(false);
             btnDoanhThu.setEnabled(false);
             btnSanPham.setEnabled(false);
+            btnLoaiSanPham.setEnabled(false);
         } else {
             btnNhanVien.setEnabled(true);
             btnDoanhThu.setEnabled(true);
             btnSanPham.setEnabled(true);
+            btnLoaiSanPham.setEnabled(true);
         }
     }
 

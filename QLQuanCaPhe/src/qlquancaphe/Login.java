@@ -16,7 +16,9 @@ import qlquancaphe.utils.MsgBox;
  * @author huydz
  */
 public class Login extends javax.swing.JDialog {
+
     NhanVienDAO dao = new NhanVienDAO();
+
     /**
      * Creates new form Login
      */
@@ -164,12 +166,12 @@ public class Login extends javax.swing.JDialog {
     }//GEN-LAST:event_txtTaiKhoanActionPerformed
 
     private void txtMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatKhauActionPerformed
-    
+
     }//GEN-LAST:event_txtMatKhauActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        if(kiemTra()){
+        if (kiemTra()) {
             dangNhap();
         }
     }//GEN-LAST:event_btnLoginActionPerformed
@@ -180,7 +182,7 @@ public class Login extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void txtQuenMKMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQuenMKMouseMoved
-       txtQuenMK.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        txtQuenMK.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_txtQuenMKMouseMoved
 
     private void txtQuenMKMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQuenMKMousePressed
@@ -188,30 +190,49 @@ public class Login extends javax.swing.JDialog {
         qmk.setVisible(true);
         this.setVisible(false);
 
-        
-        
+
     }//GEN-LAST:event_txtQuenMKMousePressed
-    void dangNhap(){
+    void dangNhap() {
         String maNV = txtTaiKhoan.getText();
         String pass = new String(txtMatKhau.getPassword());
-        
         NhanVien nv = dao.selectById(maNV);
-        String passMaHoa = nv.getMatKhau();
-        boolean passwordMatch = BCrypt.checkpw(pass, passMaHoa);
-        if(nv==null){
+
+        if (nv == null) {
             MsgBox.alert(this, "Sai tên đăng nhập");
-        }else{
-            if(passwordMatch){
-                Auth.user=nv;            
+        } else {
+            if (pass.equalsIgnoreCase(nv.getMatKhau())) {
+                Auth.user = nv;
                 this.dispose();
                 Menu mn = new Menu();
                 mn.setVisible(true);
-            }else{
-                MsgBox.alert(this, "Sai mật khẩu");
             }
+            if (!pass.equalsIgnoreCase(nv.getMatKhau())) {
+                try {
+                    dangNhapMaHoa();
+                } catch (Exception e) {
+                    MsgBox.alert(this, "Sai mật khẩu");
+                }
+            }
+
         }
-        
     }
+
+    void dangNhapMaHoa() {
+        String maNV = txtTaiKhoan.getText();
+        String pass = new String(txtMatKhau.getPassword());
+        NhanVien nv = dao.selectById(maNV);
+        String passMaHoa = nv.getMatKhau();
+        boolean passwordMatch = BCrypt.checkpw(pass, passMaHoa);
+        if (passwordMatch) {
+            Auth.user = nv;
+            this.dispose();
+            Menu mn = new Menu();
+            mn.setVisible(true);
+        } else {
+            MsgBox.alert(this, "Sai mật khẩu");
+        }
+    }
+
     public boolean kiemTra() {
         if (txtTaiKhoan.getText().equals("")) {
             MsgBox.alert(this, "Tên đăng nhập không được bỏ trống");
@@ -223,11 +244,13 @@ public class Login extends javax.swing.JDialog {
         }
         return true;
     }
-    void ketThuc(){
-        if(MsgBox.confirm(this, "Bạn có muốn kết thúc không ?")){
+
+    void ketThuc() {
+        if (MsgBox.confirm(this, "Bạn có muốn kết thúc không ?")) {
             System.exit(0);
         }
     }
+
     /**
      * @param args the command line arguments
      */
