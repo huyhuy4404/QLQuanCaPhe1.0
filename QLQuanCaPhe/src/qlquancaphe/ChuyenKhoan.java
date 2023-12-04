@@ -9,8 +9,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import javax.swing.ImageIcon;
+import qlquancaphe.DAO.DonHangDAO;
+import qlquancaphe.DAO.ThanhToanDAO;
 import qlquancaphe.DAO.ThongTinNHDAO;
+import qlquancaphe.entity.DonHang;
+import qlquancaphe.entity.ThanhToan;
 import qlquancaphe.entity.ThongTinNH;
+import qlquancaphe.utils.MsgBox;
 
 /**
  *
@@ -18,6 +23,9 @@ import qlquancaphe.entity.ThongTinNH;
  */
 public class ChuyenKhoan extends javax.swing.JDialog {
     ThongTinNHDAO ttDAO = new ThongTinNHDAO();
+    DonHangDAO dhDAO = new DonHangDAO();
+    ThanhToanDAO thanhToanDAO = new ThanhToanDAO();
+    public int amount;
     /**
      * Creates new form ChuyenKhoan
      */
@@ -26,6 +34,8 @@ public class ChuyenKhoan extends javax.swing.JDialog {
         initComponents();
         init();
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,21 +68,27 @@ public class ChuyenKhoan extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+    public void setSoTien(int amount){
+        this.amount =amount;
+    }
     void init(){
+        TinhTien ttien = new TinhTien();
+        int soTien = ttien.getSoTien();
         String hinh = "https://img.vietqr.io/image/";
         String tenNH = "";
         String dauTru = "-";
         String stk = "";
-        String nd = "compact2.jpg?amount=790000&addInfo=THANKS%20YOU&accountName=";
+        String nd = "compact2.jpg?amount=";
+        String nd1 ="&addInfo=THANKS%20YOU&accountName=";
         String nd2="";
-        
+                
         List<ThongTinNH> list = ttDAO.selectAll();
         for(ThongTinNH tt : list){
             tenNH=tt.getTenNH();
             stk=tt.getStk();
             nd2 = tt.getChuTK();
             String nd3 =nd2.replace(" ", "%20");
-            String hinhHoanChinh = hinh+tenNH+dauTru+stk+dauTru+nd+nd3;
+            String hinhHoanChinh = hinh+tenNH+dauTru+stk+dauTru+nd+soTien+nd1+nd3;
             try {
             URL imageUrl = new URL(hinhHoanChinh);
             ImageIcon imageIcon = new ImageIcon(imageUrl);

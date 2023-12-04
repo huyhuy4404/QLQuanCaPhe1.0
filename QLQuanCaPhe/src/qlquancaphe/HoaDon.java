@@ -15,10 +15,14 @@ import qlquancaphe.DAO.ChiTietDonHangDAO;
 import qlquancaphe.DAO.DonHangDAO;
 import qlquancaphe.DAO.LoaiSanPhamDAO;
 import qlquancaphe.DAO.SanPhamDAO;
+import qlquancaphe.DAO.ThanhToanDAO;
+import qlquancaphe.DAO.ThongTinNHDAO;
 import qlquancaphe.entity.ChiTietDonHang;
 import qlquancaphe.entity.DonHang;
 import qlquancaphe.entity.LoaiSanPham;
 import qlquancaphe.entity.SanPham;
+import qlquancaphe.entity.ThanhToan;
+import qlquancaphe.entity.ThongTinNH;
 import qlquancaphe.utils.Auth;
 import qlquancaphe.utils.MsgBox;
 import qlquancaphe.utils.XImage;
@@ -35,6 +39,8 @@ public class HoaDon extends javax.swing.JDialog {
     DonHangDAO dhDAO = new DonHangDAO();
     ChiTietDonHangDAO CTDHDAO = new ChiTietDonHangDAO();
     int row = 0;
+    ThanhToanDAO ttDAO = new ThanhToanDAO();
+    ThongTinNHDAO TTNHDAO = new ThongTinNHDAO();
 
     /**
      * Creates new form HoaDon
@@ -258,7 +264,10 @@ public class HoaDon extends javax.swing.JDialog {
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         // TODO add your handling code here:
-        ThanhToan();
+
+        if (check()) {
+            ThanhToan();
+        }
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void cboLoaiSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboLoaiSPMouseClicked
@@ -277,11 +286,12 @@ public class HoaDon extends javax.swing.JDialog {
 
     private void btnInHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInHoaDonActionPerformed
         // TODO add your handling code here:
+        MsgBox.alert(this, "In hóa đơn thành công");
     }//GEN-LAST:event_btnInHoaDonActionPerformed
 
     private void btnTroVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTroVeActionPerformed
         // TODO add your handling code here:
-        fillTableHoaDon2();
+        this.dispose();
     }//GEN-LAST:event_btnTroVeActionPerformed
 
     private void tblSanPhamMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseEntered
@@ -301,6 +311,17 @@ public class HoaDon extends javax.swing.JDialog {
     }//GEN-LAST:event_tblSanPhamMousePressed
     void fillTableHoaDon() {
         String input = MsgBox.prompt(this, "Vui lòng nhập số lượng");
+        if (input.matches("\\d+")) {
+            int sl1 = Integer.parseInt(input);
+            if (sl1 <= 0) {
+                MsgBox.alert(this, "Số lượng phải lớn hơn 0");
+                return;
+            }
+        }else{
+            MsgBox.alert(this, "Số lượng chỉ là số");
+            return;
+        }
+
         if (input != null && !input.isEmpty()) {
             try {
                 int sl = Integer.parseInt(input);
@@ -315,9 +336,8 @@ public class HoaDon extends javax.swing.JDialog {
                     model.insertRow(0, row);
                 }
             } catch (NumberFormatException e) {
-                MsgBox.alert(this, "Số lượng không hợp lệ");
             } catch (Exception e) {
-                MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+                return;
             }
         } else {
             return;
@@ -330,6 +350,14 @@ public class HoaDon extends javax.swing.JDialog {
         } else {
             btnThanhToan.setEnabled(true);
         }
+    }
+
+    public boolean check() {
+        if (Auth.user == null) {
+            MsgBox.alert(this, "Vui lòng đăng nhập để thanh toán");
+            return false;
+        }
+        return true;
     }
 
     void fillTableHoaDon2() {
@@ -404,6 +432,16 @@ public class HoaDon extends javax.swing.JDialog {
                     CTDH.setTongGia(tongGia);
                     CTDHDAO.insert(CTDH);
                 }
+            }
+            List<ThanhToan> listTT = ttDAO.selectByMaDH(maDH);
+            for (ThanhToan tt : listTT) {
+                tt.setSoTien(dh.getTongTien());
+                tt.setNdck("THANKS YOU");
+                tt.setMaDH(maDH);
+                ThongTinNH ttNH = (ThongTinNH) TTNHDAO.selectAll();
+                int maTTNH = ttNH.getMaTTNH();
+                tt.setMaTTNH(maTTNH);
+                ttDAO.insert(tt);
             }
             TinhTien tinhTien = new TinhTien();
             this.setVisible(false);

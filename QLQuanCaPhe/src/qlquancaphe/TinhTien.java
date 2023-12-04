@@ -4,9 +4,14 @@
  */
 package qlquancaphe;
 
+import java.awt.HeadlessException;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import qlquancaphe.DAO.ChiTietDonHangDAO;
 import qlquancaphe.DAO.DonHangDAO;
 import qlquancaphe.entity.ChiTietDonHang;
@@ -21,6 +26,7 @@ public class TinhTien extends javax.swing.JFrame {
 
     ChiTietDonHangDAO CTDHDAO = new ChiTietDonHangDAO();
     DonHangDAO dhDAO = new DonHangDAO();
+    public static int soTien;
 
     /**
      * Creates new form TinhTien
@@ -75,7 +81,7 @@ public class TinhTien extends javax.swing.JFrame {
         btnTroVe = new javax.swing.JButton();
         btnThanhToan = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Tính tiền");
 
         jLabel1.setText("Số tiền cần thanh toán:");
@@ -106,9 +112,7 @@ public class TinhTien extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(lblTienKhachTra, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblTienKhachTra, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(99, 99, 99))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -541,7 +545,7 @@ public class TinhTien extends javax.swing.JFrame {
         btnThanhToan.setText("Thanh toán CK");
         btnThanhToan.setEnabled(true);
         new ChuyenKhoan(this, true).setVisible(true);
-        
+
     }//GEN-LAST:event_btnChuyenKhoanActionPerformed
 
     private void btnTroVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTroVeActionPerformed
@@ -564,21 +568,65 @@ public class TinhTien extends javax.swing.JFrame {
         // TODO add your handling code here:
         ThanhToan();
     }//GEN-LAST:event_btnThanhToanActionPerformed
-    void ThanhToan(){
+
+    public TinhTien(JButton btn0, JButton btn00, JButton btn1, JButton btn100, JButton btn2, JButton btn200, JButton btn3, JButton btn300, JButton btn4, JButton btn5, JButton btn50, JButton btn500, JButton btn6, JButton btn7, JButton btn8, JButton btn9, JButton btnChuyenKhoan, JButton btnThanhToan, JButton btnTienMat, JButton btnTroVe, JButton btnXoa, JLabel jLabel1, JLabel jLabel2, JLabel jLabel3, JPanel jPanel1, JPanel jPanel2, JPanel jPanel3, JPanel jPanel4, JPanel jPanel5, JPanel jPanel6, JPanel jPanel7, JLabel lblTienCanThanhToan, JLabel lblTienKhachTra, JLabel lblTienTraLai, JTextField txtSoTien) throws HeadlessException {
+        this.btn0 = btn0;
+        this.btn00 = btn00;
+        this.btn1 = btn1;
+        this.btn100 = btn100;
+        this.btn2 = btn2;
+        this.btn200 = btn200;
+        this.btn3 = btn3;
+        this.btn300 = btn300;
+        this.btn4 = btn4;
+        this.btn5 = btn5;
+        this.btn50 = btn50;
+        this.btn500 = btn500;
+        this.btn6 = btn6;
+        this.btn7 = btn7;
+        this.btn8 = btn8;
+        this.btn9 = btn9;
+        this.btnChuyenKhoan = btnChuyenKhoan;
+        this.btnThanhToan = btnThanhToan;
+        this.btnTienMat = btnTienMat;
+        this.btnTroVe = btnTroVe;
+        this.btnXoa = btnXoa;
+        this.jLabel1 = jLabel1;
+        this.jLabel2 = jLabel2;
+        this.jLabel3 = jLabel3;
+        this.jPanel1 = jPanel1;
+        this.jPanel2 = jPanel2;
+        this.jPanel3 = jPanel3;
+        this.jPanel4 = jPanel4;
+        this.jPanel5 = jPanel5;
+        this.jPanel6 = jPanel6;
+        this.jPanel7 = jPanel7;
+        this.lblTienCanThanhToan = lblTienCanThanhToan;
+        this.lblTienKhachTra = lblTienKhachTra;
+        this.lblTienTraLai = lblTienTraLai;
+        this.txtSoTien = txtSoTien;
+    }
+
+    void ThanhToan() {
         int soTienKhachTra = Integer.parseInt(lblTienKhachTra.getText());
         int soTienCanThanhToan = Integer.parseInt(lblTienCanThanhToan.getText());
-        if(soTienKhachTra<soTienCanThanhToan){
+        if (soTienKhachTra < soTienCanThanhToan) {
             MsgBox.alert(this, "Số tiền phải lớn hơn hoặc bằng số tiền cần thanh toán!");
             return;
-        }else{
+        } else {
             MsgBox.alert(this, "Thanh toán thành công");
-            int soTienTraLai = soTienKhachTra-soTienCanThanhToan;
-            lblTienTraLai.setText(soTienTraLai+"");
+            int soTienTraLai = soTienKhachTra - soTienCanThanhToan;
+            lblTienTraLai.setText(soTienTraLai + "");
             txtSoTien.setText("");
         }
     }
+
     void init() {
         lblTienKhachTra.setText(txtSoTien.getText());
+    }
+
+    public int getSoTien() {
+        return Integer.parseInt(lblTienCanThanhToan.getText());
     }
 
     void loadTien() {

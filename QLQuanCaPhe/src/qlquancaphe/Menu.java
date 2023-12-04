@@ -103,7 +103,7 @@ public class Menu extends javax.swing.JFrame {
         pnlMenu.add(btnDoanhThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 160, 50));
 
         lblTenNV.setText("Nguyễn Nhật Phát");
-        pnlMenu.add(lblTenNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, -1));
+        pnlMenu.add(lblTenNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 110, -1));
 
         lblTime.setText("Time");
         pnlMenu.add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, 73, -1));
@@ -277,6 +277,8 @@ public class Menu extends javax.swing.JFrame {
     }
 
     private void init() {
+        String user = Auth.user.getHoTen();
+        lblTenNV.setText(user);
         new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
