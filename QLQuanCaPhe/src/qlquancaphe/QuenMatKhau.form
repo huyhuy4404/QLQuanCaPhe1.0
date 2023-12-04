@@ -139,7 +139,7 @@
         <Component class="javax.swing.JButton" name="btnGui">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/qlquancaphe/icons/Tick.png"/>
+              <Image iconType="3" name="/qlquancaphe/icons/Mail.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="G&#x1eed;i"/>
           </Properties>

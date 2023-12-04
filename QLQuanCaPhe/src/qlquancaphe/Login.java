@@ -90,14 +90,16 @@ public class Login extends javax.swing.JDialog {
         panel2.add(txtTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 97, 250, 38));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/Unknown person.png"))); // NOI18N
         jLabel1.setText("Tài khoản");
-        panel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 69, 140, -1));
+        panel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 140, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("Đăng Nhập");
         panel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 19, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/Unlock.png"))); // NOI18N
         jLabel3.setText("Mật khẩu");
         panel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 161, 110, -1));
 

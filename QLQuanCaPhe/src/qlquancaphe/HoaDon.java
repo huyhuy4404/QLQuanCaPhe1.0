@@ -93,6 +93,7 @@ public class HoaDon extends javax.swing.JDialog {
 
         lblTongTien.setText("0");
 
+        btnInHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/Print preview.png"))); // NOI18N
         btnInHoaDon.setText("In hóa đơn");
         btnInHoaDon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,6 +101,7 @@ public class HoaDon extends javax.swing.JDialog {
             }
         });
 
+        btnHuyMon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/Trash.png"))); // NOI18N
         btnHuyMon.setText("Hủy món");
         btnHuyMon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,6 +109,7 @@ public class HoaDon extends javax.swing.JDialog {
             }
         });
 
+        btnTroVe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/Exit.png"))); // NOI18N
         btnTroVe.setText("Trở về");
         btnTroVe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,6 +117,7 @@ public class HoaDon extends javax.swing.JDialog {
             }
         });
 
+        btnThanhToan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/Price list.png"))); // NOI18N
         btnThanhToan.setText("Thanh toán");
         btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,7 +239,7 @@ public class HoaDon extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblHinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblHinh, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

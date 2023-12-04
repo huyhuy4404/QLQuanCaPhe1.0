@@ -68,7 +68,7 @@ public class QuenMatKhau extends javax.swing.JFrame {
 
         jLabel3.setText("Email");
 
-        btnGui.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/Tick.png"))); // NOI18N
+        btnGui.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/Mail.png"))); // NOI18N
         btnGui.setText("Gửi");
         btnGui.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
