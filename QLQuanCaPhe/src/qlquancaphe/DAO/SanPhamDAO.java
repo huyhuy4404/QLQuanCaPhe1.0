@@ -88,7 +88,7 @@ public class SanPhamDAO extends QLQuanCaPhe<SanPham, String> {
     public List<SanPham> selectbyTenSP(String tenSP) {
         return selectBySql(SELECT_BY_TEN_SQL,tenSP);
     }
-    public List<SanPham> selectbyMaSP(int MaSP) {
+    public List<SanPham> selectbyMaSP(Object MaSP) {
         return selectBySql(SELECT_BY_ID_SQL,MaSP);
     }
     public List<SanPham> selectByKeyword(String keyword) {

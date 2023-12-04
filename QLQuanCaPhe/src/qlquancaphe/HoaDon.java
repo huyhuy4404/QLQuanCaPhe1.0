@@ -317,7 +317,7 @@ public class HoaDon extends javax.swing.JDialog {
                 MsgBox.alert(this, "Số lượng phải lớn hơn 0");
                 return;
             }
-        }else{
+        } else {
             MsgBox.alert(this, "Số lượng chỉ là số");
             return;
         }
@@ -327,17 +327,25 @@ public class HoaDon extends javax.swing.JDialog {
                 int sl = Integer.parseInt(input);
                 DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
                 int maSP = tblSanPham.getSelectedRow();
-                List<SanPham> list = (List<SanPham>) spDAO.selectbyMaSP((int) tblSanPham.getValueAt(maSP, 0));
+                List<SanPham> list = (List<SanPham>) spDAO.selectbyMaSP(tblSanPham.getValueAt(maSP, 0));
                 for (SanPham sp : list) {
+                    for(int i =0;i<tblHoaDon.getRowCount();i++){
+                        String tenSP = (String) tblHoaDon.getValueAt(i, 0);
+                        if(tenSP.equalsIgnoreCase(sp.getTenSP())){
+                            MsgBox.alert(this, "Sản phẩm đã tồn tại");
+                            return;
+                        }
+                    }
                     Object[] row = {sp.getTenSP(),
                         sl,
                         sp.getDonGia(),
                         sp.getDonGia() * sl};
                     model.insertRow(0, row);
                 }
+
             } catch (NumberFormatException e) {
             } catch (Exception e) {
-                return;
+                e.printStackTrace();
             }
         } else {
             return;
@@ -455,14 +463,19 @@ public class HoaDon extends javax.swing.JDialog {
 
     void loadHinh() {
         int maSP = tblSanPham.getSelectedRow();
-        List<SanPham> list = (List<SanPham>) spDAO.selectbyMaSP((int) tblSanPham.getValueAt(maSP, 0));
-        for (SanPham sp : list) {
-            if (sp.getHinh() != null) {
-                lblHinh.setToolTipText(sp.getHinh());
-                lblHinh.setIcon(XImage.read(sp.getHinh()));
+        Object value = tblSanPham.getValueAt(maSP, 0);
+        if (value instanceof Integer) {
+            int maSPValue = (int) value;
+            List<SanPham> list = (List<SanPham>) spDAO.selectbyMaSP(maSPValue);
+            for (SanPham sp : list) {
+                if (sp.getHinh() != null) {
+                    lblHinh.setToolTipText(sp.getHinh());
+                    lblHinh.setIcon(XImage.read(sp.getHinh()));
+                }
             }
+        } else {
+            return;
         }
-
     }
 
     private void fillComboboxLSP() {
