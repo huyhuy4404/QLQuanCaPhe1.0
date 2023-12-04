@@ -10,6 +10,7 @@ import qlquancaphe.DAO.NhanVienDAO;
 import qlquancaphe.entity.NhanVien;
 import qlquancaphe.utils.Auth;
 import qlquancaphe.utils.MsgBox;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -178,7 +179,7 @@ public class DoiMatKhau extends javax.swing.JDialog {
         this.dispose();
         Menu mn = new Menu();
         mn.setVisible(true);
-                
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtPassCuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassCuActionPerformed
@@ -192,7 +193,7 @@ public class DoiMatKhau extends javax.swing.JDialog {
         if (txtPassCu.getText().isEmpty() || txtPassMoi.getText().isEmpty() || txtXNPass.getText().isEmpty()) {
             return false;
         }
-        
+
         return true;
     }
 
@@ -203,6 +204,11 @@ public class DoiMatKhau extends javax.swing.JDialog {
         String matkhaumoi = new String(txtPassMoi.getPassword());
         String matkhau2 = new String(txtXNPass.getPassword());
         if (!matkhau.equalsIgnoreCase(matKhauCu)) {
+            try {
+                checkPassMaHoa();
+                return;
+            } catch (Exception e) {
+            }
             MsgBox.alert(this, "Mật khẩu cũ không đúng!");
             return;
         } else {
@@ -210,8 +216,9 @@ public class DoiMatKhau extends javax.swing.JDialog {
                 MsgBox.alert(this, "Mật khẩu mới và mật khẩu xác nhận không giống nhau!");
                 return;
             } else {
+                String mkMoiMaHoa = BCrypt.hashpw(matkhaumoi, BCrypt.gensalt());
                 NhanVien nv = new NhanVien();
-                nv.setMatKhau(matkhaumoi);
+                nv.setMatKhau(mkMoiMaHoa);
                 nv.setMaNV(maNV);
                 nvDAO.updateMK(nv);
                 MsgBox.alert(this, "Đổi mật khẩu thành công");
@@ -219,6 +226,31 @@ public class DoiMatKhau extends javax.swing.JDialog {
             }
         }
 
+    }
+
+    public void checkPassMaHoa() {
+        String maNV = Auth.user.getMaNV();
+        String matKhauCu = Auth.user.getMatKhau();
+        String matkhau = new String(txtPassCu.getPassword());
+        boolean checkPassMaHoa = BCrypt.checkpw(matkhau, matKhauCu);
+        String matkhaumoi = new String(txtPassMoi.getPassword());
+        String matkhau2 = new String(txtXNPass.getPassword());
+        String mkMoiMaHoa = BCrypt.hashpw(matkhaumoi, BCrypt.gensalt());
+        if (!checkPassMaHoa) {
+            MsgBox.alert(this, "Mật khẩu cũ không đúng!");
+        }else{
+            if (!matkhaumoi.equalsIgnoreCase(matkhau2)) {
+                MsgBox.alert(this, "Mật khẩu mới và mật khẩu xác nhận không giống nhau!");
+                return;
+            }else{
+                NhanVien nv = new NhanVien();
+                nv.setMatKhau(mkMoiMaHoa);
+                nv.setMaNV(maNV);
+                nvDAO.updateMK(nv);
+                MsgBox.alert(this, "Đổi mật khẩu thành công");
+                this.dispose();
+            }
+        }
     }
 
     public static void main(String args[]) {

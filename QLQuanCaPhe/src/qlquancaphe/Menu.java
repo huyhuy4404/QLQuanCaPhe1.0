@@ -200,6 +200,7 @@ public class Menu extends javax.swing.JFrame {
                 "THÔNG BÁO !", JOptionPane.YES_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
         if (i == 0) {
+            this.dispose();
             dangxuat();
         }
     }//GEN-LAST:event_btnDangXuatActionPerformed
