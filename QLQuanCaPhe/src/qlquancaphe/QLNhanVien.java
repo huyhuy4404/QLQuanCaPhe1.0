@@ -36,7 +36,8 @@ public class QLNhanVien extends javax.swing.JDialog {
         initComponents();
         init();
     }
-  public void setColor(JButton p) {
+
+    public void setColor(JButton p) {
         p.setBackground(new Color(204, 255, 204));
         p.setForeground(new Color(0, 0, 0));
     }
@@ -411,12 +412,12 @@ public class QLNhanVien extends javax.swing.JDialog {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void tblNhanVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMousePressed
-  if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 2) {
             this.row = tblNhanVien.getSelectedRow();
             if (this.row >= 0) {
                 this.edit();
             }
-        }       
+        }
     }//GEN-LAST:event_tblNhanVienMousePressed
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
@@ -424,11 +425,11 @@ public class QLNhanVien extends javax.swing.JDialog {
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
     private void btnFirst1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirst1ActionPerformed
-     first();
+        first();
     }//GEN-LAST:event_btnFirst1ActionPerformed
 
     private void btnPrev1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrev1ActionPerformed
-       prev();
+        prev();
     }//GEN-LAST:event_btnPrev1ActionPerformed
 
     private void btnNext1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNext1ActionPerformed
@@ -440,11 +441,11 @@ public class QLNhanVien extends javax.swing.JDialog {
     }//GEN-LAST:event_btnLast1ActionPerformed
 
     private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
-      
+
     }//GEN-LAST:event_tblNhanVienMouseClicked
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-    this.update();
+        this.update();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void txtMaNVMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMaNVMouseEntered
@@ -510,12 +511,11 @@ public class QLNhanVien extends javax.swing.JDialog {
         this.fillTable();
         txtMaNV.requestFocus();
         this.row = -1;
-           this.updateStatus();
+        this.updateStatus();
         tblNhanVien.setDefaultEditor(Object.class, null);
         tabs.setSelectedIndex(1);
 
     }
-
 
     void fillTable() {
         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
@@ -542,7 +542,8 @@ public class QLNhanVien extends javax.swing.JDialog {
         tabs.setSelectedIndex(1);
         this.updateStatus();
     }
-     void first() {
+
+    void first() {
         this.row = 0;
         this.edit();
     }
@@ -565,7 +566,7 @@ public class QLNhanVien extends javax.swing.JDialog {
         this.row = tblNhanVien.getRowCount() - 1;
         this.edit();
     }
-    
+
     void updateStatus() {
 
         boolean edit = (this.row >= 0);
@@ -630,7 +631,7 @@ public class QLNhanVien extends javax.swing.JDialog {
         String ngaysinh = txtNgaySinh.getText();
         String sdt = txtSDT.getText();
         String email = txtEmail.getText();
-         ButtonGroup gioiTinhGroup = new ButtonGroup();
+        ButtonGroup gioiTinhGroup = new ButtonGroup();
         gioiTinhGroup.add(rdoQuanLy);
         gioiTinhGroup.add(rdoNhanVien);
         boolean gioiTinhSelected = rdoQuanLy.isSelected() || rdoNhanVien.isSelected();
@@ -647,69 +648,66 @@ public class QLNhanVien extends javax.swing.JDialog {
             txtHoTen.requestFocus();
             return false;
         }
-         if (!isValidated.isBlank(mk)) {
+        if (!isValidated.isBlank(mk)) {
             notice = "Vui lòng nhập mật khẩu";
             txtMatKhau.requestFocus();
             return false;
         }
-         if(!isValidated.isBlank(ngaysinh)){
-             notice = "Vui lòng nhập ngày sinh!";
-             txtNgaySinh.requestFocus();
-             return false;
-             
-         }
-         try {
+        if (!isValidated.isBlank(ngaysinh)) {
+            notice = "Vui lòng nhập ngày sinh!";
+            txtNgaySinh.requestFocus();
+            return false;
+
+        }
+        try {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             Date ngaysinhDate = df.parse(txtNgaySinh.getText());
             nv.setNgaySinh(new java.sql.Date(ngaysinhDate.getTime()));
         } catch (ParseException e) {
-           // JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng (Ngày - Tháng - Năm)");
-         MsgBox.alert(this, "Vui lòng nhập đúng định dạng (Năm - Tháng - Ngày)");
+            // JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng (Ngày - Tháng - Năm)");
+            MsgBox.alert(this, "Vui lòng nhập đúng định dạng (Năm - Tháng - Ngày)");
             return false;
         }
-         if(!isValidated.isBlank(sdt)){
-             notice =" Vui lòng nhập số điện thoại!";
-             txtSDT.requestFocus();
-             return false;
-         }
-           if (sdt.matches(regexPhone)) {
-            nv.setDienThoai(String.valueOf(sdt));
-        } else {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng số điện thoại");
+        if(sdt.isEmpty()){
+            MsgBox.alert(this, "Vui lòng nhập số điện thoại");
             return false;
+        }else{
+            if(!sdt.matches(regexPhone)){
+                MsgBox.alert(this, "Số điện thoại không đúng định dạng");
+                return false;
+            }
         }
-         try {
+        try {
             int std = Integer.parseInt(sdt);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Số điện thoại phải là số");
             return false;
         }
-         if(!isValidated.isBlank(email)){
-             notice="Vui lòng nhập email";
-             txtEmail.requestFocus();
-             return false;          
-         }            
+        if (!isValidated.isBlank(email)) {
+            notice = "Vui lòng nhập email";
+            txtEmail.requestFocus();
+            return false;
+        }
         if (txtEmail.getText().matches(regexEmail)) {
             nv.setEmail(txtEmail.getText());
         } else {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng email");
             return false;
         }
-    
-    
+
         return true;
     }
-    
+
     void clearForm() {
         NhanVien nv = new NhanVien();
         this.setForm(nv);
         txtMaNV.requestFocus();
         this.row = -1;
-          this.updateStatus();
+        this.updateStatus();
     }
 
     void insert() {
-         NhanVien nv = getForm();
+        NhanVien nv = getForm();
         boolean isSuccess = validated();
         if (!isSuccess) {
             MsgBox.alert(this, notice);
@@ -746,7 +744,7 @@ public class QLNhanVien extends javax.swing.JDialog {
         }
     }
 
-       void update() {
+    void update() {
 
         NhanVien nv = getForm();
         boolean isSuccess = validated();
@@ -763,9 +761,8 @@ public class QLNhanVien extends javax.swing.JDialog {
                 e.printStackTrace();
             }
         }
-            }
-        
-    
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFirst1;
