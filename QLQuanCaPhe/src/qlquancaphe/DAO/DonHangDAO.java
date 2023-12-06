@@ -88,4 +88,18 @@ public class DonHangDAO extends QLQuanCaPhe<DonHang, String> {
             throw new RuntimeException();
         }
     }
+     public List<Integer> selectMonths() {
+        String sql = "SELECT DISTINCT MONTH (NgayMua) MONTH FROM DonHang ORDER BY MONTH ASC";
+        List<Integer> list = new ArrayList<>();
+        try {
+            ResultSet rs = JDBCHelper.query(sql);
+            while (rs.next()) {
+                list.add(rs.getInt(1));
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+    }
 }

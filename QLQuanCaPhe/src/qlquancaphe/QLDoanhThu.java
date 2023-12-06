@@ -8,7 +8,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import qlquancaphe.DAO.DoanhThuDAO;
 import qlquancaphe.DAO.DonHangDAO;
+import qlquancaphe.utils.MsgBox;
 
 /**
  *
@@ -17,6 +21,7 @@ import qlquancaphe.DAO.DonHangDAO;
 public class QLDoanhThu extends javax.swing.JDialog {
 
     DonHangDAO dhDAO = new DonHangDAO();
+    DoanhThuDAO tkDAO = new DoanhThuDAO();
 
     /**
      * Creates new form LoaiSanPham
@@ -24,11 +29,12 @@ public class QLDoanhThu extends javax.swing.JDialog {
     public QLDoanhThu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        init();
+        fillToComboBoxNam();
+        fillToComboBoxThang();
     }
 
     public void fillToComboBoxNam() {
-        DefaultComboBoxModel model = (DefaultComboBoxModel) cboNamOrThang.getModel();
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboNam.getModel();
         model.removeAllElements();
         List<Integer> list = dhDAO.selectYears();
         for (Integer year : list) {
@@ -36,13 +42,37 @@ public class QLDoanhThu extends javax.swing.JDialog {
         }
     }
     public void fillToComboBoxThang() {
-        DefaultComboBoxModel model = (DefaultComboBoxModel) cboNamOrThang.getModel();
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboThang.getModel();
         model.removeAllElements();
         List<Integer> list = new ArrayList<>(Arrays.asList(1, 2,3,4,5,6,7,8,9,10,11,12));
-        for (Integer month : list) {
+        for (int month : list) {
             model.addElement(month);
         }
     }
+    public void fillDoanhThuNam() {
+        DefaultTableModel model = (DefaultTableModel) tblDoanhThu.getModel();
+        model.setRowCount(0);
+        int nam = (Integer) cboNam.getSelectedItem();
+        List<Object[]> list = tkDAO.doanhThuNam(nam);
+        for (Object[] row : list) {
+            model.addRow(row);
+        }
+    }
+    public void fillTableDoanhThu() {
+    DefaultTableModel model = (DefaultTableModel) tblDoanhThu.getModel();
+    model.setRowCount(0);
+
+    // Kiểm tra xem đã chọn một mục trong cboNam và cboThang chưa
+    if (cboNam.getSelectedItem() != null && cboThang.getSelectedItem() != null) {
+        int nam = (Integer) cboNam.getSelectedItem();
+        int thang = (Integer) cboThang.getSelectedItem();
+
+        List<Object[]> list = tkDAO.doanhThuNamVaThang(nam, thang);
+        for (Object[] row : list) {
+            model.addRow(row);
+        }
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,9 +85,9 @@ public class QLDoanhThu extends javax.swing.JDialog {
 
         jScrollBar1 = new javax.swing.JScrollBar();
         jLabel1 = new javax.swing.JLabel();
-        cboLoai = new javax.swing.JComboBox<>();
+        cboNam = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        cboNamOrThang = new javax.swing.JComboBox<>();
+        cboThang = new javax.swing.JComboBox<>();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -68,16 +98,21 @@ public class QLDoanhThu extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 204, 204));
 
-        jLabel1.setText("Thống kê theo:");
+        jLabel1.setText("Năm");
 
-        cboLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Năm", "Tháng" }));
-        cboLoai.addActionListener(new java.awt.event.ActionListener() {
+        cboNam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboLoaiActionPerformed(evt);
+                cboNamActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Năm/Tháng:");
+        jLabel2.setText("Tháng");
+
+        cboThang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboThangActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 0));
         jPanel1.setForeground(new java.awt.Color(255, 204, 0));
@@ -144,11 +179,11 @@ public class QLDoanhThu extends javax.swing.JDialog {
                         .addGap(14, 14, 14)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cboLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboNam, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(cboNamOrThang, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cboThang, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -161,9 +196,9 @@ public class QLDoanhThu extends javax.swing.JDialog {
                 .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cboLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboNam, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(cboNamOrThang, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboThang, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,18 +209,16 @@ public class QLDoanhThu extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cboLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLoaiActionPerformed
+    private void cboNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNamActionPerformed
         // TODO add your handling code here:
-        init();
-    }//GEN-LAST:event_cboLoaiActionPerformed
+        fillTableDoanhThu();
+    }//GEN-LAST:event_cboNamActionPerformed
 
-    void init() {
-        if (cboLoai.getSelectedItem().equals("Năm")) {
-            fillToComboBoxNam();
-        }else{
-            fillToComboBoxThang();
-        }
-    }
+    private void cboThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboThangActionPerformed
+        // TODO add your handling code here:
+        fillTableDoanhThu();
+    }//GEN-LAST:event_cboThangActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -231,8 +264,8 @@ public class QLDoanhThu extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cboLoai;
-    private javax.swing.JComboBox<String> cboNamOrThang;
+    private javax.swing.JComboBox<String> cboNam;
+    private javax.swing.JComboBox<String> cboThang;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
