@@ -668,11 +668,11 @@ public class QLNhanVien extends javax.swing.JDialog {
             MsgBox.alert(this, "Vui lòng nhập đúng định dạng (Năm - Tháng - Ngày)");
             return false;
         }
-        if(sdt.isEmpty()){
+        if (sdt.isEmpty()) {
             MsgBox.alert(this, "Vui lòng nhập số điện thoại");
             return false;
-        }else{
-            if(!sdt.matches(regexPhone)){
+        } else {
+            if (!sdt.matches(regexPhone)) {
                 MsgBox.alert(this, "Số điện thoại không đúng định dạng");
                 return false;
             }
@@ -680,7 +680,8 @@ public class QLNhanVien extends javax.swing.JDialog {
         try {
             int std = Integer.parseInt(sdt);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Số điện thoại phải là số");
+//            JOptionPane.showMessageDialog(null, "Số điện thoại phải là số");
+            MsgBox.alert(this, "Số điện thoại phải là số");
             return false;
         }
         if (!isValidated.isBlank(email)) {
@@ -691,7 +692,8 @@ public class QLNhanVien extends javax.swing.JDialog {
         if (txtEmail.getText().matches(regexEmail)) {
             nv.setEmail(txtEmail.getText());
         } else {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng email");
+            //  JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng email");
+            MsgBox.alert(this, "Vui lòng nhập đúng định dạng email");
             return false;
         }
 

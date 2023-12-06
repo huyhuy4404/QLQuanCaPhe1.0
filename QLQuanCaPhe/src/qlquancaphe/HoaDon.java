@@ -286,7 +286,11 @@ public class HoaDon extends javax.swing.JDialog {
 
     private void btnInHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInHoaDonActionPerformed
         // TODO add your handling code here:
-        MsgBox.alert(this, "In hóa đơn thành công");
+        if(tblHoaDon.getRowCount()==0){
+            MsgBox.alert(this, "Bạn chưa có sản phẩm nào trong hóa đơn");
+        }else{
+            MsgBox.alert(this, "In hóa đơn thành công");
+        }
     }//GEN-LAST:event_btnInHoaDonActionPerformed
 
     private void btnTroVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTroVeActionPerformed
