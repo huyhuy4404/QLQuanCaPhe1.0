@@ -9,8 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import qlquancaphe.bean.DanhMucBean;
 import qlquancaphe.view.DonHang;
-import qlquancaphe.view.QuanLiLoaiSanPham;
-import qlquancaphe.view.QuanLiSanPhamJPanel;
+import qlquancaphe.view.QuanLyDoanhThuJPanel;
+import qlquancaphe.view.QuanLyLoaiSanPhamJPanel;
+import qlquancaphe.view.QuanLyNhanVienJPanel;
+import qlquancaphe.view.QuanLySanPhamJPanel;
 import qlquancaphe.view.TrangChuJPanel;
 
 public class ChuyenManHinhController {
@@ -63,15 +65,21 @@ public class ChuyenManHinhController {
                 case "TrangChu":
                     node = new TrangChuJPanel();
                     break;
-                case "QuanLiSanPham":
-                    node = new QuanLiSanPhamJPanel();
+                case "QuanLyNhanVien":
+                    node = new QuanLyNhanVienJPanel();
+                    break;    
+                case "QuanLySanPham":
+                    node = new QuanLySanPhamJPanel();
                     break;
-                case "QuanLiLoaiSanPham":
-                    node = new QuanLiLoaiSanPham();
+                case "QuanLyLoaiSanPham":
+                    node = new QuanLyLoaiSanPhamJPanel();
                     break;
                 case "DonHang":
                     node = new DonHang();
-                    break;    
+                    break;
+                case "QuanLyDoanhThu":
+                    node = new QuanLyDoanhThuJPanel();
+                    break;
                 default:
                     break;
             }
