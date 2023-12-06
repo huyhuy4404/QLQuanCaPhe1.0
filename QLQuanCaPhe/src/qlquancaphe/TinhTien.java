@@ -594,14 +594,17 @@ public class TinhTien extends javax.swing.JFrame {
             return;
         } else {
             MsgBox.alert(this, "Thanh toán thành công");
-            int soTienTraLai = soTienKhachTra - soTienCanThanhToan;
-            lblTienTraLai.setText(soTienTraLai + "");
-            txtSoTien.setText("");
+            this.dispose();
+            new HoaDon(this, true).setVisible(true);
         }
     }
 
     void init() {
         lblTienKhachTra.setText(txtSoTien.getText());
+        int so1 = Integer.parseInt(lblTienCanThanhToan.getText());
+        int so2 = Integer.parseInt(lblTienKhachTra.getText());
+        int tong = so2 - so1;
+        lblTienTraLai.setText(tong + "");
     }
 
     public int getSoTien() {
