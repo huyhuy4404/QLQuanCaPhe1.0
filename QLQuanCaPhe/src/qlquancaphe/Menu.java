@@ -74,7 +74,7 @@ public class Menu extends javax.swing.JFrame {
         });
         pnlMenu.add(btnNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 160, 50));
 
-        btnLoaiSanPham.setText("Quản Lý Sản Phẩm");
+        btnLoaiSanPham.setText("Quản Lý Loại Sản Phẩm");
         btnLoaiSanPham.setPreferredSize(new java.awt.Dimension(145, 35));
         btnLoaiSanPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
