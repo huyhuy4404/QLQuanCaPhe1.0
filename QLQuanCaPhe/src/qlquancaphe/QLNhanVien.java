@@ -623,77 +623,152 @@ public class QLNhanVien extends javax.swing.JDialog {
         return nv;
     }
 
-    boolean validated() {
-        NhanVien nv = new NhanVien();
-        String manv = txtMaNV.getText();
-        String mk = String.valueOf(txtMatKhau.getPassword());
-        String hoten = txtHoTen.getText();
-        String ngaysinh = txtNgaySinh.getText();
+//    boolean validated() {
+//        NhanVien nv = new NhanVien();
+//        String manv = txtMaNV.getText();
+//        String mk = String.valueOf(txtMatKhau.getPassword());
+//        String hoten = txtHoTen.getText();
+//        String ngaysinh = txtNgaySinh.getText();
+//        String sdt = txtSDT.getText();
+//        String email = txtEmail.getText();
+//        ButtonGroup gioiTinhGroup = new ButtonGroup();
+//        gioiTinhGroup.add(rdoQuanLy);
+//        gioiTinhGroup.add(rdoNhanVien);
+//        boolean gioiTinhSelected = rdoQuanLy.isSelected() || rdoNhanVien.isSelected();
+//        String regexPhone = "^0[0-9]{9}$";
+//        String regexEmail = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+//
+//        if (!isValidated.isBlank(manv)) {
+//            notice = "Vui lòng nhập mã nhân viên";
+//            txtMaNV.requestFocus();
+//            return false;
+//        }
+//        if (!isValidated.isBlank(hoten)) {
+//            notice = "Vui lòng nhập họ và tên";
+//            txtHoTen.requestFocus();
+//            return false;
+//        }
+//        if (!isValidated.isBlank(mk)) {
+//            notice = "Vui lòng nhập mật khẩu";
+//            txtMatKhau.requestFocus();
+//            return false;
+//        }
+//        if (!isValidated.isBlank(ngaysinh)) {
+//            notice = "Vui lòng nhập ngày sinh!";
+//            txtNgaySinh.requestFocus();
+//            return false;
+//
+//        }
+//        try {
+//            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//            Date ngaysinhDate = df.parse(txtNgaySinh.getText());
+//            nv.setNgaySinh(new java.sql.Date(ngaysinhDate.getTime()));
+//        } catch (ParseException e) {
+//            // JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng (Ngày - Tháng - Năm)");
+//            MsgBox.alert(this, "Vui lòng nhập đúng định dạng (Năm - Tháng - Ngày)");
+//            return false;
+//        }
+//        if (sdt.isEmpty()) {
+//            MsgBox.alert(this, "Vui lòng nhập số điện thoại");
+//            return false;
+//        } else {
+//            if (!sdt.matches(regexPhone)) {
+//                MsgBox.alert(this, "Số điện thoại không đúng định dạng");
+//                return false;
+//            }
+//        }
+//        try {
+//            int std = Integer.parseInt(sdt);
+//        } catch (Exception e) {
+////            JOptionPane.showMessageDialog(null, "Số điện thoại phải là số");
+//            MsgBox.alert(this, "Số điện thoại phải là số");
+//            return false;
+//        }
+//        if (!isValidated.isBlank(email)) {
+//            notice = "Vui lòng nhập email";
+//            txtEmail.requestFocus();
+//            return false;
+//        }
+//        if (txtEmail.getText().matches(regexEmail)) {
+//            nv.setEmail(txtEmail.getText());
+//        } else {
+//            //  JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng email");
+//            MsgBox.alert(this, "Vui lòng nhập đúng định dạng email");
+//            return false;
+//        }
+//
+//        return true;
+//    }
+    public boolean validated() {
+        String maNV = txtMaNV.getText();
+        String hoTen = txtHoTen.getText();
+        String matKhau = new String(txtMatKhau.getPassword());
+        String ngaySinh = txtNgaySinh.getText();
         String sdt = txtSDT.getText();
         String email = txtEmail.getText();
-        ButtonGroup gioiTinhGroup = new ButtonGroup();
-        gioiTinhGroup.add(rdoQuanLy);
-        gioiTinhGroup.add(rdoNhanVien);
-        boolean gioiTinhSelected = rdoQuanLy.isSelected() || rdoNhanVien.isSelected();
-        String regexPhone = "^0[0-9]{9}$";
-        String regexEmail = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
 
-        if (!isValidated.isBlank(manv)) {
-            notice = "Vui lòng nhập mã nhân viên";
-            txtMaNV.requestFocus();
+        if (maNV.isBlank()) {
+            MsgBox.alert(this, "Hãy nhập mã nhân viên!");
             return false;
         }
-        if (!isValidated.isBlank(hoten)) {
-            notice = "Vui lòng nhập họ và tên";
-            txtHoTen.requestFocus();
-            return false;
-        }
-        if (!isValidated.isBlank(mk)) {
-            notice = "Vui lòng nhập mật khẩu";
-            txtMatKhau.requestFocus();
-            return false;
-        }
-        if (!isValidated.isBlank(ngaysinh)) {
-            notice = "Vui lòng nhập ngày sinh!";
-            txtNgaySinh.requestFocus();
-            return false;
 
-        }
-        try {
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-            Date ngaysinhDate = df.parse(txtNgaySinh.getText());
-            nv.setNgaySinh(new java.sql.Date(ngaysinhDate.getTime()));
-        } catch (ParseException e) {
-            // JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng (Ngày - Tháng - Năm)");
-            MsgBox.alert(this, "Vui lòng nhập đúng định dạng (Năm - Tháng - Ngày)");
+        if (hoTen.isBlank()) {
+            MsgBox.alert(this, "Hãy nhập tên nhân viên!");
+            return false;
+        } else if (!hoTen.matches("^[^!-@]+$")) {
+            MsgBox.alert(this, "Tên sai định dạnh!");
             return false;
         }
-        if (sdt.isEmpty()) {
-            MsgBox.alert(this, "Vui lòng nhập số điện thoại");
+
+        if (matKhau.isBlank()) {
+            MsgBox.alert(this, "Hãy nhập mật khẩu");
+            return false;
+        } else if (matKhau.length() < 8 || matKhau.length() > 12) {
+            MsgBox.alert(this, "Mật khẩu phải từ 8 - 10 kí tự !");
+            return false;
+        } else if (!matKhau.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,12}$")) {
+            MsgBox.alert(this, "Mật khẩu phải có cả chữ và số!");
+            return false;
+        }
+
+        if (!rdoQuanLy.isSelected() && !rdoNhanVien.isSelected()) {
+            MsgBox.alert(this, "Hãy chọn chức vụ");
+            return false;
+        }
+
+        if (ngaySinh.isBlank()) {
+            MsgBox.alert(this, "Vui lòng nhập ngày sinh");
             return false;
         } else {
-            if (!sdt.matches(regexPhone)) {
-                MsgBox.alert(this, "Số điện thoại không đúng định dạng");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                dateFormat.parse(ngaySinh);
+            } catch (ParseException e) {
+                MsgBox.alert(this, "Vui lòng nhập đúng định dạng (Năm - Tháng - Ngày)");
                 return false;
             }
         }
+
+        if (sdt.isBlank()) {
+            MsgBox.alert(this, "Vui lòng nhập số điện thoại");
+            return false;
+        } else if (!sdt.matches("^0[0-9]{9}$")) {
+            MsgBox.alert(this, "Số điện thoại không đúng định dạng");
+            return false;
+        }
+
         try {
             int std = Integer.parseInt(sdt);
-        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, "Số điện thoại phải là số");
+        } catch (NumberFormatException e) {
             MsgBox.alert(this, "Số điện thoại phải là số");
             return false;
         }
-        if (!isValidated.isBlank(email)) {
-            notice = "Vui lòng nhập email";
-            txtEmail.requestFocus();
+
+        if (email.isBlank()) {
+            MsgBox.alert(this, "Hãy nhập email!");
             return false;
-        }
-        if (txtEmail.getText().matches(regexEmail)) {
-            nv.setEmail(txtEmail.getText());
-        } else {
-            //  JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng email");
-            MsgBox.alert(this, "Vui lòng nhập đúng định dạng email");
+        } else if (!email.matches("^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$")) {
+            MsgBox.alert(this, "Sai định dạng Email");
             return false;
         }
 
@@ -712,7 +787,7 @@ public class QLNhanVien extends javax.swing.JDialog {
         NhanVien nv = getForm();
         boolean isSuccess = validated();
         if (!isSuccess) {
-            MsgBox.alert(this, notice);
+          //  MsgBox.alert(this, notice);
         } else {
             try {
                 dao.insert(nv);
@@ -751,7 +826,7 @@ public class QLNhanVien extends javax.swing.JDialog {
         NhanVien nv = getForm();
         boolean isSuccess = validated();
         if (!isSuccess) {
-            MsgBox.alert(this, notice);
+          //  MsgBox.alert(this, notice);
         } else {
             try {
                 dao.update(nv);

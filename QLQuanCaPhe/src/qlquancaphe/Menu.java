@@ -53,7 +53,7 @@ public class Menu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MENU");
 
-        pnlMenu.setBackground(new java.awt.Color(255, 153, 102));
+        pnlMenu.setBackground(new java.awt.Color(255, 204, 102));
         pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnSanPham.setText("Quản Lý Sản Phẩm");

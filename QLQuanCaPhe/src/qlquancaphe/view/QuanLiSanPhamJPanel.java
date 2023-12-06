@@ -78,6 +78,8 @@ public class QuanLiSanPhamJPanel extends javax.swing.JPanel {
         lblMaLSP = new javax.swing.JLabel();
         cboMaloaiSP = new javax.swing.JComboBox<>();
 
+        setBackground(new java.awt.Color(204, 255, 255));
+
         lblTittle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTittle.setText("Thông tin sản phẩm");
 

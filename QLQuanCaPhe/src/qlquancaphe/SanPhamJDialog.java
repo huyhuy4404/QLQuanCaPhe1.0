@@ -82,7 +82,7 @@ public class SanPhamJDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        pnlList.setBackground(new java.awt.Color(255, 204, 0));
+        pnlList.setBackground(new java.awt.Color(255, 204, 102));
 
         tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
