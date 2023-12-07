@@ -39,7 +39,6 @@ public class ChuyenManHinhController {
     }
     public void setViewTinhTien() {
         kindSelected = "DonHang";
-
         root.removeAll();
         root.setLayout(new BorderLayout());
         root.add(new DonHang());
