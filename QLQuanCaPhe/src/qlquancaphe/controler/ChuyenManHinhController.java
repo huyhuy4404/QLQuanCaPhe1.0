@@ -37,6 +37,15 @@ public class ChuyenManHinhController {
         root.validate();
         root.repaint();
     }
+    public void setViewTinhTien() {
+        kindSelected = "DonHang";
+
+        root.removeAll();
+        root.setLayout(new BorderLayout());
+        root.add(new DonHang());
+        root.validate();
+        root.repaint();
+    }
 
     public void setEvent(List<DanhMucBean> listItem) {
         for (DanhMucBean item : listItem) {

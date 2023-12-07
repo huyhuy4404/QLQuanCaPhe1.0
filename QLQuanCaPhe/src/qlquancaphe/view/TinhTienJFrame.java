@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 import qlquancaphe.ChuyenKhoan;
 import qlquancaphe.DAO.ChiTietDonHangDAO;
 import qlquancaphe.DAO.DonHangDAO;
+import qlquancaphe.bean.DanhMucBean;
+import qlquancaphe.controler.ChuyenManHinhController;
 import qlquancaphe.entity.ChiTietDonHang;
 import qlquancaphe.entity.DonHang;
 import qlquancaphe.utils.MsgBox;
@@ -570,22 +572,19 @@ public class TinhTienJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         ThanhToan();
     }//GEN-LAST:event_btnThanhToanActionPerformed
-    void ThanhToan() {
+
+    public void ThanhToan() {
         int soTienKhachTra = Integer.parseInt(lblTienKhachTra.getText());
         int soTienCanThanhToan = Integer.parseInt(lblTienCanThanhToan.getText());
         if (soTienKhachTra < soTienCanThanhToan) {
             MsgBox.alert(this, "Số tiền phải lớn hơn hoặc bằng số tiền cần thanh toán!");
-            return;
         } else {
             MsgBox.alert(this, "Thanh toán thành công");
-            isTinhTien();
-            
+            this.dispose();
         }
     }
-    public boolean  tinhTien;
-    public void setTinhTien(boolean tinhTien){
-        this.tinhTien= tinhTien;
-    }
+    
+     
     void init() {
         lblTienKhachTra.setText(txtSoTien.getText());
         int so1 = Integer.parseInt(lblTienCanThanhToan.getText());
