@@ -36,7 +36,10 @@ public class TinhTienJFrame extends javax.swing.JFrame {
         initComponents();
         loadTien();
     }
-
+    boolean istt = false;
+    boolean isTinhTien(){
+        return istt;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -547,7 +550,8 @@ public class TinhTienJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         btnThanhToan.setText("Thanh toán CK");
         btnThanhToan.setEnabled(true);
-        new ChuyenKhoan(this, true).setVisible(true);
+        qlquancaphe.view.ChuyenKhoan ck = new qlquancaphe.view.ChuyenKhoan(this, true);
+        ck.setVisible(true);
     }//GEN-LAST:event_btnChuyenKhoanActionPerformed
 
     private void btnTroVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTroVeActionPerformed
@@ -576,6 +580,7 @@ public class TinhTienJFrame extends javax.swing.JFrame {
             MsgBox.alert(this, "Thanh toán thành công");
             qlquancaphe.view.DonHang dh = new qlquancaphe.view.DonHang();
             dh.fillTableHoaDon3();
+            istt = true;
             this.dispose();
             
         }
