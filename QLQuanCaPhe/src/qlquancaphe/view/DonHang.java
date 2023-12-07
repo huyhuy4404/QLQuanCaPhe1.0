@@ -516,6 +516,10 @@ public class DonHang extends javax.swing.JPanel {
             lblTongTien.setText(String.valueOf(tongTien));
         }
     }
+    void fillTableHoaDon3(){
+        DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
+        model.setRowCount(0);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHuyMon;

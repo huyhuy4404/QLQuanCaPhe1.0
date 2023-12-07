@@ -8,7 +8,9 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import qlquancaphe.bean.DanhMucBean;
+import qlquancaphe.utils.Auth;
 import qlquancaphe.view.DonHang;
+import qlquancaphe.view.MainJFrame;
 import qlquancaphe.view.QuanLyDoanhThuJPanel;
 import qlquancaphe.view.QuanLyLoaiSanPhamJPanel;
 import qlquancaphe.view.QuanLyNhanVienJPanel;
@@ -61,13 +63,17 @@ public class ChuyenManHinhController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
+            if (!pnItem.isEnabled()) {
+                return; // Không thực hiện hành động nếu JPanel đã bị vô hiệu hóa
+            }
+
             switch (kind) {
                 case "TrangChu":
                     node = new TrangChuJPanel();
                     break;
                 case "QuanLyNhanVien":
                     node = new QuanLyNhanVienJPanel();
-                    break;    
+                    break;
                 case "QuanLySanPham":
                     node = new QuanLySanPhamJPanel();
                     break;
@@ -88,14 +94,18 @@ public class ChuyenManHinhController {
             root.add(node);
             root.validate();
             root.repaint();
-            setChangeBackgroud(kind);
+            setChangeBackground(kind);
         }
 
         @Override
         public void mousePressed(MouseEvent e) {
-            kindSelected = kind;
-            pnItem.setBackground(new Color(96, 100, 191));
-            lblItem.setBackground(new Color(96, 100, 191));
+//        if (!pnItem.isEnabled()) {
+//            return; // Không thực hiện hành động nếu JPanel đã bị vô hiệu hóa
+//        }
+//
+//        kindSelected = kind;
+//        pnItem.setBackground(new Color(96, 100, 191));
+//        lblItem.setBackground(new Color(96, 100, 191));
         }
 
         @Override
@@ -104,30 +114,64 @@ public class ChuyenManHinhController {
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            pnItem.setBackground(new Color(96, 100, 191));
-            lblItem.setBackground(new Color(96, 100, 191));
+//        if (!pnItem.isEnabled()) {
+//            return; // Không thực hiện hành động nếu JPanel đã bị vô hiệu hóa
+//        }
+//
+//        pnItem.setBackground(new Color(96, 100, 191));
+//        lblItem.setBackground(new Color(96, 100, 191));
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-            if (kindSelected.equalsIgnoreCase(kind)) {
-                pnItem.setBackground(new Color(204, 102, 255));
-                lblItem.setBackground(new Color(204, 102, 255));
-            }
-        }
-
-    }
-
-    private void setChangeBackgroud(String kind) {
-        for (DanhMucBean item : listItem) {
-            if (item.getKind().equalsIgnoreCase(kind)) {
-                item.getPn().setBackground(new Color(96, 100, 191));
-                item.getLbl().setBackground(new Color(96, 100, 191));
-            } else {
-                item.getPn().setBackground(new Color(204, 102, 255));
-                item.getLbl().setBackground(new Color(204, 102, 255));
-            }
+//        if (!pnItem.isEnabled()) {
+//            return; // Không thực hiện hành động nếu JPanel đã bị vô hiệu hóa
+//        }
+//
+//        if (kindSelected.equalsIgnoreCase(kind)) {
+//            pnItem.setBackground(new Color(96, 100, 191));
+//            lblItem.setBackground(new Color(96, 100, 191));
+//        } else {
+//            pnItem.setBackground(new Color(204, 102, 255));
+//            lblItem.setBackground(new Color(204, 102, 255));
+//        }
         }
     }
- 
+
+    private void setChangeBackground(String kind) {
+        if (Auth.isManager()) {
+            for (DanhMucBean item : listItem) {
+                if (item.getKind().equalsIgnoreCase(kind)) {
+                    if (item.getPn().isEnabled()) {
+                        item.getPn().setBackground(new Color(96, 100, 191));
+                        item.getLbl().setBackground(new Color(96, 100, 191));
+                    }
+                } else {
+                    item.getPn().setBackground(new Color(204, 102, 255));
+                    item.getLbl().setBackground(new Color(204, 102, 255));
+                }
+            }
+        } else {
+            for (DanhMucBean item : listItem) {
+                if (item.getPn().isEnabled()) {
+                    if (item.getKind().equalsIgnoreCase(kind)) {
+                        item.getPn().setBackground(new Color(96, 100, 191));
+                        item.getLbl().setBackground(new Color(96, 100, 191));
+                    } else {
+                        item.getPn().setBackground(new Color(204, 102, 255));
+                        item.getLbl().setBackground(new Color(204, 102, 255));
+                    }
+                    if (item.getKind().equalsIgnoreCase(kind)) {
+                        item.getPn().setBackground(new Color(96, 100, 191));
+                        item.getLbl().setBackground(new Color(96, 100, 191));
+                    } else {
+                        item.getPn().setBackground(new Color(204, 102, 255));
+                        item.getLbl().setBackground(new Color(204, 102, 255));
+                    }
+
+                }
+            }
+        }
+    }
+
 }

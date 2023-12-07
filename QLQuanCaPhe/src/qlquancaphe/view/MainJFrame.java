@@ -4,6 +4,7 @@
  */
 package qlquancaphe.view;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -49,6 +50,21 @@ public class MainJFrame extends javax.swing.JFrame {
                 lblTime.setText(text);
             }
         }).start();
+        if (!Auth.isManager()) {
+            pnQuanLyLoaiSanPham.setEnabled(false);
+            pnQuanLySanPham.setEnabled(false);
+            pnquanlydoanhthu.setEnabled(false);
+            pnQuanlynhanvien.setEnabled(false);
+            pnQuanLyLoaiSanPham.setBackground(Color.GRAY);
+            pnQuanLySanPham.setBackground(Color.GRAY);
+            pnquanlydoanhthu.setBackground(Color.GRAY);
+            pnQuanlynhanvien.setBackground(Color.GRAY);
+        } else {
+            pnQuanLyLoaiSanPham.setEnabled(true);
+            pnQuanLySanPham.setEnabled(true);
+            pnquanlydoanhthu.setEnabled(true);
+            pnQuanlynhanvien.setEnabled(true);
+        }
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

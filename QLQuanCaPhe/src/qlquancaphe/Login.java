@@ -29,7 +29,7 @@ public class Login extends javax.swing.JDialog {
     public Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
     }
 //    public void setColor(JButton p) {
 //        p.setBackground(new Color(255, 255, 255));
@@ -191,7 +191,7 @@ public class Login extends javax.swing.JDialog {
     }//GEN-LAST:event_txtQuenMKMousePressed
 
     private void btnLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseEntered
-      //  resetColor(btnLogin);
+        //  resetColor(btnLogin);
     }//GEN-LAST:event_btnLoginMouseEntered
 
     private void btnLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseExited
@@ -199,7 +199,7 @@ public class Login extends javax.swing.JDialog {
     }//GEN-LAST:event_btnLoginMouseExited
 
     private void btnExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseEntered
-      //  resetColor(btnExit);
+        //  resetColor(btnExit);
     }//GEN-LAST:event_btnExitMouseEntered
 
     private void btnExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseExited
@@ -251,8 +251,8 @@ public class Login extends javax.swing.JDialog {
         if (passwordMatch) {
             Auth.user = nv;
             this.dispose();
-            Menu mn = new Menu();
-            mn.setVisible(true);
+            MainJFrame mf = new MainJFrame();
+            mf.setVisible(true);
         } else {
             MsgBox.alert(this, "Sai mật khẩu");
         }

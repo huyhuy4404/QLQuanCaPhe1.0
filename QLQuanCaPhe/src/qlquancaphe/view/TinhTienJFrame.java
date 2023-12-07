@@ -24,9 +24,11 @@ import qlquancaphe.utils.MsgBox;
  * @author huydz
  */
 public class TinhTienJFrame extends javax.swing.JFrame {
-ChiTietDonHangDAO CTDHDAO = new ChiTietDonHangDAO();
+
+    ChiTietDonHangDAO CTDHDAO = new ChiTietDonHangDAO();
     DonHangDAO dhDAO = new DonHangDAO();
     public static int soTien;
+
     /**
      * Creates new form TinhTienJFrame
      */
@@ -564,7 +566,7 @@ ChiTietDonHangDAO CTDHDAO = new ChiTietDonHangDAO();
         // TODO add your handling code here:
         ThanhToan();
     }//GEN-LAST:event_btnThanhToanActionPerformed
-void ThanhToan() {
+    void ThanhToan() {
         int soTienKhachTra = Integer.parseInt(lblTienKhachTra.getText());
         int soTienCanThanhToan = Integer.parseInt(lblTienCanThanhToan.getText());
         if (soTienKhachTra < soTienCanThanhToan) {
@@ -572,8 +574,9 @@ void ThanhToan() {
             return;
         } else {
             MsgBox.alert(this, "Thanh toán thành công");
+            qlquancaphe.view.DonHang dh = new qlquancaphe.view.DonHang();
+            dh.fillTableHoaDon3();
             this.dispose();
-            
             
         }
     }
@@ -597,6 +600,7 @@ void ThanhToan() {
         int tongTien = (int) lastDonHang.getTongTien();
         lblTienCanThanhToan.setText(tongTien + "");
     }
+
     /**
      * @param args the command line arguments
      */

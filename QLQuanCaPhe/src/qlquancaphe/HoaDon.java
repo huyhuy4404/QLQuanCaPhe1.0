@@ -290,6 +290,7 @@ public class HoaDon extends javax.swing.JDialog {
             MsgBox.alert(this, "Bạn chưa có sản phẩm nào trong hóa đơn");
         }else{
             MsgBox.alert(this, "In hóa đơn thành công");
+            
         }
     }//GEN-LAST:event_btnInHoaDonActionPerformed
 
