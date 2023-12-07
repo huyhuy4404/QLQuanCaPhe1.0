@@ -13,6 +13,7 @@ import qlquancaphe.DAO.NhanVienDAO;
 import qlquancaphe.entity.NhanVien;
 import qlquancaphe.utils.Auth;
 import qlquancaphe.utils.MsgBox;
+import qlquancaphe.view.MainJFrame;
 
 /**
  *
@@ -227,8 +228,8 @@ public class Login extends javax.swing.JDialog {
             if (pass.equalsIgnoreCase(nv.getMatKhau())) {
                 Auth.user = nv;
                 this.dispose();
-                Menu mn = new Menu();
-                mn.setVisible(true);
+                MainJFrame mf = new MainJFrame();
+                mf.setVisible(true);
             }
             if (!pass.equalsIgnoreCase(nv.getMatKhau())) {
                 try {

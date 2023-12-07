@@ -10,12 +10,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 import qlquancaphe.bean.DanhMucBean;
 import qlquancaphe.controler.ChuyenManHinhController;
 import qlquancaphe.utils.Auth;
 
 public class MainJFrame extends javax.swing.JFrame {
+    public JPanel getView(){
+        return pnView;
+    }
     public MainJFrame() {
         initComponents();
         init();
@@ -34,8 +38,8 @@ public class MainJFrame extends javax.swing.JFrame {
         controller.setEvent(listItem);
     }
     private void init() {
-        //String user = Auth.user.getHoTen();
-        //lblTenNV.setText(user);
+        String user = Auth.user.getHoTen();
+        lblTenNV.setText(user);
         new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

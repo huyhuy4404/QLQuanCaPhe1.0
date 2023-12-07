@@ -449,8 +449,7 @@ public class DonHang extends javax.swing.JPanel {
                 tt.setMaTTNH(maTTNH);
                 ttDAO.insert(tt);
             }
-            TinhTien tinhTien = new TinhTien();
-            this.setVisible(false);
+            TinhTienJFrame tinhTien = new TinhTienJFrame();
             tinhTien.setVisible(true);
 
         } catch (Exception e) {

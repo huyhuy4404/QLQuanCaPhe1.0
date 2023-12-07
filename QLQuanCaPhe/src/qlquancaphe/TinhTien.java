@@ -531,14 +531,11 @@ public class TinhTien extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         this.dispose();
-        HoaDon hoaDonDialog = new HoaDon(this, true);
-        hoaDonDialog.fillTableHoaDon2();
         List<DonHang> ds = dhDAO.selectAll();
         DonHang lastDonHang = ds.get(ds.size() - 1);
         int maDH = lastDonHang.getMaDH();
         CTDHDAO.deleteByMaDH(maDH);
         dhDAO.delete(maDH + "");
-        hoaDonDialog.setVisible(true);
 
 
     }//GEN-LAST:event_btnTroVeActionPerformed
@@ -595,7 +592,8 @@ public class TinhTien extends javax.swing.JFrame {
         } else {
             MsgBox.alert(this, "Thanh toán thành công");
             this.dispose();
-            new HoaDon(this, true).setVisible(true);
+            
+            
         }
     }
 
