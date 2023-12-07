@@ -578,14 +578,14 @@ public class TinhTienJFrame extends javax.swing.JFrame {
             return;
         } else {
             MsgBox.alert(this, "Thanh toán thành công");
-            qlquancaphe.view.DonHang dh = new qlquancaphe.view.DonHang();
-            dh.fillTableHoaDon3();
-            istt = true;
-            this.dispose();
+            isTinhTien();
             
         }
     }
-
+    public boolean  tinhTien;
+    public void setTinhTien(boolean tinhTien){
+        this.tinhTien= tinhTien;
+    }
     void init() {
         lblTienKhachTra.setText(txtSoTien.getText());
         int so1 = Integer.parseInt(lblTienCanThanhToan.getText());

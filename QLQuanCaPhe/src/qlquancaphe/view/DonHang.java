@@ -451,6 +451,10 @@ public class DonHang extends javax.swing.JPanel {
             }
             TinhTienJFrame tinhTien = new TinhTienJFrame();
             tinhTien.setVisible(true);
+            if(tinhTien.isTinhTien()==true){
+                DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
+                model.setRowCount(0);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
