@@ -105,6 +105,22 @@ LoaiSanPhamDAO dao = new LoaiSanPhamDAO();
         setFrom(sp);
     }
 
+      public boolean check() {
+        String tenlsp = txtTenSp.getText();
+        DefaultTableModel model = (DefaultTableModel) tblSanPham.getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            String tenSanPhamTrongBang = (String) model.getValueAt(i, 1); // Lấy tên sản phẩm từ cột 1 (đánh index từ 0)
+            if (tenlsp.equalsIgnoreCase(tenSanPhamTrongBang)) {
+                MsgBox.alert(this, "Tên loại sản phẩm đã tồn tại!");
+                return false;
+            }
+        }
+          if (tenlsp.isBlank()) {
+              MsgBox.alert(this, "");
+              return false;
+          }
+        return true;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
