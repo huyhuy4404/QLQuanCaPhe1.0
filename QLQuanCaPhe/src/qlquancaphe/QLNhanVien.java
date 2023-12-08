@@ -37,15 +37,15 @@ public class QLNhanVien extends javax.swing.JDialog {
         init();
     }
 
-    public void setColor(JButton p) {
-        p.setBackground(new Color(204, 255, 204));
-        p.setForeground(new Color(0, 0, 0));
-    }
-
-    public void resetColor(JButton p) {
-        p.setBackground(new Color(0, 102, 51));
-        p.setForeground(new Color(255, 255, 255));
-    }
+//    public void setColor(JButton p) {
+//        p.setBackground(new Color(204, 255, 204));
+//        p.setForeground(new Color(0, 0, 0));
+//    }
+//
+//    public void resetColor(JButton p) {
+//        p.setBackground(new Color(0, 102, 51));
+//        p.setForeground(new Color(255, 255, 255));
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -449,15 +449,15 @@ public class QLNhanVien extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void txtMaNVMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMaNVMouseEntered
-        setColor(btnSua);
+//        setColor(btnSua);
     }//GEN-LAST:event_txtMaNVMouseEntered
 
     private void btnThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseEntered
-        setColor(btnThem);
+//        setColor(btnThem);
     }//GEN-LAST:event_btnThemMouseEntered
 
     private void btnThemMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseExited
-        resetColor(btnThem);
+//        resetColor(btnThem);
     }//GEN-LAST:event_btnThemMouseExited
 
     /**
