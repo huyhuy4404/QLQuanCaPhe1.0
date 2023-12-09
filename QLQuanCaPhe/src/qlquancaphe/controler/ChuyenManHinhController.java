@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import qlquancaphe.bean.DanhMucBean;
 import qlquancaphe.utils.Auth;
 import qlquancaphe.view.DonHang;
+import qlquancaphe.view.DonHang2JPanel;
 import qlquancaphe.view.MainJFrame;
 import qlquancaphe.view.QuanLyDoanhThuJPanel;
 import qlquancaphe.view.QuanLyLoaiSanPhamJPanel;
@@ -89,7 +90,7 @@ public class ChuyenManHinhController {
                     node = new QuanLyLoaiSanPhamJPanel();
                     break;
                 case "DonHang":
-                    node = new DonHang();
+                    node = new DonHang2JPanel();
                     break;
                 case "QuanLyDoanhThu":
                     node = new QuanLyDoanhThuJPanel();

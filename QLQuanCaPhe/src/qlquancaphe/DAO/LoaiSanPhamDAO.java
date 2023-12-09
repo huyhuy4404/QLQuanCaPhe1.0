@@ -21,7 +21,7 @@ public class LoaiSanPhamDAO extends QLQuanCaPhe<LoaiSanPham, Object> {
     final String DELETE_SQL = "DELETE FROM LoaiSP WHERE MaLSP=?";
     final String SELECT_ALL_SQL = "SELECT * FROM LoaiSP";
     final String SELECT_BY_ID_SQL = "SELECT * FROM LoaiSP WHERE MaLSP=?";
-    final String SELECT_BY_TenLSP_SQL = "SELECT * FROM LoaiSP WHERE TenLoaiSP=?";
+    final String SELECT_BY_TenLSP_SQL = "SELECT * FROM LoaiSP WHERE TenLoaiSP LIKE ?";
 
     @Override
     public void insert(LoaiSanPham entity) {
@@ -70,7 +70,7 @@ public class LoaiSanPhamDAO extends QLQuanCaPhe<LoaiSanPham, Object> {
       
     }
 
-    public List<LoaiSanPham> selectByTenLSP(String tenLSP) {
+    public List<LoaiSanPham> selectByTenLSP(Object tenLSP) {
         return selectBySql(SELECT_BY_TenLSP_SQL,tenLSP);
     }
 }
