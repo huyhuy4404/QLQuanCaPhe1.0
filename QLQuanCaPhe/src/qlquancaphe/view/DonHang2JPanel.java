@@ -8,11 +8,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
@@ -38,8 +41,8 @@ public class DonHang2JPanel extends javax.swing.JPanel {
      */
     public DonHang2JPanel() {
         initComponents();
-        loadSanPham();
         fillComBoBoxSP();
+        xoaTableHoaDon();
     }
 
     /**
@@ -225,9 +228,9 @@ public class DonHang2JPanel extends javax.swing.JPanel {
 
     private void btnHuyMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyMonActionPerformed
         // TODO add your handling code here:
-//        deleteMon();
-//        tinhTongTien();
-//        loadThanhToan();
+        deleteMon();
+        tinhTongTien();
+        loadThanhToan();
     }//GEN-LAST:event_btnHuyMonActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
@@ -240,36 +243,146 @@ public class DonHang2JPanel extends javax.swing.JPanel {
 
     private void cboSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboSanPhamActionPerformed
         // TODO add your handling code here:
-        loadPanelSanPham();
+        loadSanPham();
     }//GEN-LAST:event_cboSanPhamActionPerformed
     void loadSanPham() {
 
-        List<SanPham> list = spDAO.selectAll();
-        for (SanPham sp : list) {
-            JPanel pnChuaSP = new JPanel();
-            pnChuaSP.setPreferredSize(new Dimension(180, 200));
-            pnChuaSP.setLayout(new BoxLayout(pnChuaSP, BoxLayout.Y_AXIS));
-            pnChuaSP.setBackground(Color.WHITE);
-            productList = new ArrayList<>();
-            productList.add(sp.getTenSP());
-            JLabel lblHinh = new JLabel(sp.getHinh());
-            lblHinh.setPreferredSize(new Dimension(180, 180));
-            lblHinh.setAlignmentX(Component.CENTER_ALIGNMENT);
-            if (lblHinh != null) {
-                lblHinh.setToolTipText(sp.getHinh());
-                lblHinh.setIcon(XImage.read(sp.getHinh()));
-                JLabel lblSanPham = new JLabel(sp.getTenSP());
-                lblSanPham.setAlignmentX(Component.CENTER_ALIGNMENT);
-                pnChuaSP.add(lblHinh);
-                pnChuaSP.add(lblSanPham);
-                pnSanPham.add(pnChuaSP);
-                pnSanPham.revalidate();
-                pnSanPham.repaint();
+        LoaiSanPham selectedLSP = (LoaiSanPham) cboSanPham.getSelectedItem();
+        if (selectedLSP != null) {
+            int maLSP = selectedLSP.getMaLSP();
+            List<SanPham> list = spDAO.selectbyMaLSP(maLSP);
+            pnSanPham.removeAll();
+            for (SanPham sp : list) {
+                JPanel pnChuaSP = new JPanel();
+                pnChuaSP.setPreferredSize(new Dimension(180, 200));
+                pnChuaSP.setLayout(new BoxLayout(pnChuaSP, BoxLayout.Y_AXIS));
+                pnChuaSP.setBackground(Color.WHITE);
+                productList = new ArrayList<>();
+                productList.add(sp.getTenSP());
+                JLabel lblHinh = new JLabel();
+                lblHinh.setPreferredSize(new Dimension(180, 180));
+                lblHinh.setAlignmentX(Component.CENTER_ALIGNMENT);
+                if (sp.getHinh() != null) {
+                    lblHinh.setToolTipText(sp.getHinh());
+                    lblHinh.setIcon(XImage.read(sp.getHinh()));
+                    JLabel lblSanPham = new JLabel(sp.getTenSP());
+                    lblSanPham.setAlignmentX(Component.CENTER_ALIGNMENT);
+                    pnChuaSP.add(lblHinh);
+                    pnChuaSP.add(lblSanPham);
+                    pnSanPham.add(pnChuaSP);
+                    lblHinh.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            // Hiển thị tên sản phẩm khi click chuột vào hình
+                            ChonSanPham(sp);
+                        }
+                    });
+                    lblSanPham.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            // Hiển thị tên sản phẩm khi click chuột
+                            ChonSanPham(sp);
+                        }
+                    });
+
+                    // Thêm MouseListener vào pnChuaSP
+                    pnChuaSP.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            // Hiển thị tên sản phẩm khi click chuột
+                            ChonSanPham(sp);
+                        }
+                    });
+                }
             }
 
+            pnSanPham.revalidate();
+            pnSanPham.repaint();
+        }
+
+    }
+
+    private void ChonSanPham(SanPham sp) {
+        String input = MsgBox.prompt(this, "Vui lòng nhập số lượng: ");
+        if (!input.matches("\\d+")) {
+            MsgBox.alert(this, "Số lượng chỉ là số");
+            return;
+
+        } else {
+            int sl1 = Integer.parseInt(input);
+            if (sl1 <= 0) {
+                MsgBox.alert(this, "Số lượng phải lớn hơn 0");
+                return;
+            }
+        }
+        if (input != null && !input.isEmpty()) {
+            try {
+                int sl = Integer.parseInt(input);
+                DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
+                boolean productExists = false; // Biến cờ kiểm tra xem sản phẩm đã tồn tại hay chưa
+
+                for (int i = 0; i < model.getRowCount(); i++) {
+                    if (model.getValueAt(i, 0).equals(sp.getTenSP())) {
+                        // Sản phẩm đã tồn tại, tăng số lượng lên
+                        int currentQuantity = (int) model.getValueAt(i, 1);
+                        model.setValueAt(currentQuantity + sl, i, 1);
+                        float suaTongTien = (float) model.getValueAt(i, 3);
+                        model.setValueAt((currentQuantity + sl) * sp.getDonGia(), i, 3);
+                        productExists = true;
+                        break;
+                    }
+                }
+
+                if (!productExists) {
+                    // Sản phẩm chưa tồn tại, thêm mới vào bảng
+                    model.addRow(new Object[]{sp.getTenSP(), sl, sp.getDonGia(), sl * sp.getDonGia()});
+                }
+            } catch (Exception e) {
+            }
+        }
+        tinhTongTien();
+
+    }
+
+    void loadThanhToan() {
+        if (tblHoaDon.getRowCount() == 0) {
+            btnThanhToan.setEnabled(false);
+        } else {
+            btnThanhToan.setEnabled(true);
         }
     }
-    public void fillComBoBoxSP(){
+    void deleteMon() {
+        try {
+            int hoaDon = tblHoaDon.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
+            model.removeRow(hoaDon);
+        } catch (Exception e) {
+            MsgBox.alert(this, "Vui lòng chọn món cần hủy");
+            return;
+        }
+    }
+
+    void tinhTongTien() {
+        DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
+        if (model.getRowCount() == 0) {
+            lblTongTien.setText(0 + "");
+        }
+        int soHang = model.getRowCount();
+        int tongTien = 0;
+        for (int i = 0; i < soHang; i++) {
+            float soTien = (float) tblHoaDon.getValueAt(i, 3);
+            tongTien += soTien;
+            String formattedTongTien = String.format("%,d", tongTien);
+            lblTongTien.setText(String.valueOf(formattedTongTien));
+        }
+    }
+
+    void xoaTableHoaDon() {
+        DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
+        model.setRowCount(0);
+    }
+
+    public void fillComBoBoxSP() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboSanPham.getModel();
         model.removeAllElements();
         try {
@@ -277,19 +390,15 @@ public class DonHang2JPanel extends javax.swing.JPanel {
             for (LoaiSanPham cd : ds) {
                 model.addElement(cd);
             }
+
         } catch (Exception e) {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
             e.printStackTrace();
         }
     }
-    public void loadPanelSanPham(){
-         
-//        String  tenLSP = (String) cboSanPham.getSelectedItem();
-//        List<LoaiSanPham> lsp = lspDAO.selectByTenLSP(tenLSP);
-//        for(LoaiSanPham lsp1 : lsp){
-//            int maLSP = lsp1.getMaLSP();
-//            
-//        }
+
+    public void loadPanelSanPham() {
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import qlquancaphe.DAO.ChiTietDonHangDAO;
 import qlquancaphe.DAO.DonHangDAO;
@@ -359,7 +360,7 @@ public class DonHang extends javax.swing.JPanel {
             return;
         }
     }
-
+ 
     void loadThanhToan() {
         if (tblHoaDon.getRowCount() == 0) {
             btnThanhToan.setEnabled(false);
