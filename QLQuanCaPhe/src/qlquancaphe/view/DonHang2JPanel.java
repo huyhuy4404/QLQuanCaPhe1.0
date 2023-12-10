@@ -67,6 +67,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
         pnSanPham = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         cboSanPham = new javax.swing.JComboBox<>();
+        btnThayDoiSL = new javax.swing.JButton();
         pnTinhTien = new javax.swing.JPanel();
 
         setPreferredSize(new java.awt.Dimension(900, 566));
@@ -92,7 +93,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
 
         btnInHoaDon.setBackground(new java.awt.Color(204, 255, 204));
         btnInHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/Print preview.png"))); // NOI18N
-        btnInHoaDon.setText("In hóa đơn");
+        btnInHoaDon.setText("Xem hóa đơn");
         btnInHoaDon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInHoaDonActionPerformed(evt);
@@ -146,6 +147,15 @@ public class DonHang2JPanel extends javax.swing.JPanel {
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
+        btnThayDoiSL.setBackground(new java.awt.Color(204, 255, 204));
+        btnThayDoiSL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/Edit.png"))); // NOI18N
+        btnThayDoiSL.setText("Thay đổi SL");
+        btnThayDoiSL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThayDoiSLActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnHoaDonLayout = new javax.swing.GroupLayout(pnHoaDon);
         pnHoaDon.setLayout(pnHoaDonLayout);
         pnHoaDonLayout.setHorizontalGroup(
@@ -156,9 +166,12 @@ public class DonHang2JPanel extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(jLabel1))
                     .addGroup(pnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(pnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pnHoaDonLayout.createSequentialGroup()
+                                .addComponent(btnThayDoiSL, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnHoaDonLayout.createSequentialGroup()
                                 .addComponent(btnInHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -182,8 +195,10 @@ public class DonHang2JPanel extends javax.swing.JPanel {
                     .addComponent(btnHuyMon, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnInHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGroup(pnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnThayDoiSL, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(78, Short.MAX_VALUE))
             .addGroup(pnHoaDonLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -213,17 +228,13 @@ public class DonHang2JPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInHoaDonActionPerformed
         // TODO add your handling code here:
-//        if (tblHoaDon.getRowCount() == 0) {
-//            MsgBox.alert(this, "Bạn chưa có sản phẩm nào trong hóa đơn");
-//        } else {
-//            MsgBox.alert(this, "In hóa đơn thành công");
-//        }
+//        
     }//GEN-LAST:event_btnInHoaDonActionPerformed
 
     private void btnHuyMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyMonActionPerformed
@@ -245,6 +256,12 @@ public class DonHang2JPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         loadSanPham();
     }//GEN-LAST:event_cboSanPhamActionPerformed
+
+    private void btnThayDoiSLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThayDoiSLActionPerformed
+        // TODO add your handling code here:
+        thayDoiSoLuong();
+        tinhTongTien();
+    }//GEN-LAST:event_btnThayDoiSLActionPerformed
     void loadSanPham() {
 
         LoaiSanPham selectedLSP = (LoaiSanPham) cboSanPham.getSelectedItem();
@@ -361,6 +378,39 @@ public class DonHang2JPanel extends javax.swing.JPanel {
             return;
         }
     }
+    void thayDoiSoLuong() {
+        try {
+            int hoaDon = tblHoaDon.getSelectedRow();
+            if(hoaDon<0){
+                MsgBox.alert(this, "Vui lòng món cần thay đổi");
+                return;
+            }
+            DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
+            String input = MsgBox.prompt(this, "Vui lòng nhập số lượng: ");
+        if (!input.matches("\\d+")) {
+            MsgBox.alert(this, "Số lượng chỉ là số");
+            return;
+
+        } else {
+            int sl1 = Integer.parseInt(input);
+            if (sl1 <= 0) {
+                MsgBox.alert(this, "Số lượng phải lớn hơn 0");
+                return;
+            }
+        }
+        if (input != null && !input.isEmpty()) {
+            int sl = Integer.parseInt(input);
+            float donGiaFloat = (float) model.getValueAt(hoaDon, 2);
+            int donGia = (int) donGiaFloat;
+            
+            model.setValueAt(sl, hoaDon, 1);
+            model.setValueAt(sl*donGia, hoaDon, 3);
+        }
+            
+        } catch (Exception e) {
+           e.printStackTrace();
+        }
+    }
 
     void tinhTongTien() {
         DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
@@ -370,7 +420,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
         int soHang = model.getRowCount();
         int tongTien = 0;
         for (int i = 0; i < soHang; i++) {
-            float soTien = (float) tblHoaDon.getValueAt(i, 3);
+            float soTien = Float.parseFloat(tblHoaDon.getValueAt(i, 3).toString());
             tongTien += soTien;
             String formattedTongTien = String.format("%,d", tongTien);
             lblTongTien.setText(String.valueOf(formattedTongTien));
@@ -405,6 +455,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnHuyMon;
     private javax.swing.JButton btnInHoaDon;
     private javax.swing.JButton btnThanhToan;
+    private javax.swing.JButton btnThayDoiSL;
     private javax.swing.JComboBox<String> cboSanPham;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
