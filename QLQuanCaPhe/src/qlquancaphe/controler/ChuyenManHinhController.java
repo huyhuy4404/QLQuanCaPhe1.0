@@ -4,7 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.ParseException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import qlquancaphe.bean.DanhMucBean;
@@ -38,6 +41,7 @@ public class ChuyenManHinhController {
         root.validate();
         root.repaint();
     }
+
     public void setViewTinhTien() {
         kindSelected = "DonHang";
         root.removeAll();
@@ -89,9 +93,16 @@ public class ChuyenManHinhController {
                 case "QuanLyLoaiSanPham":
                     node = new QuanLyLoaiSanPhamJPanel();
                     break;
-                case "DonHang":
-                    node = new DonHang2JPanel();
-                    break;
+                case "DonHang": {
+                    try {
+                        node = new DonHang2JPanel();
+                        break;
+                    } catch (ParseException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+                break;
+
                 case "QuanLyDoanhThu":
                     node = new QuanLyDoanhThuJPanel();
                     break;

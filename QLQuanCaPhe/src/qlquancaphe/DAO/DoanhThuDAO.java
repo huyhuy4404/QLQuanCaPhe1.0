@@ -51,4 +51,15 @@ public class DoanhThuDAO {
         String[] cols = {"TenSP", "SoLuong", "DonGia", "TongTien"};
         return getListOfArray(sql, cols, nam, thang);
     }
+    public List<Object[]> hoaDonNamandThangandNgay(int nam, int thang,int ngay) {
+        String sql = "{CALL SP_THONGKEHOADON (?, ?,?)}";
+        String[] cols = {"MaDH", "NgayMua", "TongTien", "MaNV"};
+        return getListOfArray(sql, cols, nam, thang,ngay);
+    }
+    public List<Object[]> xemHoaDonChiTiet(int MaHD) {
+        String sql = "{CALL SP_XEMCHITIETHOADON (?)}";
+        String[] cols = {"MaDH", "TenSP", "SoLuong", "DonGia","TongTien"};
+        return getListOfArray(sql, cols,  MaHD);
+    }
+    
 }

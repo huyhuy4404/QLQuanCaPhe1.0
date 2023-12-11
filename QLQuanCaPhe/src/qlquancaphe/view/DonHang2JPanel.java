@@ -10,8 +10,14 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
@@ -19,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+import qlquancaphe.DAO.DoanhThuDAO;
 import qlquancaphe.DAO.LoaiSanPhamDAO;
 import qlquancaphe.DAO.SanPhamDAO;
 import qlquancaphe.entity.LoaiSanPham;
@@ -34,15 +41,17 @@ public class DonHang2JPanel extends javax.swing.JPanel {
 
     SanPhamDAO spDAO = new SanPhamDAO();
     LoaiSanPhamDAO lspDAO = new LoaiSanPhamDAO();
+    DoanhThuDAO tkDAO = new DoanhThuDAO();
     private ArrayList<String> productList;
 
     /**
      * Creates new form DonHang2JPanel
      */
-    public DonHang2JPanel() {
+    public DonHang2JPanel() throws ParseException {
         initComponents();
         fillComBoBoxSP();
         xoaTableHoaDon();
+        loadDate();
     }
 
     /**
@@ -69,6 +78,17 @@ public class DonHang2JPanel extends javax.swing.JPanel {
         cboSanPham = new javax.swing.JComboBox<>();
         btnThayDoiSL = new javax.swing.JButton();
         pnTinhTien = new javax.swing.JPanel();
+        pnXemHoaDon = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblXemHoaDon = new javax.swing.JTable();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        btnTroVe = new javax.swing.JButton();
+        dchNgay = new com.toedter.calendar.JDateChooser();
+        btnXemChiTiet = new javax.swing.JButton();
+        pnChiTiet = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(900, 566));
 
@@ -220,6 +240,126 @@ public class DonHang2JPanel extends javax.swing.JPanel {
 
         jPanel1.add(pnTinhTien, "card3");
 
+        pnXemHoaDon.setBackground(new java.awt.Color(255, 255, 255));
+
+        tblXemHoaDon.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Mã HD", "Ngày mua", "Tổng tiền", "Mã NV"
+            }
+        ));
+        jScrollPane2.setViewportView(tblXemHoaDon);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btnTroVe.setBackground(new java.awt.Color(204, 204, 255));
+        btnTroVe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/Closed door.png"))); // NOI18N
+        btnTroVe.setText("Trở về");
+
+        dchNgay.setDateFormatString("yyyy-MM-dd");
+        dchNgay.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+                dchNgayAncestorMoved(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        dchNgay.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dchNgayPropertyChange(evt);
+            }
+        });
+
+        btnXemChiTiet.setBackground(new java.awt.Color(204, 204, 255));
+        btnXemChiTiet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/List.png"))); // NOI18N
+        btnXemChiTiet.setText("Xem chi tiết");
+        btnXemChiTiet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXemChiTietActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnXemHoaDonLayout = new javax.swing.GroupLayout(pnXemHoaDon);
+        pnXemHoaDon.setLayout(pnXemHoaDonLayout);
+        pnXemHoaDonLayout.setHorizontalGroup(
+            pnXemHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2)
+            .addGroup(pnXemHoaDonLayout.createSequentialGroup()
+                .addGroup(pnXemHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnXemHoaDonLayout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(dchNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnXemHoaDonLayout.createSequentialGroup()
+                        .addComponent(btnTroVe, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(btnXemChiTiet, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 286, Short.MAX_VALUE))
+        );
+        pnXemHoaDonLayout.setVerticalGroup(
+            pnXemHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnXemHoaDonLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(pnXemHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dchNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(pnXemHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnTroVe, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                    .addComponent(btnXemChiTiet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jPanel1.add(pnXemHoaDon, "card4");
+
+        pnChiTiet.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable1);
+
+        jButton2.setBackground(new java.awt.Color(204, 204, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/Exit.png"))); // NOI18N
+        jButton2.setText("Quay lại");
+
+        javax.swing.GroupLayout pnChiTietLayout = new javax.swing.GroupLayout(pnChiTiet);
+        pnChiTiet.setLayout(pnChiTietLayout);
+        pnChiTietLayout.setHorizontalGroup(
+            pnChiTietLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
+            .addGroup(pnChiTietLayout.createSequentialGroup()
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        pnChiTietLayout.setVerticalGroup(
+            pnChiTietLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnChiTietLayout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 14, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(pnChiTiet, "card5");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -234,7 +374,9 @@ public class DonHang2JPanel extends javax.swing.JPanel {
 
     private void btnInHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInHoaDonActionPerformed
         // TODO add your handling code here:
-//        
+        pnHoaDon.setVisible(false);
+        pnTinhTien.setVisible(false);
+        pnXemHoaDon.setVisible(true);
     }//GEN-LAST:event_btnInHoaDonActionPerformed
 
     private void btnHuyMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyMonActionPerformed
@@ -262,6 +404,47 @@ public class DonHang2JPanel extends javax.swing.JPanel {
         thayDoiSoLuong();
         tinhTongTien();
     }//GEN-LAST:event_btnThayDoiSLActionPerformed
+
+    private void dchNgayAncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_dchNgayAncestorMoved
+        
+    }//GEN-LAST:event_dchNgayAncestorMoved
+
+    private void dchNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dchNgayPropertyChange
+        // TODO add your handling code here:
+        loadTableXemHoaDon();
+    }//GEN-LAST:event_dchNgayPropertyChange
+
+    private void btnXemChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemChiTietActionPerformed
+        // TODO add your handling code here:
+        pnHoaDon.setVisible(false);
+        pnTinhTien.setVisible(false);
+        pnXemHoaDon.setVisible(false);
+        pnChiTiet.setVisible(true);
+    }//GEN-LAST:event_btnXemChiTietActionPerformed
+    void loadDate() throws ParseException {
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String ngayHienTai = dateFormat.format(date);
+        Date ngayHienTaiDate = dateFormat.parse(ngayHienTai);
+        dchNgay.setDate(ngayHienTaiDate);
+        loadTableXemHoaDon();
+        
+
+    }
+    void loadTableXemHoaDon(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(dchNgay.getDate());
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1; //Tháng trong Calendar bắt đầu từ 0
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        DefaultTableModel model = (DefaultTableModel) tblXemHoaDon.getModel();
+        model.setRowCount(0);
+        List<Object[]> list = tkDAO.hoaDonNamandThangandNgay(year, month, day);
+        for (Object[] row : list) {
+            model.addRow(row);
+        }
+    }
+
     void loadSanPham() {
 
         LoaiSanPham selectedLSP = (LoaiSanPham) cboSanPham.getSelectedItem();
@@ -368,6 +551,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
             btnThanhToan.setEnabled(true);
         }
     }
+
     void deleteMon() {
         try {
             int hoaDon = tblHoaDon.getSelectedRow();
@@ -378,37 +562,38 @@ public class DonHang2JPanel extends javax.swing.JPanel {
             return;
         }
     }
+
     void thayDoiSoLuong() {
         try {
             int hoaDon = tblHoaDon.getSelectedRow();
-            if(hoaDon<0){
+            if (hoaDon < 0) {
                 MsgBox.alert(this, "Vui lòng món cần thay đổi");
                 return;
             }
             DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
             String input = MsgBox.prompt(this, "Vui lòng nhập số lượng: ");
-        if (!input.matches("\\d+")) {
-            MsgBox.alert(this, "Số lượng chỉ là số");
-            return;
-
-        } else {
-            int sl1 = Integer.parseInt(input);
-            if (sl1 <= 0) {
-                MsgBox.alert(this, "Số lượng phải lớn hơn 0");
+            if (!input.matches("\\d+")) {
+                MsgBox.alert(this, "Số lượng chỉ là số");
                 return;
+
+            } else {
+                int sl1 = Integer.parseInt(input);
+                if (sl1 <= 0) {
+                    MsgBox.alert(this, "Số lượng phải lớn hơn 0");
+                    return;
+                }
             }
-        }
-        if (input != null && !input.isEmpty()) {
-            int sl = Integer.parseInt(input);
-            float donGiaFloat = (float) model.getValueAt(hoaDon, 2);
-            int donGia = (int) donGiaFloat;
-            
-            model.setValueAt(sl, hoaDon, 1);
-            model.setValueAt(sl*donGia, hoaDon, 3);
-        }
-            
+            if (input != null && !input.isEmpty()) {
+                int sl = Integer.parseInt(input);
+                float donGiaFloat = (float) model.getValueAt(hoaDon, 2);
+                int donGia = (int) donGiaFloat;
+
+                model.setValueAt(sl, hoaDon, 1);
+                model.setValueAt(sl * donGia, hoaDon, 3);
+            }
+
         } catch (Exception e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -456,16 +641,27 @@ public class DonHang2JPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnInHoaDon;
     private javax.swing.JButton btnThanhToan;
     private javax.swing.JButton btnThayDoiSL;
+    private javax.swing.JButton btnTroVe;
+    private javax.swing.JButton btnXemChiTiet;
     private javax.swing.JComboBox<String> cboSanPham;
+    private com.toedter.calendar.JDateChooser dchNgay;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblTongTien;
+    private javax.swing.JPanel pnChiTiet;
     private javax.swing.JPanel pnHoaDon;
     private javax.swing.JPanel pnSanPham;
     private javax.swing.JPanel pnTinhTien;
+    private javax.swing.JPanel pnXemHoaDon;
     private javax.swing.JScrollPane srpnSanPham;
     private javax.swing.JTable tblHoaDon;
+    private javax.swing.JTable tblXemHoaDon;
     // End of variables declaration//GEN-END:variables
 }
