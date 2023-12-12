@@ -989,6 +989,8 @@ public class DonHang2JPanel extends javax.swing.JPanel {
         int maDH = lastDonHang.getMaDH();
         CTDHDAO.deleteByMaDH(maDH);
         dhDAO.delete(maDH + "");
+        lblTienKhachTra.setText("0");
+        lblTienThuaTraLai.setText("0");
         pnHoaDon.setVisible(true);
         pnTinhTien.setVisible(false);
         pnXemHoaDon.setVisible(false);
