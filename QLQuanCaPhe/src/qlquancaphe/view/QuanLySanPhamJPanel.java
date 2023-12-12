@@ -45,6 +45,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        fileChooser = new javax.swing.JFileChooser();
         panel1 = new java.awt.Panel();
         jPanel3 = new javax.swing.JPanel();
         lblTittle = new javax.swing.JLabel();
@@ -78,6 +79,9 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
         txtDongia = new javax.swing.JTextField();
         lblMaLSP = new javax.swing.JLabel();
         cboMaloaiSP = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -103,6 +107,9 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
         tblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblSanPhamMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblSanPhamMousePressed(evt);
             }
         });
         jScrollPane2.setViewportView(tblSanPham);
@@ -279,6 +286,15 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
 
         cboMaloaiSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mời chọn loại sản phẩm", "Item 2", "Item 3", "Item 4" }));
 
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setText("*");
+
+        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel2.setText("*");
+
+        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel3.setText("*");
+
         javax.swing.GroupLayout pnlEditLayout = new javax.swing.GroupLayout(pnlEdit);
         pnlEdit.setLayout(pnlEditLayout);
         pnlEditLayout.setHorizontalGroup(
@@ -287,26 +303,33 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlEditLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMoTa)
                             .addComponent(lblHinhLogo)
                             .addGroup(pnlEditLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(89, 89, 89)
-                                .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblTenSP)
+                                .addGap(56, 56, 56)
+                                .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(pnlEditLayout.createSequentialGroup()
+                                        .addComponent(lblTenSP)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel1))
                                     .addComponent(lblMaSP)
-                                    .addComponent(tblDongia)
-                                    .addComponent(lblMaLSP))
-                                .addGap(18, 18, 18)
+                                    .addGroup(pnlEditLayout.createSequentialGroup()
+                                        .addComponent(tblDongia)
+                                        .addGap(3, 3, 3)
+                                        .addComponent(jLabel2))
+                                    .addGroup(pnlEditLayout.createSequentialGroup()
+                                        .addComponent(lblMaLSP)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel3)))
+                                .addGap(20, 20, 20)
                                 .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtTenSp, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtMaSp)
                                     .addComponent(txtDongia)
-                                    .addComponent(cboMaloaiSP, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(txtMaSp)
+                                    .addComponent(cboMaloaiSP, 0, 460, Short.MAX_VALUE))))
+                        .addContainerGap(41, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEditLayout.createSequentialGroup()
                         .addComponent(btnThem)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -315,7 +338,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
                         .addComponent(btnXoa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnMoi)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
                         .addComponent(btnFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15)
                         .addComponent(btnPrev, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -323,7 +346,13 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
                         .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15)
                         .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26))))
+                        .addGap(26, 26, 26))
+                    .addGroup(pnlEditLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMoTa)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 874, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         pnlEditLayout.setVerticalGroup(
             pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,15 +366,18 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblTenSP)
-                            .addComponent(txtTenSp, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTenSp, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtDongia, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tblDongia))
+                            .addComponent(tblDongia)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(22, 22, 22)
                         .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblMaLSP)
-                            .addComponent(cboMaloaiSP, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cboMaloaiSP, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnlEditLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblHinhLogo)
@@ -366,7 +398,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
                         .addComponent(btnMoi))
                     .addComponent(btnThem)
                     .addComponent(btnLast, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         tabs.addTab("CẬP NHẬT", pnlEdit);
@@ -408,22 +440,12 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
 
-        if (evt.getClickCount() == 2) {
-            loadTheoSPDaChon();
-            tabs.setSelectedIndex(1);
-            this.row = tblSanPham.getSelectedRow();
-            if (this.row >= 0) {
-                this.edit();
-            }
-        }
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
     private void btnTimkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimkiemActionPerformed
@@ -443,8 +465,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
         if (check()) {
-            themSP();
-            MsgBox.alert(this, "Thêm thành công!");
+            insert();
             fillTable();
         }
     }//GEN-LAST:event_btnThemActionPerformed
@@ -483,25 +504,16 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
         fillComBoBox1();
     }//GEN-LAST:event_btnLastActionPerformed
 
-    void loadTheoSPDaChon() {
-        int row = tblSanPham.getSelectedRow();
-        int masp = (int) tblSanPham.getValueAt(row, 0);
-        List<SanPham> list = (List<SanPham>) dao.selectbyMaSP(masp);
-        for (SanPham sp : list) {
-            txtMaSp.setText(sp.getMaSP() + "");
-            txtTenSp.setText(sp.getTenSP());
-            txtDongia.setText(sp.getDonGia() + "");
-            txtMoTa.setText(sp.getMoTa());
-            LoaiSanPham lsp = lspDAO.selectById(sp.getMaLSP());
-            String tenLSP = lsp.getTenLSP();
-            DefaultComboBoxModel model = (DefaultComboBoxModel) cboMaloaiSP.getModel();
-            model.setSelectedItem(tenLSP);
-            if (sp.getHinh() != null) {
-                lblAnh.setIcon(XImage.read(sp.getHinh()));
+    private void tblSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMousePressed
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            this.row = tblSanPham.getSelectedRow();
+            if (this.row >= 0) {
+                this.edit();
             }
         }
+    }//GEN-LAST:event_tblSanPhamMousePressed
 
-    }
     SanPhamDAO dao = new SanPhamDAO();
     int row = -1;
     String notice = "";
@@ -515,7 +527,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
         fillComboboxLSP();
     }
 
-    void themSP() {
+    void insert() {
         try {
             List<LoaiSanPham> list = lspDAO.selectByTenLSP(cboMaloaiSP.getSelectedItem().toString());
             for (LoaiSanPham lsp : list) {
@@ -527,26 +539,9 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
                 sp.setMaLSP(lsp.getMaLSP());
                 dao.insert(sp);
             }
+            MsgBox.alert(this, "Thêm thành công!");
         } catch (Exception e) {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
-        }
-
-    }
-
-    public void insert() {
-        SanPham sp = getForm();
-        boolean isSuccess = validated();
-        if (!isSuccess) {
-            MsgBox.alert(this, notice);
-        } else {
-            try {
-                dao.insert(sp);
-                this.fillTable();
-                this.clearForm();
-                MsgBox.alert(this, "Thêm mới thành công !");
-            } catch (Exception e) {
-                MsgBox.alert(this, "Thêm mới thất bại !");
-            }
         }
 
     }
@@ -690,6 +685,8 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
         boolean first = (this.row == 0);
         boolean last = (this.row == tblSanPham.getRowCount() - 1);
 
+        txtMaSp.setEditable(!edit);
+        btnThem.setEnabled(!edit);
         btnSua.setEnabled(edit);
         btnXoa.setEnabled(edit);
 
@@ -742,26 +739,25 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
-
-    boolean validated() {
-        String masp = txtMaSp.getText();
-        String tensp = txtTenSp.getText();
-        String dongia = txtDongia.getText();
-
-        if (!isValidated.isBlank(tensp)) {
-            txtTenSp.requestFocus();
-            notice = "Vui lòng nhập tên sản phẩm";
-            return false;
+    
+    void fillComBoBox1() {
+        int masp = Integer.parseInt(txtMaSp.getText());
+        List<SanPham> list = (List<SanPham>) dao.selectbyMaSP(masp);
+        for (SanPham sp : list) {
+            txtMaSp.setText(sp.getMaSP() + "");
+            txtTenSp.setText(sp.getTenSP());
+            txtDongia.setText(sp.getDonGia() + "");
+            txtMoTa.setText(sp.getMoTa());
+            LoaiSanPham lsp = lspDAO.selectById(sp.getMaLSP());
+            String tenLSP = lsp.getTenLSP();
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cboMaloaiSP.getModel();
+            model.setSelectedItem(tenLSP);
+            if (sp.getHinh() != null) {
+                lblAnh.setIcon(XImage.read(sp.getHinh()));
+            }
         }
-
-        if (!isValidated.isBlank(dongia)) {
-            txtDongia.requestFocus();
-            notice = "Vui lòng nhập học phí của sản phẩm";
-            return false;
-        }
-        return true;
     }
-
+    
     public boolean check() {
         String tensp = txtTenSp.getText();
         String dongia = txtDongia.getText();
@@ -802,24 +798,6 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
         return true;
     }
 
-    void fillComBoBox1() {
-        int masp = Integer.parseInt(txtMaSp.getText());
-        List<SanPham> list = (List<SanPham>) dao.selectbyMaSP(masp);
-        for (SanPham sp : list) {
-            txtMaSp.setText(sp.getMaSP() + "");
-            txtTenSp.setText(sp.getTenSP());
-            txtDongia.setText(sp.getDonGia() + "");
-            txtMoTa.setText(sp.getMoTa());
-            LoaiSanPham lsp = lspDAO.selectById(sp.getMaLSP());
-            String tenLSP = lsp.getTenLSP();
-            DefaultComboBoxModel model = (DefaultComboBoxModel) cboMaloaiSP.getModel();
-            model.setSelectedItem(tenLSP);
-            if (sp.getHinh() != null) {
-                lblAnh.setIcon(XImage.read(sp.getHinh()));
-            }
-        }
-    }
-    private javax.swing.JFileChooser fileChooser;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFirst;
     private javax.swing.JButton btnLast;
@@ -831,6 +809,10 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnTimkiem;
     private javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cboMaloaiSP;
+    private javax.swing.JFileChooser fileChooser;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

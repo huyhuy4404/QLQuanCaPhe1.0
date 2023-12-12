@@ -18,7 +18,7 @@ public class MsgBox {
 //    @param message là thông báo
     public static void alert(Component parent, String message) {
         JOptionPane.showMessageDialog(parent, message,
-                "Hệ thống quản lí quán cà phê", JOptionPane.INFORMATION_MESSAGE);
+                "Hệ thống quản lý quán cà phê", JOptionPane.INFORMATION_MESSAGE);
     }
 //    hiển thị thông báo và yêu cầu người dùng xác nhận 
 //    @param parent là cửa sổ chứa thông báo
@@ -27,7 +27,7 @@ public class MsgBox {
 
     public static boolean confirm(Component parent, String message) {
         int result = JOptionPane.showConfirmDialog(parent, message,
-                "Hệ thống quản lí quán cà phê",
+                "Hệ thống quản lý quán cà phê",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         return result == JOptionPane.YES_OPTION;
     }
@@ -37,6 +37,6 @@ public class MsgBox {
 //    @return là kết quả nhận được từ người sử dụng nhập vào
 
     public static String prompt(Component parent, String message) {
-        return JOptionPane.showInputDialog(parent, message, "Hệ thống quản lí quán cà phê", JOptionPane.INFORMATION_MESSAGE);
+        return JOptionPane.showInputDialog(parent, message, "Hệ thống quản lý quán cà phê", JOptionPane.INFORMATION_MESSAGE);
     }
 }

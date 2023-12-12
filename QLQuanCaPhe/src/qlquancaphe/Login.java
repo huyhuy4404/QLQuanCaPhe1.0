@@ -63,6 +63,8 @@ public class Login extends javax.swing.JDialog {
         txtMatKhau = new javax.swing.JPasswordField();
         txtQuenMK = new javax.swing.JLabel();
         btnLogin = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton();
 
         jMenu1.setText("jMenu1");
@@ -93,7 +95,7 @@ public class Login extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/Unknown person.png"))); // NOI18N
         jLabel1.setText("Tài khoản");
-        panel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 140, -1));
+        panel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 90, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("Đăng Nhập");
@@ -102,7 +104,7 @@ public class Login extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/Unlock.png"))); // NOI18N
         jLabel3.setText("Mật khẩu");
-        panel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 161, 110, -1));
+        panel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 161, 90, -1));
 
         txtMatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,10 +126,10 @@ public class Login extends javax.swing.JDialog {
                 txtQuenMKMousePressed(evt);
             }
         });
-        panel2.add(txtQuenMK, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 245, -1, -1));
+        panel2.add(txtQuenMK, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
 
         btnLogin.setBackground(new java.awt.Color(102, 255, 102));
-        btnLogin.setText("Login");
+        btnLogin.setText("Đăng nhập");
         btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnLoginMouseEntered(evt);
@@ -141,10 +143,18 @@ public class Login extends javax.swing.JDialog {
                 btnLoginActionPerformed(evt);
             }
         });
-        panel2.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 190, 40));
+        panel2.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 190, 40));
+
+        jLabel4.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel4.setText("*");
+        panel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, -1, -1));
+
+        jLabel5.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel5.setText("*");
+        panel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
 
         btnExit.setBackground(new java.awt.Color(255, 0, 0));
-        btnExit.setText("Exit");
+        btnExit.setText("Thoát");
         btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnExitMouseEntered(evt);
@@ -158,25 +168,13 @@ public class Login extends javax.swing.JDialog {
                 btnExitActionPerformed(evt);
             }
         });
-        panel2.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 190, 40));
+        panel2.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 190, 40));
 
         getContentPane().add(panel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, -3, 290, 410));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
-        if (kiemTra()) {
-            dangNhap();
-        }
-    }//GEN-LAST:event_btnLoginActionPerformed
-
-    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        // TODO add your handling code here:
-        ketThuc();
-    }//GEN-LAST:event_btnExitActionPerformed
 
     private void txtQuenMKMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQuenMKMouseMoved
         txtQuenMK.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -190,22 +188,6 @@ public class Login extends javax.swing.JDialog {
 
     }//GEN-LAST:event_txtQuenMKMousePressed
 
-    private void btnLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseEntered
-        //  resetColor(btnLogin);
-    }//GEN-LAST:event_btnLoginMouseEntered
-
-    private void btnLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseExited
-//        setColor(btnLogin);
-    }//GEN-LAST:event_btnLoginMouseExited
-
-    private void btnExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseEntered
-        //  resetColor(btnExit);
-    }//GEN-LAST:event_btnExitMouseEntered
-
-    private void btnExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseExited
-//        setColor(btnExit);
-    }//GEN-LAST:event_btnExitMouseExited
-
     private void txtTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTaiKhoanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTaiKhoanActionPerformed
@@ -217,6 +199,34 @@ public class Login extends javax.swing.JDialog {
     private void txtMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatKhauActionPerformed
 
     }//GEN-LAST:event_txtMatKhauActionPerformed
+
+    private void btnExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseEntered
+        //  resetColor(btnExit);
+    }//GEN-LAST:event_btnExitMouseEntered
+
+    private void btnExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseExited
+        //        setColor(btnExit);
+    }//GEN-LAST:event_btnExitMouseExited
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        // TODO add your handling code here:
+        ketThuc();
+    }//GEN-LAST:event_btnExitActionPerformed
+
+    private void btnLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseEntered
+        //  resetColor(btnLogin);
+    }//GEN-LAST:event_btnLoginMouseEntered
+
+    private void btnLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseExited
+        //        setColor(btnLogin);
+    }//GEN-LAST:event_btnLoginMouseExited
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        // TODO add your handling code here:
+        if (kiemTra()) {
+            dangNhap();
+        }
+    }//GEN-LAST:event_btnLoginActionPerformed
     void dangNhap() {
         String maNV = txtTaiKhoan.getText();
         String pass = new String(txtMatKhau.getPassword());
@@ -325,6 +335,8 @@ public class Login extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JPopupMenu jPopupMenu1;
