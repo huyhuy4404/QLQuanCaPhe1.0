@@ -77,7 +77,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         panel3 = new java.awt.Panel();
         jLabel1 = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 102));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         tblNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -121,7 +121,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
 
         tabs.addTab("Danh Sách", jPanel1);
 
-        jPanel2.setBackground(new java.awt.Color(255, 204, 102));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setText("Họ Tên:");
 
@@ -383,7 +383,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
                         .addComponent(btnSua)
                         .addComponent(btnLamMoi)
                         .addComponent(btnXoa)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
 
         tabs.addTab("Cập Nhật", jPanel2);
@@ -423,7 +423,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
                 .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 100, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -169,6 +169,7 @@ public class MainJFrame extends javax.swing.JFrame {
         );
 
         pnQuanLySanPham.setBackground(new java.awt.Color(0, 153, 51));
+        pnQuanLySanPham.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblQuanLiSanPham.setFont(new java.awt.Font("Segoe UI Black", 0, 16)); // NOI18N
         lblQuanLiSanPham.setForeground(new java.awt.Color(255, 255, 255));
@@ -193,6 +194,7 @@ public class MainJFrame extends javax.swing.JFrame {
         );
 
         pnQuanlynhanvien.setBackground(new java.awt.Color(0, 153, 51));
+        pnQuanlynhanvien.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblquanlynhanvien.setFont(new java.awt.Font("Segoe UI Black", 0, 16)); // NOI18N
         lblquanlynhanvien.setForeground(new java.awt.Color(255, 255, 255));
@@ -215,6 +217,7 @@ public class MainJFrame extends javax.swing.JFrame {
         );
 
         pnQuanLyLoaiSanPham.setBackground(new java.awt.Color(0, 153, 51));
+        pnQuanLyLoaiSanPham.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblQuanLiLoaiSanPham.setFont(new java.awt.Font("Segoe UI Black", 0, 16)); // NOI18N
         lblQuanLiLoaiSanPham.setForeground(new java.awt.Color(255, 255, 255));
@@ -237,6 +240,7 @@ public class MainJFrame extends javax.swing.JFrame {
         );
 
         pnDonHang.setBackground(new java.awt.Color(0, 153, 51));
+        pnDonHang.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblDonHang.setFont(new java.awt.Font("Segoe UI Black", 0, 16)); // NOI18N
         lblDonHang.setForeground(new java.awt.Color(255, 255, 255));
@@ -259,6 +263,7 @@ public class MainJFrame extends javax.swing.JFrame {
         );
 
         pnquanlydoanhthu.setBackground(new java.awt.Color(0, 153, 51));
+        pnquanlydoanhthu.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblquanlydoanhthu.setFont(new java.awt.Font("Segoe UI Black", 0, 16)); // NOI18N
         lblquanlydoanhthu.setForeground(new java.awt.Color(255, 255, 255));
@@ -281,6 +286,7 @@ public class MainJFrame extends javax.swing.JFrame {
         );
 
         pnTrangChu.setBackground(new java.awt.Color(0, 153, 51));
+        pnTrangChu.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblTrangChu.setFont(new java.awt.Font("Segoe UI Black", 0, 16)); // NOI18N
         lblTrangChu.setForeground(new java.awt.Color(255, 255, 255));
