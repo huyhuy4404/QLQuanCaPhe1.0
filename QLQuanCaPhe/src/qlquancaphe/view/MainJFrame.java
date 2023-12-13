@@ -107,11 +107,12 @@ public class MainJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        pnRoot.setBackground(new java.awt.Color(153, 255, 204));
+        pnRoot.setBackground(new java.awt.Color(102, 102, 102));
 
         jPanel4.setBackground(new java.awt.Color(255, 102, 102));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/coffee.png"))); // NOI18N
         jLabel1.setText("PHỐ 24H");
@@ -167,9 +168,10 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnQuanLySanPham.setBackground(new java.awt.Color(204, 102, 255));
+        pnQuanLySanPham.setBackground(new java.awt.Color(0, 153, 51));
 
         lblQuanLiSanPham.setFont(new java.awt.Font("Segoe UI Black", 0, 16)); // NOI18N
+        lblQuanLiSanPham.setForeground(new java.awt.Color(255, 255, 255));
         lblQuanLiSanPham.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblQuanLiSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/sanpham.png"))); // NOI18N
         lblQuanLiSanPham.setText("Quản lý sản phẩm");
@@ -178,7 +180,9 @@ public class MainJFrame extends javax.swing.JFrame {
         pnQuanLySanPham.setLayout(pnQuanLySanPhamLayout);
         pnQuanLySanPhamLayout.setHorizontalGroup(
             pnQuanLySanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblQuanLiSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+            .addGroup(pnQuanLySanPhamLayout.createSequentialGroup()
+                .addComponent(lblQuanLiSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 44, Short.MAX_VALUE))
         );
         pnQuanLySanPhamLayout.setVerticalGroup(
             pnQuanLySanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,9 +192,10 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnQuanlynhanvien.setBackground(new java.awt.Color(204, 102, 255));
+        pnQuanlynhanvien.setBackground(new java.awt.Color(0, 153, 51));
 
         lblquanlynhanvien.setFont(new java.awt.Font("Segoe UI Black", 0, 16)); // NOI18N
+        lblquanlynhanvien.setForeground(new java.awt.Color(255, 255, 255));
         lblquanlynhanvien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblquanlynhanvien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/nhanvien.png"))); // NOI18N
         lblquanlynhanvien.setText("Quản lý nhân viên");
@@ -209,9 +214,10 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnQuanLyLoaiSanPham.setBackground(new java.awt.Color(204, 102, 255));
+        pnQuanLyLoaiSanPham.setBackground(new java.awt.Color(0, 153, 51));
 
         lblQuanLiLoaiSanPham.setFont(new java.awt.Font("Segoe UI Black", 0, 16)); // NOI18N
+        lblQuanLiLoaiSanPham.setForeground(new java.awt.Color(255, 255, 255));
         lblQuanLiLoaiSanPham.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblQuanLiLoaiSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/loaisp.png"))); // NOI18N
         lblQuanLiLoaiSanPham.setText("Quản lý loại sản phẩm");
@@ -230,9 +236,10 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnDonHang.setBackground(new java.awt.Color(204, 102, 255));
+        pnDonHang.setBackground(new java.awt.Color(0, 153, 51));
 
         lblDonHang.setFont(new java.awt.Font("Segoe UI Black", 0, 16)); // NOI18N
+        lblDonHang.setForeground(new java.awt.Color(255, 255, 255));
         lblDonHang.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblDonHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/donhang.png"))); // NOI18N
         lblDonHang.setText("Đơn hàng");
@@ -251,9 +258,10 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        pnquanlydoanhthu.setBackground(new java.awt.Color(204, 102, 255));
+        pnquanlydoanhthu.setBackground(new java.awt.Color(0, 153, 51));
 
         lblquanlydoanhthu.setFont(new java.awt.Font("Segoe UI Black", 0, 16)); // NOI18N
+        lblquanlydoanhthu.setForeground(new java.awt.Color(255, 255, 255));
         lblquanlydoanhthu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblquanlydoanhthu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/doanhthu.png"))); // NOI18N
         lblquanlydoanhthu.setText("Doanh thu");
@@ -272,9 +280,10 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        pnTrangChu.setBackground(new java.awt.Color(204, 102, 255));
+        pnTrangChu.setBackground(new java.awt.Color(0, 153, 51));
 
         lblTrangChu.setFont(new java.awt.Font("Segoe UI Black", 0, 16)); // NOI18N
+        lblTrangChu.setForeground(new java.awt.Color(255, 255, 255));
         lblTrangChu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblTrangChu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/homecaphe.png"))); // NOI18N
         lblTrangChu.setText("Trang chủ");
@@ -310,11 +319,14 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGap(0, 640, Short.MAX_VALUE)
         );
 
+        lblTime.setBackground(new java.awt.Color(255, 255, 255));
         lblTime.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTime.setForeground(new java.awt.Color(255, 255, 255));
         lblTime.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/Alarm.png"))); // NOI18N
         lblTime.setText("Time");
 
         lblTenNV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTenNV.setForeground(new java.awt.Color(255, 255, 255));
         lblTenNV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/User.png"))); // NOI18N
         lblTenNV.setText("Tên nhân viên");
 

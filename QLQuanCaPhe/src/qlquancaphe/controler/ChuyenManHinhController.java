@@ -167,8 +167,8 @@ public class ChuyenManHinhController {
                         item.getLbl().setBackground(new Color(96, 100, 191));
                     }
                 } else {
-                    item.getPn().setBackground(new Color(204, 102, 255));
-                    item.getLbl().setBackground(new Color(204, 102, 255));
+                    item.getPn().setBackground(new Color(0,153,51));
+                    item.getLbl().setBackground(new Color(0,153,51));
                 }
             }
         } else {
@@ -178,15 +178,15 @@ public class ChuyenManHinhController {
                         item.getPn().setBackground(new Color(96, 100, 191));
                         item.getLbl().setBackground(new Color(96, 100, 191));
                     } else {
-                        item.getPn().setBackground(new Color(204, 102, 255));
-                        item.getLbl().setBackground(new Color(204, 102, 255));
+                        item.getPn().setBackground(new Color(0,153,51));
+                        item.getLbl().setBackground(new Color(0,153,51));
                     }
                     if (item.getKind().equalsIgnoreCase(kind)) {
                         item.getPn().setBackground(new Color(96, 100, 191));
                         item.getLbl().setBackground(new Color(96, 100, 191));
                     } else {
-                        item.getPn().setBackground(new Color(204, 102, 255));
-                        item.getLbl().setBackground(new Color(204, 102, 255));
+                        item.getPn().setBackground(new Color(0,153,51));
+                        item.getLbl().setBackground(new Color(0,153,51));
                     }
 
                 }

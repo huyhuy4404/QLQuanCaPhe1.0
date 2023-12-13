@@ -85,6 +85,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         cboSanPham = new javax.swing.JComboBox<>();
         btnThayDoiSL = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         pnTinhTien = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         JLabel = new javax.swing.JLabel();
@@ -174,6 +175,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
             }
         });
 
+        lblTongTien.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblTongTien.setText("0");
 
         btnHuyMon.setBackground(new java.awt.Color(204, 255, 204));
@@ -211,7 +213,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(cboSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(242, Short.MAX_VALUE))
+                .addContainerGap(228, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,27 +232,33 @@ public class DonHang2JPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel3.setText("VNĐ");
+
         javax.swing.GroupLayout pnHoaDonLayout = new javax.swing.GroupLayout(pnHoaDon);
         pnHoaDon.setLayout(pnHoaDonLayout);
         pnHoaDonLayout.setHorizontalGroup(
             pnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnHoaDonLayout.createSequentialGroup()
-                .addGroup(pnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnHoaDonLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1))
-                    .addGroup(pnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(lblTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(pnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnThayDoiSL, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnHoaDonLayout.createSequentialGroup()
+                        .addGroup(pnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnInHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnHoaDonLayout.createSequentialGroup()
-                                .addComponent(btnThayDoiSL, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnHoaDonLayout.createSequentialGroup()
-                                .addComponent(btnInHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnHuyMon, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addContainerGap()
+                                .addComponent(jLabel1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnHuyMon, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnHoaDonLayout.createSequentialGroup()
+                                .addComponent(lblTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3)
+                                .addGap(2, 2, 2)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(srpnSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
@@ -263,7 +271,8 @@ public class DonHang2JPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(lblTongTien))
+                    .addComponent(lblTongTien)
+                    .addComponent(jLabel3))
                 .addGap(12, 12, 12)
                 .addGroup(pnHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnHuyMon, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1307,22 +1316,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
     private javax.swing.JLabel JLabel;
     private javax.swing.JLabel JLabel1;
     private javax.swing.JLabel JLabel2;
-    private javax.swing.JButton btn0;
-    private javax.swing.JButton btn00;
-    private javax.swing.JButton btn1;
-    private javax.swing.JButton btn10;
     private javax.swing.JButton btn100;
-    private javax.swing.JButton btn11;
-    private javax.swing.JButton btn12;
-    private javax.swing.JButton btn13;
-    private javax.swing.JButton btn14;
-    private javax.swing.JButton btn15;
-    private javax.swing.JButton btn16;
-    private javax.swing.JButton btn17;
-    private javax.swing.JButton btn18;
-    private javax.swing.JButton btn19;
-    private javax.swing.JButton btn2;
-    private javax.swing.JButton btn20;
     private javax.swing.JButton btn200;
     private javax.swing.JButton btn21;
     private javax.swing.JButton btn22;
@@ -1333,18 +1327,11 @@ public class DonHang2JPanel extends javax.swing.JPanel {
     private javax.swing.JButton btn27;
     private javax.swing.JButton btn28;
     private javax.swing.JButton btn29;
-    private javax.swing.JButton btn3;
     private javax.swing.JButton btn30;
     private javax.swing.JButton btn300;
     private javax.swing.JButton btn31;
-    private javax.swing.JButton btn4;
-    private javax.swing.JButton btn5;
     private javax.swing.JButton btn50;
     private javax.swing.JButton btn500;
-    private javax.swing.JButton btn6;
-    private javax.swing.JButton btn7;
-    private javax.swing.JButton btn8;
-    private javax.swing.JButton btn9;
     private javax.swing.JButton btnChuyenKhoan;
     private javax.swing.JButton btnHuyMon;
     private javax.swing.JButton btnInHoaDon;
@@ -1356,13 +1343,12 @@ public class DonHang2JPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnTroLai;
     private javax.swing.JButton btnTroVe;
     private javax.swing.JButton btnXemChiTiet;
-    private javax.swing.JButton btnXoa;
-    private javax.swing.JButton btnXoa1;
     private javax.swing.JButton btnXoa2;
     private javax.swing.JComboBox<String> cboSanPham;
     private com.toedter.calendar.JDateChooser dchNgay;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -1372,12 +1358,6 @@ public class DonHang2JPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1395,8 +1375,6 @@ public class DonHang2JPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblChiTiet;
     private javax.swing.JTable tblHoaDon;
     private javax.swing.JTable tblXemHoaDon;
-    private javax.swing.JTextField txtSoTien;
-    private javax.swing.JTextField txtSoTien1;
     private javax.swing.JTextField txtSoTien2;
     // End of variables declaration//GEN-END:variables
 }
