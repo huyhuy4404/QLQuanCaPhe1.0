@@ -472,7 +472,10 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-        update();
+        if(checkCapNhat()){
+            update();
+        }
+        
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -739,7 +742,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
-    
+
     void fillComBoBox1() {
         int masp = Integer.parseInt(txtMaSp.getText());
         List<SanPham> list = (List<SanPham>) dao.selectbyMaSP(masp);
@@ -757,7 +760,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
             }
         }
     }
-    
+
     public boolean check() {
         String tensp = txtTenSp.getText();
         String dongia = txtDongia.getText();
@@ -795,6 +798,28 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
                 return false;
             }
         }
+        return true;
+    }
+
+    public boolean checkCapNhat() {
+        String dongia = txtDongia.getText();
+        String tenSP = txtTenSp.getText();
+        if (tenSP.isEmpty()) {
+            MsgBox.alert(this, "Tên sản phảm không được bỏ trống!");
+            return false;
+        } else {
+            try {
+                float donGia = Float.parseFloat(dongia);
+                if (donGia < 0) {
+                    MsgBox.alert(this, "Đơn giá phải là số dương!");
+                    return false;
+                }
+            } catch (Exception e) {
+                MsgBox.alert(this, "Đơn giá sai định dạng!");
+                return false;
+            }
+        }
+
         return true;
     }
 
