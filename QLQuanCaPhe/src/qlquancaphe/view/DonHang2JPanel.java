@@ -581,6 +581,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
         });
 
         btnThanhToan2.setText("Thanh toán");
+        btnThanhToan2.setEnabled(false);
         btnThanhToan2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThanhToan2ActionPerformed(evt);
@@ -965,7 +966,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
 
     private void btnTienMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTienMatActionPerformed
         // TODO add your handling code here:
-        btnThanhToan2.setText("Thanh toán TM");
+        btnThanhToan2.setText("Thanh toán tiền mặt");
         btnThanhToan2.setEnabled(true);
     }//GEN-LAST:event_btnTienMatActionPerformed
     void init() {
@@ -980,7 +981,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
         int so1 = Integer.parseInt(soTienCanThanhToan);
         int so2 = Integer.parseInt(soTienKhachTra);
         int tong = so2 - so1;
-        String tongTien =String.format("%,d", tong);
+        String tongTien = String.format("%,d", tong);
         lblTienThuaTraLai.setText(tongTien);
     }
     private void btnChuyenKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChuyenKhoanActionPerformed
@@ -1017,7 +1018,34 @@ public class DonHang2JPanel extends javax.swing.JPanel {
 
     private void btnThanhToan2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToan2ActionPerformed
         // TODO add your handling code here:
+        if (checkTinhTien()) {
+            DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
+            model.setRowCount(0);
+            tinhTongTien();
+            pnHoaDon.setVisible(true);
+            pnTinhTien.setVisible(false);
+            pnXemHoaDon.setVisible(false);
+            pnChiTiet.setVisible(false);
+        }
+
     }//GEN-LAST:event_btnThanhToan2ActionPerformed
+    boolean checkTinhTien() {
+        String so1 = lblTienKhachTra.getText();
+        String so2 = lblTienCanThanhToan.getText();
+        so1 = so1.replace(",", "");
+        so2 = so2.replace(",", "");
+        int soTien1 = Integer.parseInt(so1);
+        int soTien2 = Integer.parseInt(so2);
+        if (soTien1 - soTien2 < 0) {
+            MsgBox.alert(this, "Số tiền khách trả phải lớn hơn số tiền cần thanh toán!");
+            return false;
+        } else {
+            MsgBox.alert(this, "Thanh toán thành công!");
+
+        }
+        return true;
+    }
+
     boolean loadTableChiTiet() {
         int i = tblXemHoaDon.getSelectedRow();
         if (i < 0) {
