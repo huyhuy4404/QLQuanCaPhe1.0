@@ -139,6 +139,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
 
         jPanel1.setLayout(new java.awt.CardLayout());
 
+        pnHoaDon.setBackground(new java.awt.Color(102, 255, 255));
         pnHoaDon.setPreferredSize(new java.awt.Dimension(900, 566));
 
         tblHoaDon.setModel(new javax.swing.table.DefaultTableModel(

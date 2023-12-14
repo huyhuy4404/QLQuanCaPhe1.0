@@ -4,13 +4,29 @@
  */
 package qlquancaphe.view;
 
+import java.awt.Dialog;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DataFormat;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import Chart.ChartDoanhThu;
+import Chart.ChartDoanhThu;
 import qlquancaphe.DAO.DoanhThuDAO;
 import qlquancaphe.DAO.DonHangDAO;
+import qlquancaphe.utils.MsgBox;
 
 /**
  *
@@ -46,11 +62,14 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDoanhThu = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 204));
 
         panel1.setBackground(new java.awt.Color(204, 204, 204));
 
+        jLabel3.setBackground(new java.awt.Color(153, 153, 153));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Quản Lý Doanh Thu");
@@ -89,7 +108,9 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Năm:");
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPane1.setBackground(new java.awt.Color(102, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(102, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 204, 0));
 
         tblDoanhThu.setModel(new javax.swing.table.DefaultTableModel(
@@ -105,6 +126,22 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblDoanhThu);
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/Statistics.png"))); // NOI18N
+        jButton1.setText("Thống Kê Doanh Thu Tháng");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlquancaphe/icons/Excel-icon.png"))); // NOI18N
+        jButton2.setText("Xuất File Execl");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -113,12 +150,23 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(32, 32, 32)
+                .addComponent(jButton2)
+                .addGap(58, 58, 58))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addGap(19, 19, 19))
         );
 
         jTabbedPane1.addTab("Doanh thu", jPanel1);
@@ -177,6 +225,98 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
         fillTableDoanhThu();
     }//GEN-LAST:event_cboThangActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        openChartDoanhThu();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        printExce3();
+    }//GEN-LAST:event_jButton2ActionPerformed
+     public void openChartDoanhThu() {
+        JDialog dialog = new JDialog();
+        dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+        Chart.ChartDoanhThu chart = new ChartDoanhThu("Biểu Đồ Doanh Thu");
+        dialog.add(chart.getContentPane()); //tndc
+        dialog.pack(); //kích thước
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+        // setIconImage(XImage.getAppIcon());
+    }
+      public void printExce3() {
+
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            CellStyle number = workbook.createCellStyle();// định dạng
+            DataFormat numberFormat = workbook.createDataFormat();
+            number.setDataFormat(numberFormat.getFormat("#,##0.00 VND"));
+
+            XSSFSheet sheet = workbook.createSheet("Doanh Thu"); //sheep
+            XSSFRow row = null;
+            Cell cell = null;
+            // Tạo tiêu đề cho bảng
+            row = sheet.createRow(0);
+
+            sheet.addMergedRegion(new CellRangeAddress(0, 2, 0, 3));
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("Doanh Thu Sản Phẩm");
+//            cell.setCellStyle(getCenterAlignedStyle(workbook));
+            row = sheet.createRow(4);
+            
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("Tên sản phẩm ");
+               
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue("Số Lượng ");
+
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellValue("Đơn Giá Giá");
+
+            cell = row.createCell(3, CellType.STRING);
+            cell.setCellValue("Tổng Tiền");
+
+
+            
+            
+            List<Object[]> list = tkDAO.doanhThuThang(WIDTH);
+            // Điền dữ liệu vào bảng
+            for (int i = 0; i < list.size(); i++) {
+                Object[] rowOb = list.get(i);
+                row = sheet.createRow(5 + i);
+                for (int j = 0; j < rowOb.length; j++) {
+                    cell = row.createCell(j, CellType.NUMERIC);
+                    cell.setCellValue(rowOb[j].toString());
+                }
+            }
+
+//            }
+            // Lưu file Excel
+            try {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setDialogTitle("Chọn vị trí và tên file");
+                fileChooser.setFileFilter(new FileNameExtensionFilter("Excel Files", "xlsx")); 
+
+                int userSelection = fileChooser.showSaveDialog(this);
+
+                if (userSelection == JFileChooser.APPROVE_OPTION) {
+                    String filePath = fileChooser.getSelectedFile().getAbsolutePath();
+
+                    if (!filePath.toLowerCase().endsWith(".xlsx")) {
+                        filePath += ".xlsx";
+                    }
+
+                    FileOutputStream fileOut = new FileOutputStream(filePath);
+                    workbook.write(fileOut);
+                    fileOut.close();
+
+                    MsgBox.alert(this, "Xuất file Excel thành công");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public void fillToComboBoxNam() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboNam.getModel();
         model.removeAllElements();
@@ -221,6 +361,8 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cboNam;
     private javax.swing.JComboBox<String> cboThang;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -231,4 +373,6 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
     private java.awt.Panel panel1;
     private javax.swing.JTable tblDoanhThu;
     // End of variables declaration//GEN-END:variables
+
+   
 }

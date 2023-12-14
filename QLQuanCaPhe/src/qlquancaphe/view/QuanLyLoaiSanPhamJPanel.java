@@ -171,7 +171,7 @@ LoaiSanPhamDAO dao = new LoaiSanPhamDAO();
                 .addContainerGap())
         );
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel2.setBackground(new java.awt.Color(102, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnThem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
