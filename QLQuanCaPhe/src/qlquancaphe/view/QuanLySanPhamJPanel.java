@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 import qlquancaphe.DAO.LoaiSanPhamDAO;
 import qlquancaphe.DAO.SanPhamDAO;
@@ -35,7 +36,8 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
         fillTable();
         init();
     }
-
+    SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0.0, 0.0, 1000000, 1000);
+    //jSpinner jSnDongia
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -76,12 +78,12 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
         btnPrev = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
         btnLast = new javax.swing.JButton();
-        txtDongia = new javax.swing.JTextField();
         lblMaLSP = new javax.swing.JLabel();
         cboMaloaiSP = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jSnDongia = new javax.swing.JSpinner();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -323,9 +325,9 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
                         .addGap(20, 20, 20)
                         .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtTenSp, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtDongia)
                             .addComponent(txtMaSp)
-                            .addComponent(cboMaloaiSP, 0, 460, Short.MAX_VALUE))))
+                            .addComponent(cboMaloaiSP, 0, 460, Short.MAX_VALUE)
+                            .addComponent(jSnDongia))))
                 .addContainerGap(51, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEditLayout.createSequentialGroup()
                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -361,20 +363,22 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
                             .addComponent(lblMaSP)
                             .addComponent(txtMaSp, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTenSP)
-                            .addComponent(txtTenSp, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblTenSP)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTenSp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(tblDongia)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSnDongia, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtDongia, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tblDongia)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22)
-                        .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblMaLSP)
-                            .addComponent(cboMaloaiSP, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboMaloaiSP, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnlEditLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblHinhLogo)
@@ -528,23 +532,27 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
     }
 
     void insert() {
-        try {
-            List<LoaiSanPham> list = lspDAO.selectByTenLSP(cboMaloaiSP.getSelectedItem().toString());
-            for (LoaiSanPham lsp : list) {
-                SanPham sp = new SanPham();
-                sp.setTenSP(txtTenSp.getText());
-                sp.setDonGia(Float.parseFloat(txtDongia.getText()));
-                sp.setMoTa(txtMoTa.getText());
-                sp.setHinh(lblAnh.getToolTipText());
-                sp.setMaLSP(lsp.getMaLSP());
-                dao.insert(sp);
-            }
-            MsgBox.alert(this, "Thêm thành công!");
-        } catch (Exception e) {
-            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+    try {
+        List<LoaiSanPham> list = lspDAO.selectByTenLSP(cboMaloaiSP.getSelectedItem().toString());
+        for (LoaiSanPham lsp : list) {
+            SanPham sp = new SanPham();
+            
+            // Assuming jSnDongia is a JSpinner, use getValue() to get its value
+            float donGia = ((Number) jSnDongia.getValue()).floatValue();
+            
+            sp.setTenSP(txtTenSp.getText());
+            sp.setDonGia(donGia);
+            sp.setMoTa(txtMoTa.getText());
+            sp.setHinh(lblAnh.getToolTipText());
+            sp.setMaLSP(lsp.getMaLSP());
+            dao.insert(sp);
         }
-
+        MsgBox.alert(this, "Thêm thành công!");
+    } catch (Exception e) {
+        MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
     }
+}
+
 
     void update() {
         try {
@@ -552,7 +560,8 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
             for (LoaiSanPham lsp : list) {
                 SanPham sp = new SanPham();
                 sp.setTenSP(txtTenSp.getText());
-                sp.setDonGia(Float.parseFloat(txtDongia.getText()));
+                float donGia = ((Number) jSnDongia.getValue()).floatValue();
+                sp.setDonGia(donGia);
                 sp.setMoTa(txtMoTa.getText());
                 sp.setHinh(lblAnh.getToolTipText());
                 sp.setMaLSP(lsp.getMaLSP());
@@ -588,7 +597,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
 
     void clearForm() {
         lblAnh.setIcon(null);
-        txtDongia.setText("");
+        jSnDongia.setValue(0);
         cboMaloaiSP.setSelectedIndex(0);
         txtMaSp.setText("");
         txtTenSp.setText("");
@@ -647,7 +656,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
     void setForm(SanPham sp) {
         txtMaSp.setText(sp.getMaSP() + "");
         txtTenSp.setText(sp.getTenSP());
-        txtDongia.setText(String.valueOf(sp.getDonGia()));
+        jSnDongia.setValue(sp.getDonGia());
         cboMaloaiSP.setSelectedItem(sp.getMaLSP());
 
         txtMoTa.setText(sp.getMoTa());
@@ -660,9 +669,9 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
     SanPham getForm() {
         SanPham sp = new SanPham();
         sp.setTenSP(txtTenSp.getText());
-        if (!txtDongia.getText().isEmpty()) {
-            sp.setDonGia(Float.valueOf(txtDongia.getText()));
-        }
+        if (!jSnDongia.getValue().toString().isEmpty()) {
+        sp.setDonGia(Float.valueOf(jSnDongia.getValue().toString()));
+    }
         Object selectedItem = cboMaloaiSP.getSelectedItem().toString();
         lspDAO.selectByTenLSP((String) selectedItem);
         LoaiSanPham lsp = new LoaiSanPham();
@@ -671,9 +680,6 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
 
         if (selectedItem != null && selectedItem instanceof LoaiSanPham) {
             sp.setMaLSP(((LoaiSanPham) selectedItem).getMaLSP());
-        }
-        if (!txtDongia.getText().isEmpty()) {
-            sp.setDonGia(Float.valueOf(txtDongia.getText()));
         }
         sp.setMoTa(txtMoTa.getText());
         sp.setHinh(lblAnh.getToolTipText());
@@ -746,7 +752,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
         for (SanPham sp : list) {
             txtMaSp.setText(sp.getMaSP() + "");
             txtTenSp.setText(sp.getTenSP());
-            txtDongia.setText(sp.getDonGia() + "");
+            jSnDongia.setValue(sp.getDonGia());
             txtMoTa.setText(sp.getMoTa());
             LoaiSanPham lsp = lspDAO.selectById(sp.getMaLSP());
             String tenLSP = lsp.getTenLSP();
@@ -760,7 +766,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
 
     public boolean check() {
         String tensp = txtTenSp.getText();
-        String dongia = txtDongia.getText();
+        String dongia = jSnDongia.getValue().toString();
 
         if (tensp.isEmpty()) {
             if (dongia.isEmpty()) {
@@ -799,7 +805,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
     }
 
     public boolean checkCapNhat() {
-        String dongia = txtDongia.getText();
+        String dongia = jSnDongia.getValue().toString();
         String tenSP = txtTenSp.getText();
         if (tenSP.isEmpty()) {
             MsgBox.alert(this, "Tên sản phảm không được bỏ trống!");
@@ -840,6 +846,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSpinner jSnDongia;
     private javax.swing.JLabel lblAnh;
     private javax.swing.JLabel lblHinhLogo;
     private javax.swing.JLabel lblMaLSP;
@@ -853,7 +860,6 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JLabel tblDongia;
     private javax.swing.JTable tblSanPham;
-    private javax.swing.JTextField txtDongia;
     private javax.swing.JTextField txtMaSp;
     private javax.swing.JTextArea txtMoTa;
     private javax.swing.JTextField txtTenSp;

@@ -265,9 +265,9 @@
                                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="txtTenSp" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="txtDongia" alignment="0" max="32767" attributes="0"/>
                                           <Component id="txtMaSp" alignment="0" max="32767" attributes="0"/>
                                           <Component id="cboMaloaiSP" alignment="0" pref="460" max="32767" attributes="0"/>
+                                          <Component id="jSnDongia" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -312,22 +312,26 @@
                                           <Component id="txtMaSp" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="lblTenSP" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtTenSp" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                                          <Component id="jLabel1" alignment="3" min="-2" pref="8" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="lblTenSP" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel1" alignment="3" min="-2" pref="8" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="txtTenSp" alignment="1" min="-2" pref="32" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="tblDongia" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel2" alignment="3" min="-2" pref="8" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="jSnDongia" min="-2" pref="32" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="txtDongia" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                                          <Component id="tblDongia" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel2" alignment="3" min="-2" pref="8" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="lblMaLSP" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cboMaloaiSP" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                                           <Component id="jLabel3" alignment="3" min="-2" pref="8" max="-2" attributes="0"/>
+                                          <Component id="cboMaloaiSP" min="-2" pref="32" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -560,8 +564,6 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLastActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtDongia">
-                    </Component>
                     <Component class="javax.swing.JLabel" name="lblMaLSP">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -608,6 +610,8 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="*"/>
                       </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSnDongia">
                     </Component>
                   </SubComponents>
                 </Container>
