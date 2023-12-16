@@ -36,6 +36,7 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
 
     DonHangDAO dhDAO = new DonHangDAO();
     DoanhThuDAO tkDAO = new DoanhThuDAO();
+
     public QuanLyDoanhThuJPanel() {
         initComponents();
         fillToComboBoxNam();
@@ -226,23 +227,32 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cboThangActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
         openChartDoanhThu();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         printExce3();
     }//GEN-LAST:event_jButton2ActionPerformed
-     public void openChartDoanhThu() {
+    public void openChartDoanhThu() {
+
         JDialog dialog = new JDialog();
         dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-        Chart.ChartDoanhThu chart = new ChartDoanhThu("Biểu Đồ Doanh Thu");
-        dialog.add(chart.getContentPane()); //tndc
-        dialog.pack(); //kích thước
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
-        // setIconImage(XImage.getAppIcon());
+        if (cboNam.getSelectedItem() != null && cboThang.getSelectedItem() != null) {
+            int nam = (Integer) cboNam.getSelectedItem();
+            int thang = (Integer) cboThang.getSelectedItem();
+
+//            List<Object[]> list = tkDAO.doanhThuNamVaThang(nam, thang);
+            Chart.ChartDoanhThu chart = new ChartDoanhThu("Biểu Đồ Doanh Thu", nam, thang);
+            dialog.add(chart.getContentPane()); //tndc
+            dialog.pack(); //kích thước
+            dialog.setLocationRelativeTo(null);
+            dialog.setVisible(true);
+            // setIconImage(XImage.getAppIcon());
+        }
     }
-      public void printExce3() {
+
+    public void printExce3() {
 
         try {
             XSSFWorkbook workbook = new XSSFWorkbook();
@@ -261,10 +271,10 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
             cell.setCellValue("Doanh Thu Sản Phẩm");
 //            cell.setCellStyle(getCenterAlignedStyle(workbook));
             row = sheet.createRow(4);
-            
+
             cell = row.createCell(0, CellType.STRING);
             cell.setCellValue("Tên sản phẩm ");
-               
+
             cell = row.createCell(1, CellType.STRING);
             cell.setCellValue("Số Lượng ");
 
@@ -274,9 +284,6 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
             cell = row.createCell(3, CellType.STRING);
             cell.setCellValue("Tổng Tiền");
 
-
-            
-            
             List<Object[]> list = tkDAO.doanhThuThang(WIDTH);
             // Điền dữ liệu vào bảng
             for (int i = 0; i < list.size(); i++) {
@@ -293,7 +300,7 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
             try {
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setDialogTitle("Chọn vị trí và tên file");
-                fileChooser.setFileFilter(new FileNameExtensionFilter("Excel Files", "xlsx")); 
+                fileChooser.setFileFilter(new FileNameExtensionFilter("Excel Files", "xlsx"));
 
                 int userSelection = fileChooser.showSaveDialog(this);
 
@@ -317,6 +324,7 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
+
     public void fillToComboBoxNam() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboNam.getModel();
         model.removeAllElements();
@@ -325,14 +333,16 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
             model.addElement(year);
         }
     }
+
     public void fillToComboBoxThang() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboThang.getModel();
         model.removeAllElements();
-        List<Integer> list = new ArrayList<>(Arrays.asList(1, 2,3,4,5,6,7,8,9,10,11,12));
+        List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
         for (int month : list) {
             model.addElement(month);
         }
     }
+
     public void fillDoanhThuNam() {
         DefaultTableModel model = (DefaultTableModel) tblDoanhThu.getModel();
         model.setRowCount(0);
@@ -342,21 +352,22 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
             model.addRow(row);
         }
     }
+
     public void fillTableDoanhThu() {
-    DefaultTableModel model = (DefaultTableModel) tblDoanhThu.getModel();
-    model.setRowCount(0);
+        DefaultTableModel model = (DefaultTableModel) tblDoanhThu.getModel();
+        model.setRowCount(0);
 
-    // Kiểm tra xem đã chọn một mục trong cboNam và cboThang chưa
-    if (cboNam.getSelectedItem() != null && cboThang.getSelectedItem() != null) {
-        int nam = (Integer) cboNam.getSelectedItem();
-        int thang = (Integer) cboThang.getSelectedItem();
+        // Kiểm tra xem đã chọn một mục trong cboNam và cboThang chưa
+        if (cboNam.getSelectedItem() != null && cboThang.getSelectedItem() != null) {
+            int nam = (Integer) cboNam.getSelectedItem();
+            int thang = (Integer) cboThang.getSelectedItem();
 
-        List<Object[]> list = tkDAO.doanhThuNamVaThang(nam, thang);
-        for (Object[] row : list) {
-            model.addRow(row);
+            List<Object[]> list = tkDAO.doanhThuNamVaThang(nam, thang);
+            for (Object[] row : list) {
+                model.addRow(row);
+            }
         }
     }
-}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cboNam;
@@ -374,5 +385,4 @@ public class QuanLyDoanhThuJPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblDoanhThu;
     // End of variables declaration//GEN-END:variables
 
-   
 }

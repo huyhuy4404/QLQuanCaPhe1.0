@@ -23,20 +23,20 @@ import qlquancaphe.DAO.DoanhThuDAO;
  *
  * @author ADMIN
  */
-
 public class ChartDoanhThu extends JFrame {
 
     private final DoanhThuDAO thongKeDao;
 
-    public ChartDoanhThu(String title) {
+    public ChartDoanhThu(String title, int nam, int thang) {
         super(title);
         thongKeDao = new DoanhThuDAO();
 
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-                List<Object[]> SanPhamBC = thongKeDao.doanhThuThang(WIDTH);
+        
+        List<Object[]> SanPhamBC = thongKeDao.doanhThuNamVaThang(nam, thang);
         for (Object[] row : SanPhamBC) {
-             String TenNuoc = Objects.toString(row[0], ""); // lấy cái Tên
-            dataset.addValue((int) row[1],"Sản Phẩm Bán Chạy",TenNuoc);
+            String TenNuoc = Objects.toString(row[0], ""); // lấy cái Tên
+            dataset.addValue((int) row[1], "Sản Phẩm Bán Chạy", TenNuoc);
         }
 
         JFreeChart chart = ChartFactory.createBarChart3D(
