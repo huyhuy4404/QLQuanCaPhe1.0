@@ -36,8 +36,6 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
         fillTable();
         init();
     }
-    SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0.0, 0.0, 1000000, 1000);
-    //jSpinner jSnDongia
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -296,6 +294,8 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
 
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
         jLabel3.setText("*");
+
+        jSnDongia.setModel(new javax.swing.SpinnerNumberModel(0, null, null, 1000));
 
         javax.swing.GroupLayout pnlEditLayout = new javax.swing.GroupLayout(pnlEdit);
         pnlEdit.setLayout(pnlEditLayout);
