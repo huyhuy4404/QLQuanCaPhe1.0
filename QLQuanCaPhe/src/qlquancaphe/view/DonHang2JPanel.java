@@ -349,7 +349,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
 
         jPanel12.setLayout(new java.awt.GridLayout(4, 3, 5, 5));
 
-        btn21.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn21.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn21.setText("7");
         btn21.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -358,7 +358,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
         });
         jPanel12.add(btn21);
 
-        btn22.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn22.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn22.setText("8");
         btn22.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -367,7 +367,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
         });
         jPanel12.add(btn22);
 
-        btn23.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn23.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn23.setText("9");
         btn23.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -376,7 +376,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
         });
         jPanel12.add(btn23);
 
-        btn24.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn24.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn24.setText("4");
         btn24.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -385,7 +385,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
         });
         jPanel12.add(btn24);
 
-        btn25.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn25.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn25.setText("5");
         btn25.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -394,7 +394,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
         });
         jPanel12.add(btn25);
 
-        btn26.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn26.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn26.setText("6");
         btn26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -403,7 +403,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
         });
         jPanel12.add(btn26);
 
-        btn27.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn27.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn27.setText("1");
         btn27.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -412,7 +412,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
         });
         jPanel12.add(btn27);
 
-        btn28.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn28.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn28.setText("2");
         btn28.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -421,7 +421,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
         });
         jPanel12.add(btn28);
 
-        btn29.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn29.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn29.setText("3");
         btn29.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -430,7 +430,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
         });
         jPanel12.add(btn29);
 
-        btn30.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn30.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn30.setText("0");
         btn30.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -439,7 +439,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
         });
         jPanel12.add(btn30);
 
-        btn31.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn31.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn31.setText("00");
         btn31.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -448,7 +448,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
         });
         jPanel12.add(btn31);
 
-        btnXoa2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnXoa2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnXoa2.setText("<");
         btnXoa2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

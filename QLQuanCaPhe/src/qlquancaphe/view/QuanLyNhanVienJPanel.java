@@ -469,6 +469,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         delete();
+        
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
@@ -506,7 +507,9 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         tabs.setSelectedIndex(1);
 
     }
-
+    void check(){
+        
+    }
     void fillTable() {
         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
         model.setRowCount(0);
