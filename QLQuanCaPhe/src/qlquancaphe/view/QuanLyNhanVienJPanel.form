@@ -162,7 +162,7 @@
                                           </Group>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jLabel10" max="32767" attributes="0"/>
+                                      <Component id="jLabel10" pref="18" max="32767" attributes="0"/>
                                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -202,10 +202,18 @@
                                               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="txtEmail" min="-2" pref="274" max="-2" attributes="0"/>
                                           <Component id="txtNgaysinh" min="-2" pref="272" max="-2" attributes="0"/>
                                           <Component id="txtSDT" min="-2" pref="272" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="btnFirst1" min="-2" pref="54" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Component id="btnPrev1" min="-2" pref="54" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="btnNext1" min="-2" pref="52" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
                               </Group>
@@ -219,13 +227,7 @@
                               <Component id="btnLamMoi" min="-2" pref="104" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnXoa" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="219" max="32767" attributes="0"/>
-                              <Component id="btnFirst1" min="-2" pref="54" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnPrev1" min="-2" pref="54" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnNext1" min="-2" pref="52" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnLast1" min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
                       </Group>

@@ -21,7 +21,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" pref="882" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -111,9 +111,9 @@
                           </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnThanhToan" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
-                          <Component id="btnThayDoiSL" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
+                          <Component id="btnThayDoiSL" min="-2" pref="60" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="78" max="32767" attributes="0"/>
                   </Group>
@@ -811,7 +811,7 @@
         <Container class="javax.swing.JPanel" name="pnXemHoaDon">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+              <Color blue="ff" green="ff" red="33" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>
@@ -827,13 +827,14 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="btnTroVe" min="-2" pref="196" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                              <Component id="btnXemChiTiet" min="-2" pref="196" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                              <Component id="btnTroVe" min="-2" pref="133" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                              <Component id="btnXemChiTiet" min="-2" pref="142" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="dchNgay" alignment="0" min="-2" pref="252" max="-2" attributes="0"/>
+                          <Component id="dchNgay" min="-2" pref="252" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="514" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -845,9 +846,9 @@
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="416" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnTroVe" pref="55" max="32767" attributes="0"/>
-                          <Component id="btnXemChiTiet" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnXemChiTiet" alignment="3" pref="55" max="32767" attributes="0"/>
+                          <Component id="btnTroVe" alignment="3" pref="55" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
