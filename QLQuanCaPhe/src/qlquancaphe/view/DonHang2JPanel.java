@@ -340,7 +340,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
                 .addGap(0, 42, Short.MAX_VALUE))
         );
 
-        jPanel10.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel10.setBackground(new java.awt.Color(204, 255, 255));
 
         txtSoTien2.setEditable(false);
         txtSoTien2.setBackground(new java.awt.Color(204, 204, 204));
@@ -574,6 +574,9 @@ public class DonHang2JPanel extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        jPanel15.setBackground(new java.awt.Color(255, 255, 255));
+
+        btnTroLai.setBackground(new java.awt.Color(102, 102, 255));
         btnTroLai.setText("Trở lại");
         btnTroLai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -581,6 +584,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
             }
         });
 
+        btnThanhToan2.setBackground(new java.awt.Color(102, 255, 102));
         btnThanhToan2.setText("Thanh toán");
         btnThanhToan2.setEnabled(false);
         btnThanhToan2.addActionListener(new java.awt.event.ActionListener() {
@@ -785,6 +789,7 @@ public class DonHang2JPanel extends javax.swing.JPanel {
         pnHoaDon.setVisible(false);
         pnTinhTien.setVisible(false);
         pnXemHoaDon.setVisible(true);
+        loadTableXemHoaDon();
     }//GEN-LAST:event_btnInHoaDonActionPerformed
 
     private void btnHuyMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyMonActionPerformed
@@ -1146,15 +1151,20 @@ public class DonHang2JPanel extends javax.swing.JPanel {
     }
 
     private void ChonSanPham(SanPham sp) {
-        String input = MsgBox.prompt(this, "Vui lòng nhập số lượng: ");
-        if (input == null || !input.matches("\\d+")) {
-            MsgBox.alert(this, "Số lượng chỉ là số");
+        String input = JOptionPane.showInputDialog(this, "Vui lòng nhập số lượng: ");
+        if (input == null) {
+            // Người dùng đã nhấn "Thoát" hoặc "Cancel"
+            return;
+        }
+
+        if (!input.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "Số lượng chỉ là số");
             return;
         }
 
         int sl1 = Integer.parseInt(input);
         if (sl1 <= 0) {
-            MsgBox.alert(this, "Số lượng phải lớn hơn 0");
+            JOptionPane.showMessageDialog(this, "Số lượng phải lớn hơn 0");
             return;
         }
         if (input != null && !input.isEmpty()) {
