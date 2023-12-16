@@ -109,7 +109,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         pnRoot.setBackground(new java.awt.Color(0, 51, 51));
 
-        jPanel4.setBackground(new java.awt.Color(255, 0, 0));
+        jPanel4.setBackground(new java.awt.Color(204, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -236,7 +236,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(pnQuanLyLoaiSanPhamLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblQuanLiLoaiSanPham)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         pnDonHang.setBackground(new java.awt.Color(51, 153, 0));
@@ -259,7 +259,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(pnDonHangLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblDonHang)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         pnquanlydoanhthu.setBackground(new java.awt.Color(51, 153, 0));
@@ -282,7 +282,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(pnquanlydoanhthuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblquanlydoanhthu)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         pnTrangChu.setBackground(new java.awt.Color(51, 153, 0));
@@ -379,11 +379,11 @@ public class MainJFrame extends javax.swing.JFrame {
                         .addComponent(pnQuanlynhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15)
                         .addComponent(pnQuanLyLoaiSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(pnDonHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)
+                        .addGap(18, 18, 18)
                         .addComponent(pnquanlydoanhthu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblTenNV)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblTime)

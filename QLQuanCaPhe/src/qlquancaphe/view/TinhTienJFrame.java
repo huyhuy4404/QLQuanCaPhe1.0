@@ -160,7 +160,7 @@ public class TinhTienJFrame extends javax.swing.JFrame {
 
         jPanel4.setLayout(new java.awt.GridLayout(4, 3, 5, 5));
 
-        btn7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn7.setText("7");
         btn7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,7 +169,7 @@ public class TinhTienJFrame extends javax.swing.JFrame {
         });
         jPanel4.add(btn7);
 
-        btn8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn8.setText("8");
         btn8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,7 +178,7 @@ public class TinhTienJFrame extends javax.swing.JFrame {
         });
         jPanel4.add(btn8);
 
-        btn9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn9.setText("9");
         btn9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,7 +187,7 @@ public class TinhTienJFrame extends javax.swing.JFrame {
         });
         jPanel4.add(btn9);
 
-        btn4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn4.setText("4");
         btn4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,7 +196,7 @@ public class TinhTienJFrame extends javax.swing.JFrame {
         });
         jPanel4.add(btn4);
 
-        btn5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn5.setText("5");
         btn5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,7 +205,7 @@ public class TinhTienJFrame extends javax.swing.JFrame {
         });
         jPanel4.add(btn5);
 
-        btn6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn6.setText("6");
         btn6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,7 +214,7 @@ public class TinhTienJFrame extends javax.swing.JFrame {
         });
         jPanel4.add(btn6);
 
-        btn1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn1.setText("1");
         btn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,7 +223,7 @@ public class TinhTienJFrame extends javax.swing.JFrame {
         });
         jPanel4.add(btn1);
 
-        btn2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn2.setText("2");
         btn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,7 +232,7 @@ public class TinhTienJFrame extends javax.swing.JFrame {
         });
         jPanel4.add(btn2);
 
-        btn3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn3.setText("3");
         btn3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,7 +241,7 @@ public class TinhTienJFrame extends javax.swing.JFrame {
         });
         jPanel4.add(btn3);
 
-        btn0.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn0.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn0.setText("0");
         btn0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,7 +250,7 @@ public class TinhTienJFrame extends javax.swing.JFrame {
         });
         jPanel4.add(btn0);
 
-        btn00.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn00.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn00.setText("00");
         btn00.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,7 +259,7 @@ public class TinhTienJFrame extends javax.swing.JFrame {
         });
         jPanel4.add(btn00);
 
-        btnXoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnXoa.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnXoa.setText("<");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
