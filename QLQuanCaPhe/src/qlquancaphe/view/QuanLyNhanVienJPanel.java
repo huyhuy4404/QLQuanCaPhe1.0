@@ -192,8 +192,28 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         });
 
         rdoQuanLy.setText("Quản Lý ");
+        rdoQuanLy.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdoQuanLyItemStateChanged(evt);
+            }
+        });
+        rdoQuanLy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoQuanLyActionPerformed(evt);
+            }
+        });
 
         rdoNhanVien.setText("Nhân Viên");
+        rdoNhanVien.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdoNhanVienItemStateChanged(evt);
+            }
+        });
+        rdoNhanVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoNhanVienActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Email:");
 
@@ -444,7 +464,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tblNhanVienMousePressed
 
     private void txtMaNVMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMaNVMouseEntered
-   
+
     }//GEN-LAST:event_txtMaNVMouseEntered
 
     private void txtSDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSDTActionPerformed
@@ -452,11 +472,11 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSDTActionPerformed
 
     private void btnThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseEntered
-    
+
     }//GEN-LAST:event_btnThemMouseEntered
 
     private void btnThemMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseExited
-   
+
     }//GEN-LAST:event_btnThemMouseExited
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
@@ -468,8 +488,15 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        delete();
-        
+       
+//        if (rdoQuanLy.isSelected()) {
+//            rdoNhanVien.setSelected(false);
+//            MsgBox.alert(this, "Bạn không có quyền xóa quản lý!");
+//        }else{
+//            delete();
+//        }
+delete();
+         
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
@@ -492,12 +519,28 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         last();
     }//GEN-LAST:event_btnLast1ActionPerformed
 
-  NhanVienDAO dao = new NhanVienDAO();
+    private void rdoQuanLyItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdoQuanLyItemStateChanged
+
+    }//GEN-LAST:event_rdoQuanLyItemStateChanged
+
+    private void rdoQuanLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoQuanLyActionPerformed
+
+    }//GEN-LAST:event_rdoQuanLyActionPerformed
+
+    private void rdoNhanVienItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdoNhanVienItemStateChanged
+       
+    }//GEN-LAST:event_rdoNhanVienItemStateChanged
+
+    private void rdoNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNhanVienActionPerformed
+
+    }//GEN-LAST:event_rdoNhanVienActionPerformed
+
+    NhanVienDAO dao = new NhanVienDAO();
     int row = -1;
     String notice = "";
 
     private void init() {
-      
+
 //        this.setIconImage(XImage.getAppIcon());
         this.fillTable();
         txtMaNV.requestFocus();
@@ -507,9 +550,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         tabs.setSelectedIndex(1);
 
     }
-    void check(){
-        
-    }
+
     void fillTable() {
         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
         model.setRowCount(0);
@@ -586,7 +627,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         Date day = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String ngaySinh = dateFormat.format(nv.getNgaySinh());
-     //   txtNgaySinh.setText(ngaySinh);
+        //   txtNgaySinh.setText(ngaySinh);
         txtNgaysinh.setDate(nv.getNgaySinh());
         //  txtNgaySinh.setText(nv.getNgaySinh());
         txtSDT.setText(nv.getDienThoai());
@@ -611,14 +652,13 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
 //        } catch (ParseException e) {
 ////            MsgBox.alert(this, "Không thể chuyển đổi kiểu dữ liệu!");
 //        }
-         nv.setNgaySinh(txtNgaysinh.getDate());
+        nv.setNgaySinh(txtNgaysinh.getDate());
 
 //        nv.setNgaySinh(txtNgaySinh.getDate);
         nv.setDienThoai(txtSDT.getText());
         nv.setEmail(txtEmail.getText());
         return nv;
     }
-
 
     public boolean validated() {
         String maNV = txtMaNV.getText();
@@ -669,7 +709,6 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
 //                return false;
 //            }
 //        }
-
         if (sdt.isBlank()) {
             MsgBox.alert(this, "Vui lòng nhập số điện thoại");
             return false;
@@ -708,7 +747,7 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         NhanVien nv = getForm();
         boolean isSuccess = validated();
         if (!isSuccess) {
-          //  MsgBox.alert(this, notice);
+            //  MsgBox.alert(this, notice);
         } else {
             try {
                 dao.insert(nv);
@@ -722,32 +761,54 @@ public class QuanLyNhanVienJPanel extends javax.swing.JPanel {
         }
     }
 
-    void delete() {
-        if (!Auth.isManager()) {
-            MsgBox.alert(this, "Bạn không có quyền xoá nhân viên này !");
-        } else {
-            String manv = txtMaNV.getText();
-            if (manv.equals(Auth.user.getMaNV())) {
-                MsgBox.alert(this, "Bạn không được xoá chính bạn !");
-            } else if (MsgBox.confirm(this, "Bạn có thực sự muốn xoá nhân viên này ?")) {
-                try {
-                    dao.delete(manv);
-                    this.fillTable();
-                    this.clearForm();
-                    MsgBox.alert(this, "Xoá thành công !");
-                } catch (Exception e) {
-                    MsgBox.alert(this, "Xoá thất bại");
-                }
+//    void delete() {
+//        if (!Auth.isManager()) {
+//            MsgBox.alert(this, "Bạn không có quyền xoá nhân viên này !");
+//        } else {
+//            String manv = txtMaNV.getText();
+//            if (manv.equals(Auth.user.getMaNV())) {
+//              
+//            } else if (MsgBox.confirm(this, "Bạn có thực sự muốn xoá nhân viên này ?")) {
+//                try {
+//                    dao.delete(manv);
+//                    this.fillTable();
+//                    this.clearForm();
+//                    MsgBox.alert(this, "Xoá thành công !");
+//                } catch (Exception e) {
+//                    MsgBox.alert(this, "Xoá thất bại");
+//                }
+//            }
+//        }
+//    }
+    private void delete() {
+    if (!Auth.isManager()) {
+        MsgBox.alert(this, "Bạn không có quyền xoá nhân viên này !");
+    } else {
+        String manv = txtMaNV.getText();
+        if (manv.equals(Auth.user.getMaNV())) {
+            MsgBox.alert(this, "Bạn không được xoá chính bạn !");
+        } else if (rdoQuanLy.isSelected()) {
+            MsgBox.alert(this, "Bạn không thể xóa quản lý !");
+        } else if (MsgBox.confirm(this, "Bạn có thực sự muốn xoá nhân viên này ?")) {
+            try {
+                dao.delete(manv);
+                this.fillTable();
+                this.clearForm();
+                MsgBox.alert(this, "Xoá thành công !");
+            } catch (Exception e) {
+                MsgBox.alert(this, "Xoá thất bại");
             }
         }
     }
+}
+
 
     void update() {
 
         NhanVien nv = getForm();
         boolean isSuccess = validated();
         if (!isSuccess) {
-          //  MsgBox.alert(this, notice);
+            //  MsgBox.alert(this, notice);
         } else {
             try {
                 dao.update(nv);
